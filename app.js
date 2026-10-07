@@ -871,4 +871,3 @@ document.addEventListener('visibilitychange', () => {
 
 State.lastQEnter = Date.now();
 boot();
-// 测试改动 Wed Oct  7 18:22:56     2026

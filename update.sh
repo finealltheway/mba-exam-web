@@ -17,32 +17,82 @@ MSG="${1:-更新内容}"
 DEV_DIR="$(cd "$REPO_DIR/.." && pwd)/模拟考试系统"
 NEED_REBUILD=0
 
+# Python 解释器（构建 + 行尾归一化都要用）
+PY="/c/Users/77158/.workbuddy/binaries/python/versions/3.13.12/python.exe"
+NODE="/c/Users/77158/.workbuddy/binaries/node/versions/22.22.2-6/node.exe"
+API="https://api.github.com/repos/finealltheway/mba-exam-web"
+
 # 清理失效代理（这台机器上曾经有过127.0.0.1:52227 的死代理）
 unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy
 
-# ---------- 网络检测：自动找可用的本地代理 ----------
-# 直连可用就用直连；不可用则尝试常见端口，找到能用的自动设置
-DIRECT_OK=0
-if timeout 8 curl -sI https://github.com -o /dev/null 2>/dev/null; then
-  DIRECT_OK=1
+# ---------- 网络检测 ----------
+# 这台机器的网络有个坑：DNS 把 github.com 解析到 20.205.243.166，
+# 而那个 IP 经常被阻断（表现为 git push/clone 超时），但同网段的
+# .169/.171 或美西 140.82.x.x 完全正常。所以直连失败时先换IP，
+# 换不通再找本地代理。
+
+# curl 额外参数：命中就用 --resolve 绕过被污染的 DNS
+RESOLVE_OPT=""
+
+probe() {  # $1 = 目标 url
+  if [ -n "$RESOLVE_OPT" ]; then
+    timeout 8 curl -sI $RESOLVE_OPT "$1" -o /dev/null 2>/dev/null
+  else
+    timeout 8 curl -sI "$1" -o /dev/null 2>/dev/null
+  fi
+}
+
+NET_OK=0
+
+# 阶段1：直连
+if probe https://github.com; then
+  NET_OK=1
   echo "[网络] 直连 GitHub 正常"
 else
-  echo "[网络] 直连 GitHub 失败，查找本地代理..."
-  for p in 7890 7897 10809 10808 8889 52227 1080 20171 33210; do
-    if timeout 5 curl -sI -x "http://127.0.0.1:$p" https://github.com -o /dev/null 2>/dev/null; then
-      export HTTPS_PROXY="http://127.0.0.1:$p"
-      export HTTP_PROXY="http://127.0.0.1:$p"
-      echo "[网络] 已启用代理 127.0.0.1:$p"
-      DIRECT_OK=1
+  echo "[网络] 直连失败，可能是 DNS 指向了被阻断的 IP，尝试换 IP..."
+  # 阶段 2：换 IP（覆盖香港/新加坡/美西几组 GitHub 常用段）
+  for ip in 20.205.243.169 20.205.243.171 140.82.112.3 140.82.113.3 \
+            140.82.114.3 140.82.116.3 140.82.121.3; do
+    if timeout 6 curl -sI --resolve "github.com:443:$ip" https://github.com \
+         -o /dev/null 2>/dev/null; then
+      RESOLVE_OPT="--resolve github.com:443:$ip"
+      NET_OK=1
+      echo "[网络] 已切换到可用 IP $ip"
       break
     fi
   done
-  if [ "$DIRECT_OK" -ne 1 ]; then
-    echo ""
-    echo "[✗] 无法连接 GitHub，且未找到可用代理。"
-    echo "    请先开启你的代理客户端（Clash / v2ray 等），然后重新运行本脚本。"
-    exit 1
-  fi
+fi
+
+# 阶段 3：本地代理
+if [ "$NET_OK" -ne 1 ]; then
+  echo "[网络] 换 IP 仍不通，查找本地代理..."
+  for p in 7890 7897 10809 10808 8889 52227 1080 20171 33210; do
+    if timeout 5 curl -sI -x "http://127.0.0.1:$p" https://github.com \
+         -o /dev/null 2>/dev/null; then
+      export HTTPS_PROXY="http://127.0.0.1:$p"
+      export HTTP_PROXY="http://127.0.0.1:$p"
+      NET_OK=1
+      echo "[网络] 已启用代理 127.0.0.1:$p"
+      break
+    fi
+  done
+fi
+
+if [ "$NET_OK" -ne 1 ]; then
+  echo ""
+  echo "[✗] 无法连接 GitHub（直连/换IP/代理都试过了）。"
+  echo "    1) 开启你的代理客户端（Clash / v2ray 等）后重跑本脚本"
+  echo "    2) 或换个网络环境重试"
+  exit 1
+fi
+
+# 换过IP 的话，git 也得走同样的 IP（否则 git 自己解析还是会撞上）
+if [ -n "$RESOLVE_OPT" ]; then
+  GIT_IP=$(echo "$RESOLVE_OPT" | sed 's/.*github.com:443:\([0-9.]*\).*/\1/')
+  GIT_HOST="https://${GIT_IP}"
+  echo "[网络] git 将直连 $GIT_IP（绕过 DNS）"
+else
+  GIT_HOST="https://github.com"
 fi
 
 cd "$REPO_DIR"
@@ -92,6 +142,30 @@ if [ -d "$DEV_DIR" ]; then
     cp "$DEV_DIR/data/question_bank.json" "$REPO_DIR/data/question_bank.json"
     echo "    ✓ question_bank.json 已更新"
   fi
+
+  # 行尾归一化：开发目录在 Windows 上编辑，文件是 CRLF；
+  # 发布目录必须存 LF，否则 .gitattributes 生效后 git 会认为整个文件都改了。
+  # 用 Python 做，避免依赖 dos2unix（Git Bash 不一定带）。
+  if [ -f "$PY" ]; then
+    "$PY" - "$REPO_DIR" <<'PYEOF' 2>/dev/null
+import os, sys
+root = sys.argv[1]
+files = ["index.html", "app.js", "engine.js", "assets.js",
+         "data/question_bank.json", "robots.txt", "README.md"]
+n = 0
+for rel in files:
+    p = os.path.join(root, rel)
+    if not os.path.isfile(p):
+        continue
+    d = open(p, "rb").read()
+    if b"\r\n" in d:
+        open(p, "wb").write(d.replace(b"\r\n", b"\n"))
+        n += 1
+if n:
+    print(f"    ⟳ 已把 {n} 个文件的行尾统一为 LF")
+PYEOF
+  fi
+
   echo ""
   echo "  提示：如需重新生成图片资源（assets.js），在开发目录执行 python _embed_assets.py"
 else
@@ -113,7 +187,6 @@ echo "[✓] 无 PDF 文件"
 #    若 index.html 刚从开发目录覆盖过来，必须强制重建（--force）
 echo ""
 echo "[构建] 内联题库到 index.html..."
-PY="/c/Users/77158/.workbuddy/binaries/python/versions/3.13.12/python.exe"
 if [ -f "$PY" ]; then
   FORCE_FLAG=""
   [ "$NEED_REBUILD" = "1" ] && FORCE_FLAG="--force"
@@ -124,7 +197,7 @@ else
   echo "    [跳过] 未找到 Python"
 fi
 
-# 4. 提交
+# 5. 提交
 echo ""
 echo "[提交] 暂存改动..."
 git add -A
@@ -145,37 +218,52 @@ git -c user.name="finealltheway" \
     commit -q -m "$MSG"
 echo "[✓] 已提交：$MSG"
 
-# 5. 推送（网络易抖动，重试 3 次）
+# 6. 推送（网络易抖动；先走 git，失败则改用 REST API 逐 blob 兜底）
 echo ""
 echo "[推送] 上传到 GitHub..."
 PUSH_OK=0
 for attempt in 1 2 3; do
-  if git push "https://finealltheway:${TOKEN}@github.com/finealltheway/mba-exam-web.git" main 2>/dev/null; then
+  if git -c http.postBuffer=524288000 -c http.version=HTTP/1.1 \
+          -c http.lowSpeedLimit=0 -c http.lowSpeedTime=999999 \
+          push "https://finealltheway:${TOKEN}@${GIT_HOST}/finealltheway/mba-exam-web.git" main 2>/dev/null; then
     PUSH_OK=1
     break
   fi
-  echo "    第 $attempt 次失败，3 秒后重试..."
+  echo "    第 $attempt 次 git push 失败，3 秒后重试..."
   sleep 3
 done
+
+# git 推送大包（assets.js 3.9 MB）常被中途掐断。
+# 兜底方案：走 Git Data API，把每个改动文件作为 blob 单独上传再组 tree，
+# 单请求体积小、不产生 packfile，实测比 git push 稳得多。
 if [ "$PUSH_OK" -ne 1 ]; then
-  echo "[✗] 推送连续 3 次失败，请检查网络后重试"
-  echo "    若网络不通，可开启代理后再运行本脚本"
-  exit 1
+  echo ""
+  echo "    git push 连续失败，改用 REST API 兜底上传..."
+  if "$PY" "$REPO_DIR/api_push.py" "$TOKEN" "$MSG"; then
+    PUSH_OK=1
+    echo "    ✓ REST API 上传成功"
+  else
+    echo ""
+    echo "[✗] 两种方式都推送失败。"
+    echo "    1) 确认网络能访问 github.com（可尝试开启代理后重跑本脚本）"
+    echo "    2) 或稍后在网络稳定时重跑：bash update.sh \"$MSG\""
+    echo "    本地改动已提交，不会丢失。"
+    exit 1
+  fi
 fi
 echo "[✓] 推送成功"
 
-# 6. 清理 .git/config 里的 token（push 会写进去）
+# 7. 清理 .git/config 里的 token（push 会写进去）
 git remote set-url origin https://github.com/finealltheway/mba-exam-web.git
 sed -i 's|^\tremote = https://finealltheway:ghp_[A-Za-z0-9]*@github.com/finealltheway/mba-exam-web.git$|\tremote = origin|' .git/config
 echo "[✓] 已清理配置文件中的 token"
 
-# 7. 查部署状态
+# 8. 查部署状态
 echo ""
 echo "[部署] 等待 GitHub Actions 完成..."
-NODE="/c/Users/77158/.workbuddy/binaries/node/versions/22.22.2-6/node.exe"
 for i in $(seq 1 12); do
   ST=$(curl -s -H "Authorization: Bearer ${TOKEN}" \
-    "https://api.github.com/repos/finealltheway/mba-exam-web/actions/workflows/deploy.yml/runs?per_page=1" \
+    "$API/actions/workflows/deploy.yml/runs?per_page=1" \
     | "$NODE" -e '
 let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
   try{const r=JSON.parse(s).workflow_runs[0];

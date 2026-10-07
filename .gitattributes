@@ -1,0 +1,16 @@
+# 统一行尾，避免 Windows 上 core.autocrlf 导致工作区反复显示「有改动」
+# 网页文件必须存 LF：浏览器/JS 对 CRLF 不敏感，但保持一致才能让
+# git diff 干净，避免误提交把全文件行尾改一遍。
+*.js    text eol=lf
+*.json  text eol=lf
+*.html  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.yml   text eol=lf
+*.py    text eol=lf
+
+# 二进制，禁止任何转换（3.9 MB 的 base64 图片资源）
+assets.js binary
+*.png   binary
+*.jpg   binary
+*.pdf   binary
