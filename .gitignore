@@ -1,0 +1,20 @@
+# ===== 严格排除，绝不外传 =====
+
+# 13 份 PDF 原题（约 40 MB）
+*.pdf
+
+# 原始数据目录
+/ocr_out/
+/tmp*/
+*_raw.*
+
+# 构建/开发中间文件
+_assets_map.json
+_*.py
+_*.log
+_*.chunk*
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+Thumbs.db
