@@ -40,6 +40,9 @@ PAYLOAD = os.path.join(tempfile.gettempdir(), "wbapi_payload.json")
 # 可选的 curl --resolve 参数（由 update.sh 传入，见 main）
 RESOLVE = ""
 
+# 只存在于本地的文件，永不上传
+LOCAL_ONLY = {"update-log.txt", "payload.json"}
+
 
 def curl(method, url, payload=None, timeout=180, retries=4):
     """用 curl 发一个 GitHub API 请求，返回解析后的 JSON。
@@ -176,6 +179,11 @@ def main():
         for rel in sorted(candidates):
             fp = os.path.join(REPO, rel)
             if not os.path.isfile(fp):
+                continue
+            # 本地产物：update.sh 的日志、临时请求体等，一律不上传。
+            # （.gitignore 已排除未跟踪的，但一旦被误 git add 过，
+            #   ls-files 仍会列出来，所以这里再挡一次。）
+            if rel in LOCAL_ONLY or rel.endswith(("-log.txt", ".log")):
                 continue
             if remote.get(rel) != blob_sha(fp):
                 changed.append(rel)

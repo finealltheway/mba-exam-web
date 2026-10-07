@@ -18,3 +18,7 @@ __pycache__/
 node_modules/
 .DS_Store
 Thumbs.db
+
+# 更新脚本产生的本地日志（含时间戳等本地信息，不入库）
+update-log.txt
+payload.json
