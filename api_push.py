@@ -100,14 +100,20 @@ def curl(method, url, payload=None, timeout=180, retries=4):
     raise RuntimeError("重试次数用尽")
 
 
-def git(*args, binary=False):
-    """执行本地 git 命令。"""
-    r = subprocess.run(["git"] + list(args), cwd=REPO,
-                       capture_output=True, text=True,
-                       encoding="utf-8", errors="replace")
+def git(*args):
+    """执行本地 git 命令，返回 **bytes**（不转文本）。
+
+    必须拿字节：git 会把非ASCII 文件名转义成八进制输出
+    （`git ls-files` 里中文名显示成 "351\\203\\250..."），
+    解成文本后再拿去 os.path.isfile() 一律找不到，
+    中文文件（如部署指南.md）就会被静默漏掉。
+    用 core.quotepath=false 让 git 直接输出原始 UTF-8 字节。
+    """
+    r = subprocess.run(["git", "-c", "core.quotepath=false"] + list(args),
+                       cwd=REPO, capture_output=True)
     if r.returncode != 0:
-        raise RuntimeError(f"git {' '.join(args)} 失败：{(r.stderr or r.stdout)[:300]}")
-    return r.stdout if not binary else r.stdout
+        raise RuntimeError(f"git {' '.join(args)} 失败：{r.stderr.decode('utf-8', 'replace')[:300]}")
+    return r.stdout
 
 
 def blob_sha(path):
@@ -154,9 +160,12 @@ def main():
                     remote[epath] = e["sha"]
 
         # ---- 本地候选：git 跟踪的 + 未跟踪但存在的 ----
-        candidates = set(git("ls-files").split())
-        candidates |= set(git("ls-files", "--others",
-                              "--exclude-standard").split())
+        # git() 返回 bytes，解成列表
+        def names(*args):
+            return [x for x in git(*args).decode("utf-8", "replace").split("\n") if x]
+
+        candidates = set(names("ls-files"))
+        candidates |= set(names("ls-files", "--others", "--exclude-standard"))
         candidates.discard("")
 
         changed, same = [], []
