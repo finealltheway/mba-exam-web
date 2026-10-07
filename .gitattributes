@@ -1,6 +1,11 @@
 # 统一行尾，避免 Windows 上 core.autocrlf 导致工作区反复显示「有改动」
-# 网页文件必须存 LF：浏览器/JS 对 CRLF 不敏感，但保持一致才能让
-# git diff 干净，避免误提交把全文件行尾改一遍。
+#
+# 重要：assets.js 是 3.9 MB 的 base64 图片资源，必须放在下面的
+# 文本规则**之前**。gitattributes 是「后匹配覆盖先匹配」，
+# 如果 *.js 排在它前面，assets.js 会被当成文本做行尾转换，
+# 导致内容被改动、tree 对不上。
+assets.js binary
+
 *.js    text eol=lf
 *.json  text eol=lf
 *.html  text eol=lf
@@ -9,8 +14,7 @@
 *.yml   text eol=lf
 *.py    text eol=lf
 
-# 二进制，禁止任何转换（3.9 MB 的 base64 图片资源）
-assets.js binary
+# 二进制资源，禁止任何转换
 *.png   binary
 *.jpg   binary
 *.pdf   binary

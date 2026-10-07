@@ -44,34 +44,57 @@ probe() {  # $1 = 目标 url
 
 NET_OK=0
 
-# 阶段1：直连
-if probe https://github.com; then
+# 上传只需要 api.github.com（blob/tree/commit/ref 全在这）。
+# git push 才需要 github.com。所以先探API——它通常比主站稳。
+if probe https://api.github.com/zen; then
   NET_OK=1
-  echo "[网络] 直连 GitHub 正常"
+  echo "[网络] GitHub API 可用"
 else
-  echo "[网络] 直连失败，可能是 DNS 指向了被阻断的 IP，尝试换 IP..."
-  # 阶段 2：换 IP（覆盖香港/新加坡/美西几组 GitHub 常用段）
+  echo "[网络] API 探测失败，尝试换 IP..."
   for ip in 20.205.243.169 20.205.243.171 140.82.112.3 140.82.113.3 \
             140.82.114.3 140.82.116.3 140.82.121.3; do
-    if timeout 6 curl -sI --resolve "github.com:443:$ip" https://github.com \
+    if timeout 6 curl -sI --resolve "api.github.com:443:$ip" https://api.github.com/zen \
          -o /dev/null 2>/dev/null; then
-      RESOLVE_OPT="--resolve github.com:443:$ip"
+      RESOLVE_OPT="--resolve api.github.com:443:$ip"
       NET_OK=1
-      echo "[网络] 已切换到可用 IP $ip"
+      echo "[网络] API 已切换到可用 IP $ip"
       break
     fi
   done
 fi
 
-# 阶段 3：本地代理
-if [ "$NET_OK" -ne 1 ]; then
-  echo "[网络] 换 IP 仍不通，查找本地代理..."
+# 阶段 2：github.com 主站（git push 用）。不通也能走 API 兜底。
+GIT_OK=0
+if timeout 8 curl -sI https://github.com -o /dev/null 2>/dev/null; then
+  GIT_OK=1
+  GIT_HOST="https://github.com"
+  echo "[网络] github.com 主站可达，git push 可用"
+else
+  echo "[网络] github.com 主站不通（git push 会失败，将走 API 兜底）"
+  for ip in 20.205.243.169 20.205.243.171 140.82.112.3 140.82.113.3 \
+            140.82.114.3 140.82.116.3 140.82.121.3; do
+    if timeout 6 curl -sI --resolve "github.com:443:$ip" https://github.com \
+         -o /dev/null 2>/dev/null; then
+      GIT_HOST="https://${ip}"
+      GIT_OK=1
+      echo "[网络] github.com 已切换到可用 IP $ip"
+      break
+    fi
+  done
+fi
+
+# 阶段 3：本地代理（API 和主站都不通时才找）
+if [ "$NET_OK" -ne 1 ] || [ "$GIT_OK" -ne 1 ]; then
+  echo "[网络] 查找本地代理..."
   for p in 7890 7897 10809 10808 8889 52227 1080 20171 33210; do
-    if timeout 5 curl -sI -x "http://127.0.0.1:$p" https://github.com \
+    if timeout 5 curl -sI -x "http://127.0.0.1:$p" https://api.github.com/zen \
          -o /dev/null 2>/dev/null; then
       export HTTPS_PROXY="http://127.0.0.1:$p"
       export HTTP_PROXY="http://127.0.0.1:$p"
+      RESOLVE_OPT=""
       NET_OK=1
+      GIT_OK=1
+      GIT_HOST="https://github.com"
       echo "[网络] 已启用代理 127.0.0.1:$p"
       break
     fi
@@ -80,19 +103,11 @@ fi
 
 if [ "$NET_OK" -ne 1 ]; then
   echo ""
-  echo "[✗] 无法连接 GitHub（直连/换IP/代理都试过了）。"
+  echo "[✗] 无法连接 GitHub API（直连/换IP/代理都试过了）。"
   echo "    1) 开启你的代理客户端（Clash / v2ray 等）后重跑本脚本"
   echo "    2) 或换个网络环境重试"
+  echo "    本地改动已提交，不会丢失。"
   exit 1
-fi
-
-# 换过IP 的话，git 也得走同样的 IP（否则 git 自己解析还是会撞上）
-if [ -n "$RESOLVE_OPT" ]; then
-  GIT_IP=$(echo "$RESOLVE_OPT" | sed 's/.*github.com:443:\([0-9.]*\).*/\1/')
-  GIT_HOST="https://${GIT_IP}"
-  echo "[网络] git 将直连 $GIT_IP（绕过 DNS）"
-else
-  GIT_HOST="https://github.com"
 fi
 
 cd "$REPO_DIR"
@@ -222,16 +237,20 @@ echo "[✓] 已提交：$MSG"
 echo ""
 echo "[推送] 上传到 GitHub..."
 PUSH_OK=0
-for attempt in 1 2 3; do
-  if git -c http.postBuffer=524288000 -c http.version=HTTP/1.1 \
-          -c http.lowSpeedLimit=0 -c http.lowSpeedTime=999999 \
-          push "https://finealltheway:${TOKEN}@${GIT_HOST}/finealltheway/mba-exam-web.git" main 2>/dev/null; then
-    PUSH_OK=1
-    break
-  fi
-  echo "    第 $attempt 次 git push 失败，3 秒后重试..."
-  sleep 3
-done
+if [ "$GIT_OK" -ne 1 ]; then
+  echo "    github.com 主站不通，跳过 git push，直接走 API 兜底"
+else
+  for attempt in 1 2 3; do
+    if git -c http.postBuffer=524288000 -c http.version=HTTP/1.1 \
+            -c http.lowSpeedLimit=0 -c http.lowSpeedTime=999999 \
+            push "https://finealltheway:${TOKEN}@${GIT_HOST}/finealltheway/mba-exam-web.git" main 2>/dev/null; then
+      PUSH_OK=1
+      break
+    fi
+    echo "    第 $attempt 次 git push 失败，3 秒后重试..."
+    sleep 3
+  done
+fi
 
 # git 推送大包（assets.js 3.9 MB）常被中途掐断。
 # 兜底方案：走 Git Data API，把每个改动文件作为 blob 单独上传再组 tree，
@@ -239,7 +258,7 @@ done
 if [ "$PUSH_OK" -ne 1 ]; then
   echo ""
   echo "    git push 连续失败，改用 REST API 兜底上传..."
-  if "$PY" "$REPO_DIR/api_push.py" "$TOKEN" "$MSG"; then
+  if "$PY" "$REPO_DIR/api_push.py" "$TOKEN" "$MSG" "$RESOLVE_OPT"; then
     PUSH_OK=1
     echo "    ✓ REST API 上传成功"
   else

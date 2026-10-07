@@ -37,14 +37,20 @@ BRANCH = "main"
 # update.sh 的 git add -A 扫到，或与 .gitignore 规则打架。
 PAYLOAD = os.path.join(tempfile.gettempdir(), "wbapi_payload.json")
 
+# 可选的 curl --resolve 参数（由 update.sh 传入，见 main）
+RESOLVE = ""
+
 
 def curl(method, url, payload=None, timeout=180, retries=4):
     """用 curl 发一个 GitHub API 请求，返回解析后的 JSON。
 
-    这条网络对 GitHub 是间歇性阻断的（同一个 URL 可能连着三次好
+    这条网络对GitHub 是间歇性阻断的（同一个 URL 可能连着三次好
     一次断），所以每个请求都要自动重试。HTTP 000 = 连接层就断了，
-    必须重试；4xx/5xx 里的 502/503/429 同理；404 这类确定性错误
-    直接抛出，重试也没用。
+    必须重试；502/503/504/429 同理；404 这类确定性错误直接抛，
+    重试也没用。
+
+    RESOLVE 允许 update.sh 传「--resolve api.github.com:443:IP」，
+    绕过被污染的 DNS——这台机器上 DNS 常把 GitHub 指到连不上的 IP。
     """
     retryable_codes = ("000", "502", "503", "504", "429")
 
@@ -55,6 +61,8 @@ def curl(method, url, payload=None, timeout=180, retries=4):
                "-H", "Content-Type: application/json",
                "-H", "Expect:",          # 禁用 100-continue，大 body 更稳
                "-w", "\n%{http_code}"]
+        if RESOLVE:
+            cmd += RESOLVE.split()
 
         # 请求体先落盘再交给 curl（--data-binary @file）。
         # 直接拼命令行传大 body 会被 shell 转义规则和长度上限坑到。
@@ -114,12 +122,14 @@ def blob_sha(path):
 
 
 def main():
-    global TOKEN, REPO
+    global TOKEN, REPO, RESOLVE
     if len(sys.argv) < 3:
-        print("用法：python api_push.py <token> \"<提交说明>\"", file=sys.stderr)
+        print("用法：python api_push.py <token> \"<提交说明>\" [--resolve api.github.com:443:IP]",
+              file=sys.stderr)
         return 2
     TOKEN = sys.argv[1].strip()
     message = sys.argv[2]
+    RESOLVE = sys.argv[3] if len(sys.argv) > 3 else ""
     REPO = os.path.dirname(os.path.abspath(__file__))
 
     try:
@@ -127,24 +137,51 @@ def main():
         # 注意不能拿本地 HEAD——本地往往比远端领先（这次更新的提交
         # 还没推上去），查远端会404。必须从 /git/refs 读远端真实 SHA。
         head = curl("GET", API + f"/git/ref/heads/{BRANCH}")["object"]["sha"]
+        # ---- 远端现有文件清单（用于判断改了什么）----
+        # 这里刻意不依赖本地 git 对象库：远端 commit 往往不在本地
+        # （git push 失败时就推不上去），git diff 那个 SHA 会报
+        # "bad object"。改成直接拉远端 tree，逐个比对磁盘文件的
+        # blob sha——纯靠 API 完成，不受本地仓库状态影响。
+        remote = {}
+        stack = [(curl("GET", API + f"/git/commits/{head}")["tree"]["sha"], "")]
+        while stack:
+            tsha, prefix = stack.pop()
+            for e in curl("GET", API + f"/git/trees/{tsha}")["tree"]:
+                epath = prefix + e["path"]
+                if e["type"] == "tree":
+                    stack.append((e["sha"], epath + "/"))
+                elif e["type"] == "blob":
+                    remote[epath] = e["sha"]
 
-        # ---- 找出本地相对远端有哪些文件变了 ----
-        #   删掉的文件：git diff 比对远端 SHA 与工作区
-        #   新增/修改：git diff --cached（update.sh 已经 add 过）
-        changed = git("diff", "--name-only", "--cached", head).split()
-        deleted = git("diff", "--name-only", "--diff-filter=D",
-                      "--cached", head).split()
+        # ---- 本地候选：git 跟踪的 + 未跟踪但存在的 ----
+        candidates = set(git("ls-files").split())
+        candidates |= set(git("ls-files", "--others",
+                              "--exclude-standard").split())
+        candidates.discard("")
 
-        changed = [p for p in changed if os.path.isfile(os.path.join(REPO, p))]
-        deleted = [p for p in deleted if p not in changed]
+        changed, same = [], []
+        for rel in sorted(candidates):
+            fp = os.path.join(REPO, rel)
+            if not os.path.isfile(fp):
+                continue
+            if remote.get(rel) != blob_sha(fp):
+                changed.append(rel)
+            else:
+                same.append(rel)
+
+        # 本地已删除（远端有、磁盘上没了）——同样要在 tree 里标null
+        deleted = [r for r in remote
+                   if r not in candidates
+                   and not os.path.isfile(os.path.join(REPO, r))]
 
         if not changed and not deleted:
-            print("没有需要上传的改动")
+            print(f"  没有需要上传的改动（{len(same)} 个文件与远端一致）")
             return 0
 
         print(f"  远端基准 {head[:12]}")
         print(f"  待上传 {len(changed)} 个文件"
-              + (f"，删除 {len(deleted)} 个" if deleted else ""))
+              + (f"，删除 {len(deleted)} 个" if deleted else "")
+              + f"，已一致 {len(same)} 个")
 
         # ---- 1. 逐个上传 blob ----
         entries = []
