@@ -44,22 +44,26 @@ RESOLVE = ""
 def curl(method, url, payload=None, timeout=180, retries=4):
     """用 curl 发一个 GitHub API 请求，返回解析后的 JSON。
 
-    这条网络对GitHub 是间歇性阻断的（同一个 URL 可能连着三次好
-    一次断），所以每个请求都要自动重试。HTTP 000 = 连接层就断了，
-    必须重试；502/503/504/429 同理；404 这类确定性错误直接抛，
-    重试也没用。
+    这条网络对 GitHub 是间歇性阻断的（同一个 URL 可能连着三次好
+    一次断），所以每个请求都要自动重试。
+
+    重试范围刻意包含 400：GitHub 在连接被中途掐断、收到截断的请求体时
+    会返回 400 "malformed request"，而不是 5xx——这是实测遇到的坑。
+    但 401/403/404 是确定性错误（token 问题、路径不存在），重试无意义。
 
     RESOLVE 允许 update.sh 传「--resolve api.github.com:443:IP」，
     绕过被污染的 DNS——这台机器上 DNS 常把 GitHub 指到连不上的 IP。
     """
-    retryable_codes = ("000", "502", "503", "504", "429")
+    retryable_codes = ("000", "400", "502", "503", "504", "429", "408")
+    # 400/000 这类网络诱发的错误给足重试次数（默认 4 次）
+    attempts = 6 if retries == 4 else retries
 
-    for attempt in range(1, retries + 1):
+    for attempt in range(1, attempts + 1):
         cmd = ["curl", "-s", "--http1.1", "--max-time", str(timeout),
                "-X", method,
                "-H", "Authorization: Bearer " + TOKEN,
                "-H", "Content-Type: application/json",
-               "-H", "Expect:",          # 禁用 100-continue，大 body 更稳
+               "-H", "Expect:",          # 禁用 100-continue，大body 更稳
                "-w", "\n%{http_code}"]
         if RESOLVE:
             cmd += RESOLVE.split()
@@ -80,8 +84,8 @@ def curl(method, url, payload=None, timeout=180, retries=4):
 
         if "\n" not in out:
             # curl 根本没拿到响应（连接被掐），也算可重试
-            if attempt < retries:
-                print(f"      …连接中断，第 {attempt} 次重试", flush=True)
+            if attempt < attempts:
+                print(f"      ...连接中断，第 {attempt} 次重试", flush=True)
                 time.sleep(2)
                 continue
             raise RuntimeError(f"curl 失败：{err[:200]}")
@@ -91,8 +95,8 @@ def curl(method, url, payload=None, timeout=180, retries=4):
 
         if code in ("200", "201"):
             return json.loads(body) if body.strip() else {}
-        if code in retryable_codes and attempt < retries:
-            print(f"      …HTTP {code}，第 {attempt} 次重试", flush=True)
+        if code in retryable_codes and attempt < attempts:
+            print(f"      ...HTTP {code}，第 {attempt} 次重试", flush=True)
             time.sleep(2)
             continue
         raise RuntimeError(f"HTTP {code}: {body[:300]}")
@@ -241,4 +245,11 @@ def main():
 
 
 if __name__ == "__main__":
+    # 在 Windows 控制台（尤其被 PowerShell 调用时）输出中文常变乱码，
+    # 显式把stdout/stderr 切到 UTF-8。这必须在任何 print 之前做。
+    for _s in (sys.stdout, sys.stderr):
+        try:
+            _s.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     sys.exit(main())

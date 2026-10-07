@@ -368,9 +368,24 @@ function passageLabel(q) {
  * 完形正文在抽取阶段已把每处空位标成 {{1}}…{{20}}，
  * 这里渲染成带下划线的编号，便于把题目与文章中的位置对上。
  */
+/**
+ * 正文渲染：把段落分隔（空行）转成真正的段落块。
+ *
+ * 题库里用 `\n\n` 标记段落边界（由 add_paragraph_breaks.py 依 PDF 版面写入）。
+ * 渲染成 `<p class="art-p">` 而不是依赖 CSS 的 pre-wrap 空行，
+ * 这样段间距可控、可点、也不会被其它样式吃掉。
+ * 段内的单个换行仍保留为软换行（pre-wrap 生效）。
+ */
 function passageHTML(text) {
-  return esc(text).replace(/\{\{(\d+)\}\}/g,
-    '<span class="cloze-blank" data-n="$1">$1</span>');
+  return String(text)
+    .split(/\n{2,}/)
+    .map(seg => {
+      const html = esc(seg.trim())
+        .replace(/\{\{(\d+)\}\}/g,
+          '<span class="cloze-blank" data-n="$1">$1</span>');
+      return '<p class="art-p">' + html + '</p>';
+    })
+    .join('');
 }
 
 function renderArticle(q) {

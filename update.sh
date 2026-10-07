@@ -112,6 +112,10 @@ fi
 
 cd "$REPO_DIR"
 
+# 从 PowerShell 调用时输出会变乱码（PS 5.1 默认按 GBK 解码 UTF-8 字节）。
+# 这里统一成 UTF-8，能解决大部分；剩下的在 调用方加 [Console]::OutputEncoding。
+export PYTHONIOENCODING=utf-8
+
 echo "========================================"
 echo "  MBA 模考系统 · 一键更新"
 echo "========================================"
