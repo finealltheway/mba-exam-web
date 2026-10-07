@@ -21,6 +21,10 @@
   --sh:0 1px 2px rgba(28,43,58,.05),0 4px 14px rgba(31,111,196,.07);
   --sh-lift:0 3px 8px rgba(28,43,58,.07),0 10px 26px rgba(31,111,196,.13);
   --r:10px;
+  /* 顶部固定栏高度：桌面实测 63px。窄屏 header 会换行变高，
+     下面用 @media 覆写，并在地 exam-bar 里引用它做 sticky 偏移——
+     不要在多处写死像素，否则窄屏必然对不齐、被 header 盖住。 */
+  --hdr:63px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -68,6 +72,36 @@ nav button.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(31,111
 .btn:disabled{opacity:.4;cursor:not-allowed}
 
 .subj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+
+/* 未完成考试提示卡（断点续答入口） */
+.resume-card{
+  background:linear-gradient(180deg,#f2f9ff 0%,var(--blue-bg) 100%);
+  border:1px solid var(--line);border-left:3px solid var(--blue);
+}
+.resume-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.resume-ico{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:var(--blue);position:relative;
+}
+/* 用两条白色竖条画个「暂停」记号 */
+.resume-ico::before,.resume-ico::after{
+  content:'';position:absolute;top:9px;width:4px;height:16px;border-radius:2px;background:#fff;
+}
+.resume-ico::before{left:10px}
+.resume-ico::after{left:20px}
+.resume-txt{flex:1;min-width:180px}
+.resume-txt b{font-size:14.5px;font-weight:600;color:var(--tx)}
+.resume-txt .sub{margin-top:3px}
+.resume-act{display:flex;gap:8px;flex-shrink:0}
+
+/* 答题页的「已自动保存」提示条 */
+.autosave{
+  font-size:12px;color:var(--tx3);display:inline-flex;align-items:center;gap:5px;
+}
+.autosave .ico{
+  width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;
+}
+.autosave.saving .ico{background:var(--amber)}
 .subj{
   background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   padding:20px;cursor:pointer;box-shadow:var(--sh);
@@ -84,7 +118,7 @@ nav button.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(31,111
 /* 考试页 */
 .exam-bar{
   background:var(--card);border-bottom:1px solid var(--line);
-  padding:12px 0;position:sticky;top:63px;z-index:40;
+  padding:12px 0;position:sticky;top:var(--hdr);z-index:40;
   box-shadow:0 1px 3px rgba(31,111,196,.05);
 }
 .exam-bar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
@@ -273,6 +307,48 @@ summary{font-size:13px;color:var(--blue);cursor:pointer;padding:6px 0}
 .empty-state{text-align:center;padding:56px 20px;color:var(--tx3)}
 .empty-state h3{font-size:15px;color:var(--tx2);margin-bottom:6px;font-weight:500}
 .loading{text-align:center;padding:60px;color:var(--tx3);font-size:14px}
+
+/* ---------- 窄屏适配 ----------
+   核心问题：header 是 position:sticky，exam-bar 也 sticky 并靠 top 偏移接在它下面。
+   窄屏时 header 里的 nav 会换行、字号换行后整体变高，如果 still 用桌面的 63px，
+   exam-bar 就会被 header 盖住（计时器/交卷按钮显示不全）。
+   办法：① 该处直接让 header 不再 sticky（手机竖屏本来就不该占两行固定栏），
+        ② exam-bar 改为 top:0 独占顶部，③ 用绝对定位的高度变量兜底。
+   这样窄屏只有一条固定栏，永远不遮挡。 */
+@media (max-width:640px){
+  header{padding:12px 0}
+  header .wrap{gap:12px;flex-wrap:wrap}
+  h1{font-size:15px}
+  .sub{font-size:11px}
+
+  /* 窄屏：header 随页面滚走，只留 exam-bar 固定在顶部 */
+  .exam-bar{top:0;padding:10px 0}
+  .exam-bar .wrap{gap:10px}
+  .timer{font-size:17px;padding:3px 10px}
+  .prog{font-size:12px}
+  .autosave{font-size:11px}
+  .exam-actions{margin-left:auto}
+
+  .wrap{padding:0 14px}
+  .card{padding:16px}
+  .subj-grid{grid-template-columns:1fr}
+
+  /* 题目导航做成横向滚动条，省纵向空间 */
+  .qnav{
+    flex-wrap:nowrap;overflow-x:auto;gap:6px;
+    padding:12px 0;margin-bottom:16px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .qnav::-webkit-scrollbar{display:none}
+  .qn{flex:0 0 auto}
+
+  .resume-row{gap:10px}
+  .resume-txt{min-width:0}
+  .resume-act{width:100%;justify-content:flex-end}
+
+  /* 长表格 / 正文横向滚动，避免撑破布局 */
+  table{display:block;overflow-x:auto}
+}
 </style>
 </head>
 <body>
@@ -295,6 +371,20 @@ summary{font-size:13px;color:var(--blue);cursor:pointer;padding:6px 0}
 <!-- 首页 -->
 <section class="page on" id="pg-home">
   <div class="wrap">
+    <!-- 未完成考试：断点续答入口。默认隐藏，检测到上次未交卷的试卷时显示。 -->
+    <div class="card resume-card" id="resume-card" style="display:none">
+      <div class="resume-row">
+        <span class="resume-ico"></span>
+        <div class="resume-txt">
+          <b id="resume-title">上次考试未完成</b>
+          <div class="sub" id="resume-sub"></div>
+        </div>
+        <div class="resume-act">
+          <button class="btn" id="btn-resume">继续答题</button>
+          <button class="btn ghost" id="btn-discard">放弃</button>
+        </div>
+      </div>
+    </div>
     <div class="card" style="margin-bottom:16px">
       <h2>选择科目</h2>
       <div class="hint">题量、分值、时长均与真实考试一致。数学题以原版截图呈现，逻辑与英语为可检索文本。</div>
@@ -335,6 +425,9 @@ summary{font-size:13px;color:var(--blue);cursor:pointer;padding:6px 0}
     <div class="wrap">
       <span class="timer" id="timer">--:--</span>
       <span class="prog" id="prog"></span>
+      <span class="autosave" id="autosave" title="答题进度会自动保存在本机，刷新或关闭页面后可继续">
+        <span class="ico"></span><span id="autosave-txt">已自动保存</span>
+      </span>
       <div class="exam-actions">
         <button class="btn ghost sm" id="btn-pause">暂停</button>
         <button class="btn sm" id="btn-submit">交卷</button>

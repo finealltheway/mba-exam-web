@@ -422,6 +422,99 @@ const Store = {
   clear() { localStorage.removeItem(this.key); },
 };
 
+/* ---------- 未完成考试（断点续答）----------
+   考试中途刷新页面 / 关掉浏览器 / 误关标签页后，重新打开时应能接着答。
+   持久化的东西必须**能跨会话还原**，所以不能存 `_qid`（每次组卷都随机生成），
+   而要存「题目的稳定身份」`subject|part|year|no`，以及组卷时派生的
+   题目顺序与分组字段。恢复时按顺序重建 paper，并按稳定身份把答案对回去。
+
+   只保留最近一份未完成试卷（key 里带 v1）；交卷或手动放弃时清除。 */
+const ResumeStore = {
+  key: 'mba_exam_resume_v1',
+
+  /** 把当前试卷压成可持久化的最小快照。 */
+  snapshot(paper, answers, remaining, cursor) {
+    const groupFields = ['_group', '_groupIdx', '_first', '_gsize',
+                         '_article', '_groupLabel', '_seq', '_idx', '_ord'];
+    // 逐题落盘：题目身份 + 派生字段 + 该题答案。
+    // 答案**跟着题目一起存**（而不是单独一张按 _qid 索引的表）——
+    // 因为 _qid 每次组卷都随机生成，跨会话对不上；绑定到题目顺序才可靠。
+    const questions = paper.questions.map(q => {
+      const a = answers[q._qid] || {};
+      const row = {
+        subject: q.subject, part: q.part, year: q.year, no: q.no,
+        textNo: q.textNo ?? null,
+        a: { choice: a.choice ?? null, text: a.text || '',
+             selfScore: a.selfScore ?? null, seconds: a.seconds || 0 },
+      };
+      for (const f of groupFields) if (q[f] !== undefined) row[f] = q[f];
+      return row;
+    });
+    return {
+      v: 1,
+      paperId: paper.id,
+      subject: paper.subject,
+      createdAt: paper.createdAt,
+      savedAt: new Date().toISOString(),
+      remaining: Math.max(0, remaining),
+      cursor: cursor || 0,
+      questions,
+    };
+  },
+
+  save(snap) {
+    try { localStorage.setItem(this.key, JSON.stringify(snap)); return true; }
+    catch { return false; }
+  },
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.key);
+      if (!raw) return null;
+      const s = JSON.parse(raw);
+      if (!s || s.v !== 1 || !s.subject || !Array.isArray(s.questions) || !s.questions.length) {
+        return null;
+      }
+      return s;
+    } catch { return null; }
+  },
+
+  clear() { try { localStorage.removeItem(this.key); } catch (e) { /* 忽略 */ } },
+
+  /** 把快照还原成运行时结构：重建 paper（含新 _qid）并把答案对回来。 */
+  restore(snap, bank) {
+    const byId = new Map();
+    for (const q of bank) {
+      byId.set(`${q.subject}|${q.part}|${q.year}|${q.no}`, q);
+    }
+    const questions = [], answers = {};
+    for (const row of snap.questions) {
+      const id = `${row.subject}|${row.part}|${row.year}|${row.no}`;
+      const src = byId.get(id);
+      if (!src) return null;              // 题库已变（重建过），快照失效
+      const q = { ...src, _qid: uid(), _idx: row._idx };
+      for (const f of ['_group', '_groupIdx', '_first', '_gsize',
+                       '_article', '_groupLabel', '_seq', '_ord']) {
+        if (row[f] !== undefined) q[f] = row[f];
+      }
+      if (row.textNo != null) q.textNo = row.textNo;
+      questions.push(q);
+      const a = row.a || {};
+      answers[q._qid] = {
+        choice: a.choice ?? null, text: a.text || '',
+        selfScore: a.selfScore ?? null, seconds: a.seconds || 0,
+      };
+    }
+    return {
+      paper: { id: snap.paperId, subject: snap.subject, createdAt: snap.createdAt, questions },
+      answers,
+      remaining: snap.remaining,
+      cursor: Math.min(snap.cursor || 0, questions.length - 1),
+      savedAt: snap.savedAt,
+    };
+  },
+};
+
 /* ---------- 数据源 ----------
    题库与图片都可以由构建脚本内联成 JS 常量（BANK_DATA / ASSETS）。
    内联后页面是自包含的，双击 index.html 就能用，不再需要 HTTP 服务器
@@ -445,5 +538,5 @@ const assetURL = (rel) => {
 
 /* 供 Node 自检脚本读取（浏览器中无副作用） */
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { EXAM, TAG_WEIGHT, drawQuestions, gradePaper, diagnose, timeByPart, Store, shuffle, getBank, assetURL };
+  module.exports = { EXAM, TAG_WEIGHT, drawQuestions, gradePaper, diagnose, timeByPart, Store, ResumeStore, shuffle, getBank, assetURL };
 }

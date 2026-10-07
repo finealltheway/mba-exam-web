@@ -32,6 +32,9 @@ const State = {
   bank: [], paper: null, answers: {}, cursor: 0,
   remaining: 0, running: false, paused: false, tick: null,
   qStart: {}, lastTick: 0, showPassage: true,
+  // 断点续答：pendingSnap 是启动时读到的未完成试卷，等用户决定「继续 / 放弃」；
+  // autoTimer 是自动落盘的节流定时器；finished 标记已交卷，避免卸载时又写回快照。
+  pendingSnap: null, autoTimer: null, finished: false,
 };
 
 /* ---------- 启动 ---------- */
@@ -48,7 +51,133 @@ async function boot() {
   window.__State = State;
   renderHome();
   renderHistory();
+  detectResume();          // 检测未完成考试，显示「继续答题」入口
+  syncHeaderOffset();      // 量一次真实 header 高度，供答题栏 sticky 偏移
 }
+
+/* ---------- 断点续答：检测 / 继续 / 放弃 ---------- */
+
+/** 启动时检查本机是否有未交卷的试卷。 */
+function detectResume() {
+  const snap = ResumeStore.load();
+  if (!snap) return;
+  // 校验快照对当前题库仍然有效（题库重建过就会失效）
+  if (!ResumeStore.restore(snap, State.bank)) {
+    ResumeStore.clear();
+    return;
+  }
+  State.pendingSnap = snap;
+  renderResumeCard(snap);
+}
+
+function renderResumeCard(snap) {
+  const card = $('#resume-card');
+  if (!card) return;
+  const subj = EXAM[snap.subject];
+  const answered = snap.questions.filter(r => {
+    const p = subj.parts.find(x => x.key === r.part);
+    const a = r.a || {};
+    return p && p.subjective ? !!(a.text && a.text.trim()) : !!a.choice;
+  }).length;
+  const when = snap.savedAt ? new Date(snap.savedAt) : null;
+  const ago = when ? humanAgo(Date.now() - when.getTime()) : '';
+  $('#resume-title').textContent = `上次「${subj.name}」考试未完成`;
+  $('#resume-sub').innerHTML =
+    `已答 <b style="color:var(--tx)">${answered}</b> / ${snap.questions.length} 题 · ` +
+    `剩余 <b style="color:var(--tx)">${fmtTime(snap.remaining)}</b>` +
+    (ago ? ` · 保存于${ago}` : '');
+  card.style.display = '';
+}
+
+/** 把毫秒差转成「刚刚 / N 分钟前 / N 小时前 / N 天前」。 */
+function humanAgo(ms) {
+  const s = Math.max(0, Math.round(ms / 1000));
+  if (s < 60) return '刚刚';
+  const m = Math.round(s / 60);
+  if (m < 60) return `${m} 分钟前`;
+  const h = Math.round(m / 60);
+  if (h < 24) return `${h} 小时前`;
+  return `${Math.round(h / 24)} 天前`;
+}
+
+/** 恢复上次未完成的考试，接着答。 */
+function resumeExam() {
+  const snap = State.pendingSnap;
+  if (!snap) return;
+  const r = ResumeStore.restore(snap, State.bank);
+  if (!r) { ResumeStore.clear(); dipResumeCard(); alert('上次的试卷已失效（题库可能更新过），请重新开始。'); return; }
+
+  State.paper = r.paper;
+  State.answers = r.answers;
+  State.cursor = r.cursor;
+  State.remaining = r.remaining;
+  State.paused = false;
+  State.finished = false;
+  State.qStart = {};
+  State.paper.questions.forEach(q => { State.qStart[q._qid] = Date.now(); });
+
+  dipResumeCard();          // 已进入考试，收起首页的「继续答题」入口
+  $('#nav-exam').style.display = '';
+  $('#nav-result').style.display = 'none';
+  renderExam();
+  go('exam');
+  startTick();
+  State.lastQEnter = Date.now();
+  saveProgress(true);       // 恢复后立刻回写一次，刷新时间戳
+  window.scrollTo(0, 0);
+}
+
+/** 放弃未完成的考试。 */
+function discardResume() {
+  confirmModal('放弃考试', '将丢弃本次未完成的答题进度，此操作不可撤销。确定放弃吗？', () => {
+    ResumeStore.clear();
+    State.pendingSnap = null;
+    dipResumeCard();
+    closeModal();
+  });
+}
+
+function dipResumeCard() {
+  const c = $('#resume-card');
+  if (c) c.style.display = 'none';
+}
+
+$('#btn-resume').onclick = () => resumeExam();
+$('#btn-discard').onclick = () => discardResume();
+
+/* ---------- 断点续答：自动落盘 ---------- */
+
+/**
+ * 把当前试卷与答案写进 localStorage。
+ * @param {boolean} immediate 立即写（不做节流），用于关键节点
+ */
+function saveProgress(immediate) {
+  if (!State.paper) return;
+  const doSave = () => {
+    State.autoTimer = null;
+    const snap = ResumeStore.snapshot(State.paper, State.answers, State.remaining, State.cursor);
+    const ok = ResumeStore.save(snap);
+    paintAutosave(ok);
+  };
+  if (immediate) {
+    if (State.autoTimer) { clearTimeout(State.autoTimer); State.autoTimer = null; }
+    doSave();
+    return;
+  }
+  // 节流：最多每 2 秒落一次盘，避免每次输入都写 localStorage
+  if (State.autoTimer) return;
+  paintAutosave(true, true);
+  State.autoTimer = setTimeout(doSave, 2000);
+}
+
+function paintAutosave(ok, saving) {
+  const box = $('#autosave');
+  if (!box) return;
+  box.classList.toggle('saving', !!saving);
+  const txt = $('#autosave-txt');
+  if (txt) txt.textContent = !ok ? '保存失败（存储空间不足）' : (saving ? '保存中…' : '已自动保存');
+}
+
 
 function renderHome() {
   for (const s of ['zg', 'en']) {
@@ -77,8 +206,31 @@ function go(pg) {
   $$('nav button').forEach(b => b.classList.toggle('on', b.dataset.pg === pg));
   if (pg === 'history') renderHistory();
   if (pg === 'home') $('#nav-exam').style.display = 'none', $('#nav-result').style.display = 'none';
+  syncHeaderOffset();
   window.scrollTo(0, 0);
 }
+
+/* 把实测的 header 高度写进 --hdr，供 .exam-bar 的 sticky top 使用。
+   窄屏下 header 会换行变高，写死像素会让答题栏被盖住，所以这里动态测量。
+   两点注意：
+   ① 窄屏（≤640px）CSS 已让 header 不 sticky、exam-bar 归零，此处必须写 0，
+      否则会用桌面高度把答题栏往下推。
+   ② 量不到高度（隐藏/尚未布局，返回 0）时**不要覆盖**，保留 CSS 里的兜底值，
+      否则桌面端会被退化成 0，反过来又造成遮挡。 */
+function syncHeaderOffset() {
+  const hdr = document.querySelector('header');
+  if (!hdr) return;
+  const root = document.documentElement;
+  if (window.innerWidth <= 640) {
+    root.style.setProperty('--hdr', '0px');
+    return;
+  }
+  const h = hdr.getBoundingClientRect().height;
+  if (h > 0) root.style.setProperty('--hdr', Math.round(h) + 'px');
+  else root.style.removeProperty('--hdr');   // 量不到 → 用 :root 的兜底 63px
+}
+window.addEventListener('resize', syncHeaderOffset);
+window.addEventListener('orientationchange', syncHeaderOffset);
 
 /* ---------- 开始考试 ---------- */
 $$('.subj').forEach(c => c.onclick = () => startExam(c.dataset.s));
@@ -96,14 +248,18 @@ function startExam(subject) {
   State.cursor = 0;
   State.remaining = EXAM[subject].duration;
   State.paused = false;
+  State.finished = false;
   State.qStart = {};
   qs.forEach(q => { State.answers[q._qid] = { choice: null, text: '', selfScore: null, seconds: 0 }; });
   qs.forEach(q => { State.qStart[q._qid] = Date.now(); });
 
   $('#nav-exam').style.display = '';
+  $('#nav-result').style.display = 'none';
   renderExam();
   go('exam');
   startTick();
+  State.lastQEnter = Date.now();
+  saveProgress(true);        // 开考即落盘，避免刚开考就刷新导致丢卷
   window.scrollTo(0, 0);
 }
 
@@ -318,6 +474,7 @@ function renderQ(q, i, part) {
     ta.oninput = () => {
       State.answers[q._qid].text = ta.value;
       wc.textContent = `${ta.value.length} 字`;
+      saveProgress(false);
     };
     card.appendChild(ta);
     card.appendChild(wc);
@@ -327,7 +484,10 @@ function renderQ(q, i, part) {
     inp.type = 'number'; inp.min = 0; inp.max = part.score; inp.step = 0.5;
     inp.placeholder = '0';
     inp.value = a.selfScore ?? '';
-    inp.oninput = () => { State.answers[q._qid].selfScore = inp.value === '' ? null : Number(inp.value); };
+    inp.oninput = () => {
+      State.answers[q._qid].selfScore = inp.value === '' ? null : Number(inp.value);
+      saveProgress(false);
+    };
     ss.appendChild(inp);
     ss.appendChild(el('span', '', `<span style="font-size:12px;color:var(--tx3)">交卷前可留空，交卷时再评</span>`));
     card.appendChild(ss);
@@ -347,6 +507,7 @@ function renderQ(q, i, part) {
         const nb = document.querySelectorAll('.qn')[i];
         if (nb) nb.classList.add('done');
         paintTimer();
+        saveProgress(false);
       };
       box.appendChild(o);
     });
@@ -367,13 +528,19 @@ function jumpTo(i) {
   $$('.qn').forEach((b, k) => b.classList.toggle('cur', k === i));
   const t = document.getElementById(`q-${i}`);
   if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  saveProgress(false);
 }
 
 /* ---------- 交卷 ---------- */
 function finishExam(auto) {
   clearInterval(State.tick);
   State.running = false;
+  State.finished = true;
   const { subject, questions } = State.paper;
+  // 交卷后试卷已完成，清掉断点快照——否则下次打开还会提示「继续答题」
+  ResumeStore.clear();
+  State.pendingSnap = null;
+  dipResumeCard();
   // 补齐未累计的当前题用时
   if (!State.paused && State.lastQEnter) {
     const cur = questions[State.cursor];
@@ -683,5 +850,25 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp' || e.key === 'k') { e.preventDefault(); jumpTo(Math.max(State.cursor - 1, 0)); }
 });
 
+/* ---------- 断点续答：离开页面时兜底落盘 ---------- */
+// 关闭 / 刷新 / 切到后台时，把节流队列里还没写盘的进度补写一次，
+// 否则用户答完最后一题直接关标签页，会丢掉最后 2 秒内的作答。
+function flushResume() {
+  if (!State.paper || State.finished) return;
+  if (!State.running && !State.paused) return;
+  try {
+    if (State.autoTimer) { clearTimeout(State.autoTimer); State.autoTimer = null; }
+    const snap = ResumeStore.snapshot(State.paper, State.answers, State.remaining, State.cursor);
+    ResumeStore.save(snap);
+  } catch (e) { /* 卸载阶段，静默处理 */ }
+}
+
+window.addEventListener('beforeunload', flushResume);
+window.addEventListener('pagehide', flushResume);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') flushResume();
+});
+
 State.lastQEnter = Date.now();
 boot();
+// 测试改动 Wed Oct  7 18:22:56     2026
