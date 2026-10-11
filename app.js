@@ -886,3 +886,150 @@ document.addEventListener('visibilitychange', () => {
 
 State.lastQEnter = Date.now();
 boot();
+
+/* ---------- 双击查词 ---------- */
+/* 双击英文单词弹出中文释义。词典来自 data/dictionary.js（离线内嵌，
+   由 build_dictionary.py 生成，只收录题库涉及词汇及其原型）。
+   变形还原：直接命中失败后依次尝试复数/时态/比较级/-ly 派生、
+   双写辅音还原与常见不规则变化，规则与 build_dictionary.py 一致。 */
+(function () {
+  const DICT = (typeof WORD_DICT_DATA !== 'undefined') ? WORD_DICT_DATA : null;
+  if (!DICT) return;
+
+  const IRREGULAR = {
+    'was':'be','were':'be','been':'be','being':'be','am':'be','is':'be','are':'be',
+    'has':'have','had':'have','did':'do','does':'do',
+    'went':'go','gone':'go','goes':'go','made':'make','makes':'make',
+    'took':'take','taken':'take','got':'get','gotten':'get',
+    'gave':'give','given':'give','saw':'see','seen':'see',
+    'known':'know','knew':'know','grown':'grow','grew':'grow',
+    'drawn':'draw','drew':'draw','shown':'show','showed':'show',
+    'driven':'drive','drove':'drive','written':'write','wrote':'write',
+    'spoken':'speak','spoke':'speak','broken':'break','broke':'break',
+    'held':'hold','kept':'keep','left':'leave','felt':'feel',
+    'found':'find','built':'build','sent':'send','spent':'spend',
+    'met':'meet','paid':'pay','sold':'sell','told':'tell','said':'say',
+    'brought':'bring','thought':'think','caught':'catch','taught':'teach',
+    'bought':'buy','sat':'sit','stood':'stand','ran':'run',
+    'began':'begin','begun':'begin','became':'become','become':'become',
+    'won':'win','fell':'fall','fallen':'fall','meant':'mean',
+    'lost':'lose','chose':'choose','chosen':'choose','rose':'rise',
+    'risen':'rise','born':'bear','worn':'wear','wore':'wear',
+    'torn':'tear','tore':'tear','slept':'sleep','swept':'sweep',
+    'dealt':'deal','cost':'cost','led':'lead','heard':'hear','hurt':'hurt',
+    'laid':'lay','lain':'lie','lay':'lie','lied':'lie',
+    'set':'set','put':'put','cut':'cut','hit':'hit','read':'read','let':'let',
+    'shook':'shake','shaken':'shake','stole':'steal','stolen':'steal',
+    'sang':'sing','sung':'sing','swam':'swim','swum':'swim',
+    'flew':'fly','flown':'fly','blew':'blow','blown':'blow',
+    'arose':'arise','arisen':'arise','awoke':'awake','awaken':'awake',
+    'forbade':'forbid','hid':'hide','hidden':'hide',
+    'rode':'ride','ridden':'ride','sank':'sink','sunk':'sink',
+    'spread':'spread','stuck':'stick','struck':'strike',
+    'swore':'swear','sworn':'swear','woke':'wake','woken':'wake',
+    'wept':'weep','wound':'wind','upset':'upset',
+    'men':'man','women':'woman','children':'child','feet':'foot',
+    'teeth':'tooth','mice':'mouse','people':'person','geese':'goose',
+    'better':'good','best':'good','worse':'bad','worst':'bad',
+    'more':'much','most':'much','less':'little','least':'little',
+    'further':'far','furthest':'far','elder':'old','eldest':'old',
+  };
+
+  function lemmaCandidates(w) {
+    const out = [w];
+    const add = x => { if (x && x.length > 1 && out.indexOf(x) < 0) out.push(x); };
+    if (IRREGULAR[w]) add(IRREGULAR[w]);
+    if (w.endsWith('ies') && w.length > 4) add(w.slice(0, -3) + 'y');
+    if (w.endsWith('es')) add(w.slice(0, -2));
+    if (w.endsWith('s')) add(w.slice(0, -1));
+    if (w.endsWith('ed')) { add(w.slice(0, -1)); add(w.slice(0, -2)); }
+    if (w.endsWith('ing')) { add(w.slice(0, -3)); add(w.slice(0, -3) + 'e'); }
+    if (w.endsWith('er') && w.length > 4) { add(w.slice(0, -2)); add(w.slice(0, -1)); }
+    if (w.endsWith('est') && w.length > 5) { add(w.slice(0, -3)); add(w.slice(0, -2)); }
+    if (w.endsWith('ly') && w.length > 4) add(w.slice(0, -2));
+    if (w.endsWith('d')) add(w.slice(0, -1));
+    // 双写辅音还原：stopped -> stopp -> stop
+    for (const x of out.slice()) {
+      if (x.length > 3 && x[x.length - 1] === x[x.length - 2]) add(x.slice(0, -1));
+    }
+    return out;
+  }
+
+  // 词条：DICT[key] = [音标, "词性. 释义|词性. 释义"]
+  function lookup(raw) {
+    const w = String(raw).toLowerCase().replace(/[^a-z''-]/g, '');
+    if (!w || w.length < 2) return null;
+    for (const c of lemmaCandidates(w)) {
+      if (DICT[c]) return { head: c, from: (c === w ? '' : w), phone: DICT[c][0], trans: DICT[c][1] };
+    }
+    return { head: w, from: '', phone: '', trans: '', miss: true };
+  }
+
+  /* ---- 弹层 ---- */
+  let pop = null;
+  function ensurePop() {
+    if (!pop) {
+      pop = document.createElement('div');
+      pop.id = 'word-pop';
+      document.body.appendChild(pop);
+    }
+    return pop;
+  }
+  function hidePop() { if (pop) pop.style.display = 'none'; }
+
+  function showPop(entry, x, y) {
+    const p = ensurePop();
+    if (entry.miss) {
+      p.innerHTML = '<div class="wp-miss">「' + entry.head + '」未收录</div>';
+    } else {
+      const ph = entry.phone
+        ? '<div class="wp-phone">/' + entry.phone + '/</div>' : '';
+      const from = entry.from
+        ? ' <span style="color:var(--tx3);font-weight:400;font-size:11px">(' + entry.from + ')</span>' : '';
+      p.innerHTML = '<div class="wp-word">' + entry.head + from + '</div>' + ph +
+        '<div class="wp-trans">' + entry.trans.split('|').join('\n') + '</div>';
+    }
+    p.style.display = 'block';
+    // 先渲染再量尺寸，按视口收拢位置
+    let px = x + 14, py = y + 16;
+    const r = p.getBoundingClientRect();
+    if (px + r.width + 10 > innerWidth) px = Math.max(6, innerWidth - r.width - 10);
+    if (py + r.height + 10 > innerHeight) py = Math.max(6, y - r.height - 12);
+    p.style.left = px + 'px';
+    p.style.top = py + 'px';
+  }
+
+  /* 双击时浏览器会自动选中一个词，先取选区；取不到再按坐标取光标处的词 */
+  function wordAtPoint(x, y) {
+    const sel = window.getSelection();
+    const tok = (sel ? String(sel) : '').trim();
+    if (tok && tok.split(/\s+/).length === 1 && /[A-Za-z]/.test(tok)) return tok;
+    let node = null, off = 0;
+    if (document.caretRangeFromPoint) {
+      const r = document.caretRangeFromPoint(x, y);
+      if (r) { node = r.startContainer; off = r.startOffset; }
+    } else if (document.caretPositionFromPoint) {
+      const p = document.caretPositionFromPoint(x, y);
+      if (p) { node = p.offsetNode; off = p.offset; }
+    }
+    if (!node || node.nodeType !== 3) return null;
+    const text = node.textContent;
+    const isW = ch => /[A-Za-z''-]/.test(ch);
+    let s = off, e = off;
+    while (s > 0 && isW(text[s - 1])) s--;
+    while (e < text.length && isW(text[e])) e++;
+    return text.slice(s, e) || null;
+  }
+
+  document.addEventListener('dblclick', e => {
+    if (e.target.closest('input,textarea,button,nav,header,.modal')) return;
+    const raw = wordAtPoint(e.clientX, e.clientY);
+    if (!raw) return hidePop();
+    showPop(lookup(raw), e.clientX, e.clientY);
+  });
+  // 单击空白处 / 滚动 / 缩放 / Esc 收起弹层
+  document.addEventListener('click', e => { if (pop && !pop.contains(e.target)) hidePop(); });
+  window.addEventListener('scroll', hidePop, true);
+  window.addEventListener('resize', hidePop);
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') hidePop(); });
+})();
