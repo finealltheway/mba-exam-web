@@ -64,6 +64,10 @@ const shuffle = (arr) => {
 
 const uid = () => Math.random().toString(36).slice(2, 10);
 
+/** 题目的稳定身份（跨会话可还原，与 ResumeStore 的口径一致）：
+    subject|part|year|no。历史完成记录去重、断点续答都靠它。 */
+const qKey = (q) => `${q.subject}|${q.part}|${q.year}|${q.no}`;
+
 /* ============================================================
    抽题
    ============================================================
@@ -163,11 +167,21 @@ function pickArticles(groups, n, weightOf) {
 
 
 /** 英语二：按文章整篇组装 */
-function drawEnglish(bank, weightOf) {
+function drawEnglish(bank, weightOf, exclude) {
   const out = [];
   for (const { part, units, perUnit, label } of EN_ARTICLE_PARTS) {
     const groups = groupArticles(bank, part, perUnit);
-    const chosen = pickArticles(groups, units, weightOf);
+    // 历史去重：整篇里只要有一题做过，这篇就视为「已做」。
+    // 优先从没做过的篇目里抽；不够时再用做过的兜底，保证试卷永远凑得齐。
+    const fresh = exclude
+      ? groups.filter(g => !g.questions.some(q => exclude.has(qKey(q))))
+      : groups;
+    const chosen = pickArticles(fresh, units, weightOf);
+    if (chosen.length < units) {
+      const freshKeys = new Set(fresh.map(g => g.key));
+      chosen.push(...pickArticles(
+        groups.filter(g => !freshKeys.has(g.key)), units - chosen.length, weightOf));
+    }
     chosen.forEach((g, gi) => {
       const groupId = `${part}#${gi}`;
       const groupLabel = part === 'en_cloze'
@@ -194,7 +208,11 @@ function drawEnglish(bank, weightOf) {
   for (const part of ['en_translation', 'en_writing_small', 'en_writing_big']) {
     const pool = bank.filter(q => q.subject === 'en' && q.part === part);
     if (!pool.length) continue;
-    const q = weightedPick(pool, 1, weightOf)[0];
+    // 同样优先没做过的；全部做过才回退到整个池子
+    const usable = exclude
+      ? (pool.filter(q => !exclude.has(qKey(q))).length ? pool.filter(q => !exclude.has(qKey(q))) : pool)
+      : pool;
+    const q = weightedPick(usable, 1, weightOf)[0];
     out.push({ ...q, _qid: uid(), _group: part, _groupIdx: 0, _first: true, _gsize: 1 });
   }
   return out;
@@ -202,7 +220,7 @@ function drawEnglish(bank, weightOf) {
 
 
 /** 管综：数学与逻辑逐题按考点权重抽（每题相互独立） */
-function drawZg(bank, weightOf) {
+function drawZg(bank, weightOf, exclude) {
   const cfg = EXAM.zg;
   const picked = [];
   const pickedKeys = new Set();
@@ -215,18 +233,25 @@ function drawZg(bank, weightOf) {
     );
     if (!pool.length) continue;
 
+    // 历史去重：优先从没做过的题里抽。fresh 不足时，
+    // 末尾的兜底逻辑会从整个 pool（含做过的）补齐，保证总题量不变。
+    const fresh = exclude
+      ? pool.filter(q => !exclude.has(qKey(q)))
+      : pool;
+    const usable = fresh.length ? fresh : pool;
+
     // 主观题（写作）每题独立、也不参与考点配额，直接按年份加权随机挑，
     // 与英语二的主观题保持一致。原实现走下面的配额逻辑，
     // 结果权重最高的年份把 1 个名额全吃掉 —— 每次都固定抽到最近年份。
     if (part.subjective) {
-      for (const q of weightedPick(pool, Math.min(part.count, pool.length), weightOf)) {
+      for (const q of weightedPick(usable, Math.min(part.count, usable.length), weightOf)) {
         picked.push({ ...q, _qid: uid() });
       }
       continue;
     }
 
     const byTag = new Map();
-    for (const q of pool) {
+    for (const q of usable) {
       const t = q.tag || '其他';
       if (!byTag.has(t)) byTag.set(t, []);
       byTag.get(t).push(q);
@@ -274,12 +299,15 @@ function drawZg(bank, weightOf) {
       }
     });
 
-    // 容量不足时从该题型剩余池补齐
+    // 容量不足时从该题型剩余池补齐：先补没做过的，再补做过的
     if (picked.filter(q => q.part === part.key).length < part.count) {
-      const fallback = shuffle(pool).filter(q => {
+      const leftover = pool.filter(q => {
         const key = `${q.subject}|${q.part}|${q.year}|${q.no}`;
         return !pickedKeys.has(key);
       });
+      const freshLeft = exclude ? leftover.filter(q => !exclude.has(qKey(q))) : leftover;
+      const doneLeft = exclude ? leftover.filter(q => exclude.has(qKey(q))) : [];
+      const fallback = shuffle(freshLeft).concat(shuffle(doneLeft));
       for (const q of fallback) {
         if (picked.filter(x => x.part === part.key).length >= part.count) break;
         pickedKeys.add(`${q.subject}|${q.part}|${q.year}|${q.no}`);
@@ -299,11 +327,14 @@ function drawZg(bank, weightOf) {
  */
 function drawQuestions(bank, subject, opts = {}) {
   const yearBias = opts.yearBias ?? 0.5;
+  // opts.exclude：Set<subject|part|year|no>，历史记录里已完成的题目。
+  // 组卷时优先避开；某题型题量不足时才用做过的题兜底补齐。
+  const exclude = opts.exclude instanceof Set ? opts.exclude : null;
   const years = [...new Set(bank.filter(q => q.subject === subject).map(q => q.year))].sort();
   const y0 = years[0], yN = years[years.length - 1];
   const weightOf = (y) => 1 + yearBias * ((y - y0) / Math.max(1, yN - y0));
 
-  let list = subject === 'en' ? drawEnglish(bank, weightOf) : drawZg(bank, weightOf);
+  let list = subject === 'en' ? drawEnglish(bank, weightOf, exclude) : drawZg(bank, weightOf, exclude);
 
   // 按题型顺序、组序、**抽取顺序**排列，再统一编号。
   //
@@ -454,6 +485,8 @@ const ResumeStore = {
       v: 1,
       paperId: paper.id,
       subject: paper.subject,
+      mode: paper.mode || 'random',     // 组卷模式（随机 / 指定年份真题）
+      year: paper.year ?? null,         // 年份模式下的真题年份
       createdAt: paper.createdAt,
       savedAt: new Date().toISOString(),
       remaining: Math.max(0, remaining),
@@ -506,7 +539,9 @@ const ResumeStore = {
       };
     }
     return {
-      paper: { id: snap.paperId, subject: snap.subject, createdAt: snap.createdAt, questions },
+      paper: { id: snap.paperId, subject: snap.subject,
+               mode: snap.mode || 'random', year: snap.year ?? null,
+               createdAt: snap.createdAt, questions },
       answers,
       remaining: snap.remaining,
       cursor: Math.min(snap.cursor || 0, questions.length - 1),

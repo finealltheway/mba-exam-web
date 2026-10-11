@@ -188,6 +188,7 @@ function renderHome() {
     if (st) st.innerHTML = EXAM[s].parts.map(p =>
       `<div><span>${p.name}</span><span>${p.count}题 · ${p.score}分</span></div>`).join('');
   }
+  initSubjModes();
   $('#rules').innerHTML = `
     <b style="color:var(--tx)">管理类联考综合能力（150 分钟客观题 + 30 分钟写作）</b><br>
     · 数学 25 题按应用题 / 代数 / 几何 / 数据分析约 25% : 30% : 25% : 20% 抽取<br>
@@ -233,14 +234,98 @@ window.addEventListener('resize', syncHeaderOffset);
 window.addEventListener('orientationchange', syncHeaderOffset);
 
 /* ---------- 开始考试 ---------- */
-$$('.subj').forEach(c => c.onclick = () => startExam(c.dataset.s));
+/** 汇总历史完成记录里出现过的题目身份：Set<subject|part|year|no>。
+    每份已完成试卷的 detail 都覆盖卷面全部题目（含主观题），
+    以此作为「该题已做过」的依据，供随机组卷去重。 */
+function doneQuestionKeys() {
+  const keys = new Set();
+  for (const rec of Store.all()) {
+    for (const d of (rec.detail || [])) {
+      keys.add(`${rec.subject}|${d.part}|${d.year}|${d.no}`);
+    }
+  }
+  return keys;
+}
 
-function startExam(subject) {
-  const qs = drawQuestions(State.bank, subject, { yearBias: 0.65 });
+/** 科目卡双模式：随机模式（点击卡片随机组卷）/ 指定年份真题（选年份后整卷开考）。 */
+function initSubjModes() {
+  $$('.subj').forEach(card => {
+    const s = card.dataset.s;
+    const sel = card.querySelector('.yr-sel');
+    const hint = card.querySelector('.mode-hint');
+    // 年份下拉：题库里该科目出现过的年份，降序
+    const years = [...new Set(State.bank.filter(q => q.subject === s).map(q => q.year))].sort((a, b) => b - a);
+    sel.innerHTML = years.map(y => `<option value="${y}">${y} 年真题</option>`).join('');
+
+    const isYearMode = () => card.querySelector('.mt.on').dataset.m === 'year';
+    const syncHint = () => {
+      hint.textContent = isYearMode()
+        ? `将按 ${sel.value} 年真题整卷组卷，点击卡片或「开始考试」`
+        : '点击卡片即随机组卷（自动避开历史做过的题）';
+    };
+    syncHint();
+
+    // 模式切换
+    card.querySelectorAll('.mt').forEach(btn => btn.onclick = (e) => {
+      e.stopPropagation();
+      card.querySelectorAll('.mt').forEach(b => b.classList.toggle('on', b === btn));
+      card.classList.toggle('year-mode', btn.dataset.m === 'year');
+      syncHint();
+    });
+    // 年份切换后同步提示
+    sel.onchange = syncHint;
+    // 下拉与按钮的点击不能冒泡成「开考」
+    sel.onclick = e => e.stopPropagation();
+    card.querySelector('[data-yr-start]').onclick = (e) => {
+      e.stopPropagation();
+      startExam(s, Number(sel.value));
+    };
+    // 点击卡片：随机模式随机组卷；年份模式按选中年份组卷
+    card.onclick = () => startExam(s, isYearMode() ? Number(sel.value) : undefined);
+  });
+}
+
+function startExam(subject, year) {
+  // 随机组卷先剔除历史记录里已完成的题目；某题型库存不足时才允许回头补做过的题
+  const exclude = doneQuestionKeys();
+  // 指定年份真题模式：只在当年题目范围内组卷
+  const pool = year ? State.bank.filter(q => q.subject === subject && q.year === year) : State.bank;
+  if (year && !pool.length) { alert(`${year} 年暂无题目，无法组卷`); return; }
+  const qs = drawQuestions(pool, subject, { yearBias: 0.65, exclude });
   if (!qs.length) { alert('题库为空，无法组卷'); return; }
+
+  // 年份卷完整性检查：题库个别年份本身缺题型（如 2021/2023 无新题型、
+  // 2025 扫描卷缺完形），组不满整卷时明确告知缺口，确认后再开考。
+  const expect = EXAM[subject].parts.map(p => p.count).reduce((a, b) => a + b, 0);
+  const begin = () => beginExam(subject, qs, year);
+  if (qs.length < expect) {
+    const missing = EXAM[subject].parts.map(p => {
+      const have = qs.filter(q => q.part === p.key).length;
+      return have < p.count ? `${p.name}（缺 ${p.count - have} 题）` : null;
+    }).filter(Boolean).join('、');
+    confirmModal('该年份题库不完整',
+      `${year} 年真题在题库中实际可用 ${qs.length}/${expect} 题，缺少：${missing}。` +
+      `用现有题目开考吗？（不缺的题型仍与真实考试结构一致）`, () => begin());
+    return;
+  }
+  begin();
+}
+
+/** 真正落卷开考（startExam 校验通过后调用）。 */
+function beginExam(subject, qs, year) {
+  const exclude = doneQuestionKeys();
+  // 提示本次卷子里有多少题是历史做过的（库存不足时兜底回填的题）
+  const reused = exclude.size ? qs.filter(q => exclude.has(`${q.subject}|${q.part}|${q.year}|${q.no}`)).length : 0;
+  if (reused > 0) {
+    setTimeout(() => confirmModal('题目去重提示',
+      `本次组卷已优先避开历史记录里做过的题；` +
+      `因部分题型库存不足，回填了 ${reused} 道做过的题，以保证试卷完整。`, null), 400);
+  }
 
   State.paper = {
     id: uid(), subject,
+    mode: year ? 'year' : 'random',   // 组卷模式：指定年份真题 / 随机
+    year: year || null,               // 年份模式下的真题年份
     createdAt: new Date().toISOString(),
     questions: qs.map((q, i) => ({ ...q, _idx: i })),
   };
@@ -636,12 +721,14 @@ function buildResult() {
     date: dayKey(new Date()),
     at: new Date().toLocaleString('zh-CN', { hour12: false }),
     subject,
+    mode: State.paper.mode || 'random',
+    year: State.paper.year || null,
     score: Math.round(r.score * 10) / 10,
     full: EXAM[subject].full,
     seconds: Math.round(total),
     detail: r.detail.map(d => ({
-      qid: d.qid, no: d.no, part: d.part, tag: d.tag, year: d.year,
-      choice: d.choice, correct: d.correct, gained: d.gained, full: d.full,
+      qid: d.qid, no: d.no, seq: d.seq, part: d.part, tag: d.tag, year: d.year,
+      choice: d.choice, text: d.text || '', correct: d.correct, gained: d.gained, full: d.full,
       seconds: Math.round(d.seconds), selfScore: d.selfScore,
     })),
     times, diag: { list: diag.list, weak: diag.weak, mid: diag.mid, good: diag.good },
@@ -659,7 +746,8 @@ function buildResult() {
   go('result');
 }
 
-function renderResult(rec) {
+/* 把一次考核记录渲染成完整 HTML —— 「成绩」页与「记录」页展开共用 */
+function resultHTML(rec) {
   const subject = rec.subject;
   const cfg = EXAM[subject];
   const objQ = rec.detail.filter(d => d.correct !== null);
@@ -669,7 +757,7 @@ function renderResult(rec) {
 
   const grade = (s) => s >= 0.85 ? ['优', 'var(--green)'] : s >= 0.6 ? ['中', 'var(--amber)'] : ['弱', 'var(--red)'];
 
-  const d = rec.diag;
+  const d = rec.diag || { weak: [], mid: [], good: [] };
   const card = (title, color, rows, sub) => {
     if (!rows.length) return `<div class="dcard"><h3><span class="dot" style="background:${color}"></span>${title}</h3>
       <div class="empty">本次未涉及</div></div>`;
@@ -684,7 +772,56 @@ function renderResult(rec) {
       </div>`).join('')}</div>`;
   };
 
-  $('#result-body').innerHTML = `
+  // 逐题明细（纯 HTML，展开后无需再绑定事件）
+  const qmap = Object.fromEntries((rec.questions || []).map(q => [q._qid, q]));
+  const hasQ = Array.isArray(rec.questions) && rec.questions.length;
+  const qdetailHTML = rec.detail.map(d2 => {
+    const q = qmap[d2.qid] || {};
+    const p = cfg.parts.find(x => x.key === d2.part) || {};
+    const isSub = !!p.subjective;
+    const state = isSub
+      ? `<span class="pill a">自评 ${d2.gained} / ${d2.full}</span>`
+      : d2.choice == null ? `<span class="pill r">未答</span>`
+      : d2.correct ? `<span class="pill g">正确</span>`
+      : `<span class="pill r">错误</span>`;
+    return `<details>
+      <summary>
+      <span style="display:inline-flex;gap:8px;align-items:center;width:100%;padding-right:10px">
+        <span style="font-weight:500">第 ${d2.seq ?? d2.no} 题${isSub ? ' ' + esc((p.name || '').split('·').pop() || '') : ''}</span>
+        <span style="font-size:11px;color:var(--tx3)">${esc(d2.tag || '')}</span>
+        <span style="margin-left:auto">${state}<span style="font-size:12px;color:var(--tx3);font-weight:400"> · ${fmtDur(d2.seconds)}</span></span>
+      </span></summary>
+      <div class="ansbox" style="margin-top:8px">
+        ${!isSub ? `
+          <div style="margin-bottom:10px">
+            ${(q._first && q.passage) ? `<details style="margin-bottom:10px"><summary style="font-size:12px;color:var(--blue);cursor:pointer">${esc(q._groupLabel || passageLabel(q))}（${q.passage.length} 字符）</summary>
+              <div style="font-size:12.5px;line-height:1.75;color:var(--tx2);background:var(--hover2);padding:10px;border-radius:6px;margin-top:6px;max-height:220px;overflow:auto;white-space:pre-wrap">${passageHTML(q.passage)}</div></details>`
+              : (q.passage ? `<div style="font-size:11.5px;color:var(--tx3);margin-bottom:8px">原文见本篇第 1 题（${esc(q._groupLabel || '')}）</div>` : '')}
+            ${q.img ? `<img src="${esc(assetURL(q.img))}" style="width:100%;border:1px solid var(--line);border-radius:6px;margin-bottom:10px" alt="题面">`
+                    : `<div style="font-size:13px;line-height:1.7;margin-bottom:10px">${esc(q.stem || '')}</div>`}
+            <div style="display:flex;flex-direction:column;gap:3px;font-size:13px">
+              ${(q.optionsInImage ? OPT_KEYS : OPT_KEYS.filter(k => q.options?.[k] != null)).map(k => {
+                const mine = d2.choice === k, right2 = q.answer === k;
+                const col = right2 ? 'var(--green)' : mine ? 'var(--red)' : 'var(--tx2)';
+                const w = right2 ? 'font-weight:600' : mine ? 'font-weight:600' : 'font-weight:400';
+                const label = q.optionsInImage ? `${k}.（选项见题面图）` : `${k}. ${esc(q.options[k])}`;
+                return `<div style="color:${col};${w}">${label}${right2 ? '  ✓' : mine ? '  ✗' : ''}</div>`;
+              }).join('')}
+            </div>
+          </div>
+          <div class="lbl">正确答案：<span class="ok">${esc(q.answer || '—')}</span>　你的答案：<span class="${d2.correct ? 'ok' : 'no'}">${esc(d2.choice || '未答')}</span></div>
+          ${q.explanation ? `<div class="lbl" style="margin-top:8px">解析</div><div>${esc(q.explanation)}</div>` : ''}
+        ` : `
+          <div class="lbl">题目</div>
+          <div style="font-size:13px;line-height:1.7;white-space:pre-wrap;margin-bottom:10px">${esc(q.stem || '')}</div>
+          <div class="lbl">你的作答（${(d2.text || '').length} 字）</div>
+          <div style="font-size:13px;line-height:1.7;color:var(--tx2);white-space:pre-wrap;background:var(--hover);padding:10px;border-radius:6px;max-height:200px;overflow:auto">${esc(d2.text || '（未作答）')}</div>
+          <div class="lbl" style="margin-top:8px">自评得分 <span class="ok">${d2.gained} / ${d2.full}</span></div>
+        `}
+      </div></details>`;
+  }).join('');
+
+  return `
     <div class="score-hero">
       <div class="n" style="color:${rate >= 0.6 ? 'var(--tx)' : 'var(--red)'}">${rec.score}<span style="font-size:20px;color:var(--tx3);font-weight:400"> / ${rec.full}</span></div>
       <div class="d">${cfg.name} · ${rec.date} ${rec.at.slice(-8)} · 用时 ${fmtDur(rec.seconds)} / 180 分钟</div>
@@ -729,65 +866,18 @@ function renderResult(rec) {
     <div class="card">
       <h2>逐题明细</h2>
       <div class="hint">点击展开题目与答案解析</div>
-      <div id="qdetail"></div>
-    </div>
+      ${hasQ ? '' : '<div class="hint">（该条为早期记录，未保存题目原文，仅显示作答结果）</div>'}
+      <div id="qdetail">${qdetailHTML}</div>
+    </div>`;
+}
 
+function renderResult(rec) {
+  $('#result-body').innerHTML = resultHTML(rec) + `
     <div style="display:flex;gap:10px;margin-top:16px">
       <button class="btn" id="again">再考一次</button>
       <button class="btn ghost" id="back-home">返回首页</button>
     </div>`;
-
-  // 逐题明细
-  const box = $('#qdetail');
-  const qmap = Object.fromEntries(rec.questions.map(q => [q._qid, q]));
-  rec.detail.forEach(d2 => {
-    const q = qmap[d2.qid] || {};
-    const p = cfg.parts.find(x => x.key === d2.part);
-    const isSub = p.subjective;
-    const det = el('details');
-    const state = isSub
-      ? `<span class="pill a">自评 ${d2.gained} / ${d2.full}</span>`
-      : d2.choice == null ? `<span class="pill r">未答</span>`
-      : d2.correct ? `<span class="pill g">正确</span>`
-      : `<span class="pill r">错误</span>`;
-    det.innerHTML = `<summary>
-      <span style="display:inline-flex;gap:8px;align-items:center;width:100%;padding-right:10px">
-        <span style="font-weight:500">第 ${d2.seq ?? d2.no} 题${isSub ? ' ' + esc(p.name.split('·').pop() || '') : ''}</span>
-        <span style="font-size:11px;color:var(--tx3)">${esc(d2.tag || '')}</span>
-        <span style="margin-left:auto">${state}<span style="font-size:12px;color:var(--tx3);font-weight:400"> · ${fmtDur(d2.seconds)}</span></span>
-      </span></summary>
-      <div class="ansbox" style="margin-top:8px">
-        ${!isSub ? `
-          <div style="margin-bottom:10px">
-            ${(q._first && q.passage) ? `<details style="margin-bottom:10px"><summary style="font-size:12px;color:var(--blue);cursor:pointer">${esc(q._groupLabel || passageLabel(q))}（${q.passage.length} 字符）</summary>
-              <div style="font-size:12.5px;line-height:1.75;color:var(--tx2);background:var(--hover2);padding:10px;border-radius:6px;margin-top:6px;max-height:220px;overflow:auto;white-space:pre-wrap">${passageHTML(q.passage)}</div></details>`
-              : (q.passage ? `<div style="font-size:11.5px;color:var(--tx3);margin-bottom:8px">原文见本篇第 1 题（${esc(q._groupLabel || '')}）</div>` : '')}
-            ${q.img ? `<img src="${esc(assetURL(q.img))}" style="width:100%;border:1px solid var(--line);border-radius:6px;margin-bottom:10px" alt="题面">`
-                    : `<div style="font-size:13px;line-height:1.7;margin-bottom:10px">${esc(q.stem || '')}</div>`}
-            <div style="display:flex;flex-direction:column;gap:3px;font-size:13px">
-              ${(q.optionsInImage ? OPT_KEYS : OPT_KEYS.filter(k => q.options?.[k] != null)).map(k => {
-                const mine = d2.choice === k, right = q.answer === k;
-                const col = right ? 'var(--green)' : mine ? 'var(--red)' : 'var(--tx2)';
-                const w = right ? 'font-weight:600' : mine ? 'font-weight:600' : 'font-weight:400';
-                const label = q.optionsInImage ? `${k}.（选项见题面图）` : `${k}. ${esc(q.options[k])}`;
-                return `<div style="color:${col};${w}">${label}${right ? '  ✓' : mine ? '  ✗' : ''}</div>`;
-              }).join('')}
-            </div>
-          </div>
-          <div class="lbl">正确答案：<span class="ok">${esc(q.answer || '—')}</span>　你的答案：<span class="${d2.correct ? 'ok' : 'no'}">${esc(d2.choice || '未答')}</span></div>
-          ${q.explanation ? `<div class="lbl" style="margin-top:8px">解析</div><div>${esc(q.explanation)}</div>` : ''}
-        ` : `
-          <div class="lbl">题目</div>
-          <div style="font-size:13px;line-height:1.7;white-space:pre-wrap;margin-bottom:10px">${esc(q.stem || '')}</div>
-          <div class="lbl">你的作答（${(q._ansText || '').length} 字）</div>
-          <div style="font-size:13px;line-height:1.7;color:var(--tx2);white-space:pre-wrap;background:var(--hover);padding:10px;border-radius:6px;max-height:200px;overflow:auto">${esc(q._ansText || '（未作答）')}</div>
-          <div class="lbl" style="margin-top:8px">自评得分 <span class="ok">${d2.gained} / ${d2.full}</span></div>
-        `}
-      </div>`;
-    box.appendChild(det);
-  });
-
-  $('#again').onclick = () => startExam(subject);
+  $('#again').onclick = () => startExam(rec.subject);
   $('#back-home').onclick = () => go('home');
 }
 
@@ -808,6 +898,7 @@ function renderHistory() {
     return `<div class="rec">
       <div class="rec-h">
         <span style="font-weight:600">${cfg.name}</span>
+        ${r.mode === 'year' && r.year ? `<span class="pill y">${r.year} 真题</span>` : `<span class="pill n">随机卷</span>`}
         <span class="pill ${rate >= 60 ? 'g' : 'r'}">${r.score} / ${r.full}</span>
         <span style="font-size:12px;color:var(--tx2)">正确率 ${rate}%</span>
         <span class="dt">${r.date} ${r.at.slice(-8)}</span>
@@ -818,11 +909,8 @@ function renderHistory() {
         <span>薄弱 <b>${weak.length ? esc(weak.slice(0, 3).join('、')) : '无'}</b></span>
       </div>
       <details>
-        <summary>查看详情</summary>
-        <div style="margin-top:8px">
-          ${r.times.map(t => `<div style="display:flex;gap:12px;font-size:12px;padding:3px 0;border-bottom:1px solid var(--line)">
-            <span style="flex:1">${esc(t.name)}</span><span style="color:var(--tx2)">${fmtDur(t.seconds)} / ${t.planned} 分钟</span></div>`).join('')}
-        </div>
+        <summary>展开查看完整成绩单</summary>
+        <div style="margin-top:10px">${resultHTML(r)}</div>
       </details>
     </div>`;
   }).join('');

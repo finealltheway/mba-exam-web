@@ -256,7 +256,7 @@
   "part": "logic",
   "year": 2021,
   "no": 40,
-  "stem": "40、根据以上信息，可以得出以下哪项？",
+  "stem": "40~41 题基于以下题干：冬奥组委会官网开通全球招募系统，正式招募冬奥会志愿者。张明、刘伟、庄敏、孙兰、李梅5人在一起讨论报名事宜，他们商量的结果如下：（1）如果张明报名，则刘伟报名；（2）如果庄敏报名，则孙兰也报名；（3）只要刘伟和孙兰两人中至少有1人报名，则李梅也报名。后来得知，他们5人中恰有3人报名了。 40、根据以上信息，可以得出以下哪项？",
   "options": {
    "A": "张明报名了",
    "B": "刘伟报名了",
@@ -274,7 +274,7 @@
   "part": "logic",
   "year": 2021,
   "no": 41,
-  "stem": "41、如果增加条件“若刘伟报名，则庄敏也报名”，那么可以得出以下哪项？",
+  "stem": "40~41 题基于以下题干：冬奥组委会官网开通全球招募系统，正式招募冬奥会志愿者。张明、刘伟、庄敏、孙兰、李梅5人在一起讨论报名事宜，他们商量的结果如下：（1）如果张明报名，则刘伟报名；（2）如果庄敏报名，则孙兰也报名；（3）只要刘伟和孙兰两人中至少有1人报名，则李梅也报名。后来得知，他们5人中恰有3人报名了。 41、如果增加条件“若刘伟报名，则庄敏也报名”，那么可以得出以下哪项？",
   "options": {
    "A": "张明和刘伟都报名了",
    "B": "刘伟和庄敏都报名了",
@@ -382,7 +382,7 @@
   "part": "logic",
   "year": 2021,
   "no": 47,
-  "stem": "47.根据上述信息，可以得出以下哪项?",
+  "stem": "47~48 题基于以下题干：某剧团拟将历史故事\"鸿门宴\"搬上舞台，该剧有项王、沛公、项伯、张良、项庄、樊哙、范增7个主要角色，甲、乙、丙、丁、戊、己、庚7名演员每人只能扮演其中一个，且每个角色只能由其中一人扮演。根据各演员的特点，角色安排如下：（1）如果甲不扮演沛公，则乙扮演项王；（2）如果丙或己扮演张良，则丁扮演范增；（3）如果乙不扮演项王，则丙扮演张良；（4）如果丁不扮演樊哙，则庚或戊扮演沛公。 47.根据上述信息，可以得出以下哪项?",
   "options": {
    "A": "甲扮演沛公",
    "B": "乙扮演项王",
@@ -400,7 +400,7 @@
   "part": "logic",
   "year": 2021,
   "no": 48,
-  "stem": "48.若甲扮演沛公而庚扮演项庄，则可以得出以下哪项？",
+  "stem": "47~48 题基于以下题干：某剧团拟将历史故事\"鸿门宴\"搬上舞台，该剧有项王、沛公、项伯、张良、项庄、樊哙、范增7个主要角色，甲、乙、丙、丁、戊、己、庚7名演员每人只能扮演其中一个，且每个角色只能由其中一人扮演。根据各演员的特点，角色安排如下：（1）如果甲不扮演沛公，则乙扮演项王；（2）如果丙或己扮演张良，则丁扮演范增；（3）如果乙不扮演项王，则丙扮演张良；（4）如果丁不扮演樊哙，则庚或戊扮演沛公。 48.若甲扮演沛公而庚扮演项庄，则可以得出以下哪项？",
   "options": {
    "A": "丙扮演项伯",
    "B": "丙扮演范增",
@@ -508,7 +508,7 @@
   "part": "logic",
   "year": 2021,
   "no": 54,
-  "stem": "54.根据上述信息，可以得出哪项？",
+  "stem": "54~55 题基于以下题干：某高铁线路设有\"东沟\"\"西山\"\"南镇\"\"北阳\"\"中丘\"5座高铁站。该线路有甲、乙、丙、丁、戊5趟车运行。这5座高铁站中，每站恰好有3趟车停靠，且甲车和乙车停靠的站均不相同。已知：（1）若乙车或丙车至少有一车在\"北阳\"停靠，则它们均在\"东沟\"停靠；（2）若丁车在\"北阳\"停靠，则丙、丁和戊车均在\"中丘\"停靠；（3）若甲、乙和丙车中至少有2趟车在\"东沟\"停靠，则这3趟车均在\"西山\"停靠。 54.根据上述信息，可以得出哪项？",
   "options": {
    "A": "甲车不在“中丘”停靠",
    "B": "乙车不在“西山”停靠",
@@ -526,7 +526,7 @@
   "part": "logic",
   "year": 2021,
   "no": 55,
-  "stem": "55.若没有车在每站都停靠，则可以得出以下哪项?",
+  "stem": "54~55 题基于以下题干：某高铁线路设有\"东沟\"\"西山\"\"南镇\"\"北阳\"\"中丘\"5座高铁站。该线路有甲、乙、丙、丁、戊5趟车运行。这5座高铁站中，每站恰好有3趟车停靠，且甲车和乙车停靠的站均不相同。已知：（1）若乙车或丙车至少有一车在\"北阳\"停靠，则它们均在\"东沟\"停靠；（2）若丁车在\"北阳\"停靠，则丙、丁和戊车均在\"中丘\"停靠；（3）若甲、乙和丙车中至少有2趟车在\"东沟\"停靠，则这3趟车均在\"西山\"停靠。 55.若没有车在每站都停靠，则可以得出以下哪项?",
   "options": {
    "A": "甲车在“南镇”停靠",
    "B": "乙车在“东沟”停靠",
@@ -1338,7 +1338,7 @@
   "part": "logic",
   "year": 2022,
   "no": 41,
-  "stem": "41.如果乙在丁之前的学年选修，则可以得出以下哪项？",
+  "stem": "41~42 题基于以下题干：本科生小刘拟在四个学年中选修甲、乙、丙、丁、戊、己、庚、辛8门课程，每个学年选修其中的一到三门课程，每门课程均在其中的一个学年修完。同时还满足：（1）后三个学年选修的课程数量均不同；（2）丙、己和辛课程安排在一个学年，丁课程安排在紧接其后的一个学年；（3）若第4学年至少选修甲、丙、丁中的一门课程，则第一学年仅选修戊、辛两门课程。 41.如果乙在丁之前的学年选修，则可以得出以下哪项？",
   "options": {
    "A": "乙在第一学年选修",
    "B": "乙在第二学年选修",
@@ -1356,7 +1356,7 @@
   "part": "logic",
   "year": 2022,
   "no": 42,
-  "stem": "42.如果甲、庚均在乙之后的学年选修，则可以得出以下哪项？",
+  "stem": "41~42 题基于以下题干：本科生小刘拟在四个学年中选修甲、乙、丙、丁、戊、己、庚、辛8门课程，每个学年选修其中的一到三门课程，每门课程均在其中的一个学年修完。同时还满足：（1）后三个学年选修的课程数量均不同；（2）丙、己和辛课程安排在一个学年，丁课程安排在紧接其后的一个学年；（3）若第4学年至少选修甲、丙、丁中的一门课程，则第一学年仅选修戊、辛两门课程。 42.如果甲、庚均在乙之后的学年选修，则可以得出以下哪项？",
   "options": {
    "A": "戊在第一学年选修",
    "B": "戊在第三学年选修",
@@ -1410,7 +1410,7 @@
   "part": "logic",
   "year": 2022,
   "no": 45,
-  "stem": "45.根据以上信息，可以得出以下哪项?",
+  "stem": "45~46 题基于以下题干：某电影院制定未来一周的排片计划。他们决定，周二至周日（周一休息）每天放映动作片、悬疑片、科幻片、纪录片、战争片、历史片6类型中的一种，各不重复。已知排片还有如下要求：（1）如果周二或周五放映悬疑片，则周三放映科幻片；（2）如果周四或周六放映悬疑片，则周五放映战争片；（3）战争片必须在周三放。 45.根据以上信息，可以得出以下哪项?",
   "options": {
    "A": "周六放科幻片",
    "B": "周日放悬疑片",
@@ -1428,7 +1428,7 @@
   "part": "logic",
   "year": 2022,
   "no": 46,
-  "stem": "46.如果历史片的放映日期，既与纪录片相邻，又与科幻片相邻，则可得出以下哪项?",
+  "stem": "45~46 题基于以下题干：某电影院制定未来一周的排片计划。他们决定，周二至周日（周一休息）每天放映动作片、悬疑片、科幻片、纪录片、战争片、历史片6类型中的一种，各不重复。已知排片还有如下要求：（1）如果周二或周五放映悬疑片，则周三放映科幻片；（2）如果周四或周六放映悬疑片，则周五放映战争片；（3）战争片必须在周三放。 46.如果历史片的放映日期，既与纪录片相邻，又与科幻片相邻，则可得出以下哪项?",
   "options": {
    "A": "周二放纪录片",
    "B": "周四放纪录片",
@@ -1482,7 +1482,7 @@
   "part": "logic",
   "year": 2022,
   "no": 49,
-  "stem": "49.根据以上信息，可以得出以下哪项？",
+  "stem": "49~50 题基于以下题干：某校文学社王、李、周、丁4人每人只爱好诗歌、戏剧、散文、小说4种文学形式中的一种，且各不相同。他们每个人只创作了上述4种中的一种作品，且形式各不相同；他们创作的作品形式与各自的文学爱好均不相同。已知：（1）若王没有创作诗歌，则李爱好小说；（2）若王没有创作诗歌，则李创作小说；（3）若王创作诗歌，则李爱好小说且周爱好散文。 49.根据以上信息，可以得出以下哪项？",
   "options": {
    "A": "王爱好散文",
    "B": "李爱好戏剧",
@@ -1500,7 +1500,7 @@
   "part": "logic",
   "year": 2022,
   "no": 50,
-  "stem": "50.如果丁创作散文，则可得出？",
+  "stem": "49~50 题基于以下题干：某校文学社王、李、周、丁4人每人只爱好诗歌、戏剧、散文、小说4种文学形式中的一种，且各不相同。他们每个人只创作了上述4种中的一种作品，且形式各不相同；他们创作的作品形式与各自的文学爱好均不相同。已知：（1）若王没有创作诗歌，则李爱好小说；（2）若王没有创作诗歌，则李创作小说；（3）若王创作诗歌，则李爱好小说且周爱好散文。 50.如果丁创作散文，则可得出？",
   "options": {
    "A": "周创作小说",
    "B": "李创作诗歌",
@@ -1572,7 +1572,7 @@
   "part": "logic",
   "year": 2022,
   "no": 54,
-  "stem": "54.根据上述信息，可以得出以下哪项？",
+  "stem": "54~55 题基于以下题干：某特色建筑项目评选活动设有纪念建筑、观演建筑、会堂建筑、商业建筑、工业建筑5个门类的奖项，甲、乙、丙、丁、戊、己6个建筑师均有2个项目入选上述不同门类的奖项，且每个门类有上述6人的2~3个项目入选。已知：（1）若甲或乙至少有一个项目入选观演建筑或工业建筑，则乙、丙入选的项目均是观演建筑和工业建筑；（2）若乙或丁至少有一个项目入选观演建筑或会堂建筑，则乙、丁、戊入选的项目均是纪念建筑和工业建筑；（3）若丁至少有一个项目入选纪念建筑或商业建筑，则甲、己入选的项目均在纪念建筑、观演建筑和商业建筑之中。 54.根据上述信息，可以得出以下哪项？",
   "options": {
    "A": "甲有项目入选观演建筑",
    "B": "丙有项目入选工业建筑",
@@ -1590,7 +1590,7 @@
   "part": "logic",
   "year": 2022,
   "no": 55,
-  "stem": "55.若己有项目入选商业建筑，则可以得出以下哪项?",
+  "stem": "54~55 题基于以下题干：某特色建筑项目评选活动设有纪念建筑、观演建筑、会堂建筑、商业建筑、工业建筑5个门类的奖项，甲、乙、丙、丁、戊、己6个建筑师均有2个项目入选上述不同门类的奖项，且每个门类有上述6人的2~3个项目入选。已知：（1）若甲或乙至少有一个项目入选观演建筑或工业建筑，则乙、丙入选的项目均是观演建筑和工业建筑；（2）若乙或丁至少有一个项目入选观演建筑或会堂建筑，则乙、丁、戊入选的项目均是纪念建筑和工业建筑；（3）若丁至少有一个项目入选纪念建筑或商业建筑，则甲、己入选的项目均在纪念建筑、观演建筑和商业建筑之中。 55.若己有项目入选商业建筑，则可以得出以下哪项?",
   "options": {
    "A": "己有项目入选观演建筑",
    "B": "戊有项目入选工业建筑",
@@ -2222,7 +2222,7 @@
   "part": "logic",
   "year": 2023,
   "no": 31,
-  "stem": "31.根据以上信息，可以得出以下哪项？",
+  "stem": "31~32 题基于以下题干：某中学举行田径运动会，高二（3）班的甲、乙、丙、丁、戊、己六人报名参赛，在跳远、跳高和铅球3项比赛中，他们每人都报名1~2项，其中2人报名跳远，3人报名跳高，3人报名铅球。另外还知道：（1）如果甲、乙至少有一人报名铅球，则丙也报名铅球；（2）如果己报名跳高，则乙和己均报名跳远；（3）如果丙、戊至少有1人报名铅球，则己报名跳高。 31.根据以上信息，可以得出以下哪项？",
   "options": {
    "A": "甲报名铅球，乙报名跳远",
    "B": "乙报名跳远，丙报名铅球",
@@ -2240,7 +2240,7 @@
   "part": "logic",
   "year": 2023,
   "no": 32,
-  "stem": "32.如果甲、乙均报名跳高，则可以得出以下哪项？",
+  "stem": "31~32 题基于以下题干：某中学举行田径运动会，高二（3）班的甲、乙、丙、丁、戊、己六人报名参赛，在跳远、跳高和铅球3项比赛中，他们每人都报名1~2项，其中2人报名跳远，3人报名跳高，3人报名铅球。另外还知道：（1）如果甲、乙至少有一人报名铅球，则丙也报名铅球；（2）如果己报名跳高，则乙和己均报名跳远；（3）如果丙、戊至少有1人报名铅球，则己报名跳高。 32.如果甲、乙均报名跳高，则可以得出以下哪项？",
   "options": {
    "A": "丁、戊均报名铅球",
    "B": "乙、丁均报名铅球",
@@ -2330,7 +2330,7 @@
   "part": "logic",
   "year": 2023,
   "no": 37,
-  "stem": "37.根据以上信息，可以得出以下哪项?",
+  "stem": "37~38 题基于以下题干：某研究所甲、乙、丙、丁、戊5人拟定去我国四大佛教名山普陀山、九华山、五台山、峨眉山考察。他们每人去了上述两座名山，且每座名山均有其中的2~3人前往，丙与丁结伴考察。已知：（1）如果甲去五台山，则乙和丁都去五台山；（2）如果甲去峨眉山，则丙和戊都去峨眉山；（3）如果甲去九华山，则戊去九华山和普陀山。 37.根据以上信息，可以得出以下哪项?",
   "options": {
    "A": "甲去五台山和普陀山",
    "B": "乙去五台山和峨眉山",
@@ -2348,7 +2348,7 @@
   "part": "logic",
   "year": 2023,
   "no": 38,
-  "stem": "38.如果乙去普陀山和九华山，则5 人去四大名山（按题干所列顺序）的人次比是",
+  "stem": "37~38 题基于以下题干：某研究所甲、乙、丙、丁、戊5人拟定去我国四大佛教名山普陀山、九华山、五台山、峨眉山考察。他们每人去了上述两座名山，且每座名山均有其中的2~3人前往，丙与丁结伴考察。已知：（1）如果甲去五台山，则乙和丁都去五台山；（2）如果甲去峨眉山，则丙和戊都去峨眉山；（3）如果甲去九华山，则戊去九华山和普陀山。 38.如果乙去普陀山和九华山，则5 人去四大名山（按题干所列顺序）的人次比是",
   "options": {
    "A": "3:3:2:2",
    "B": "2:3:3:2",
@@ -2492,7 +2492,7 @@
   "part": "logic",
   "year": 2023,
   "no": 46,
-  "stem": "46.若《尚书》分发给丙部门，则可以得出以下哪项？",
+  "stem": "46~47 题基于以下题干：某单位购买了《尚书》《周易》《诗经》《论语》《老子》《孟子》各1本，分发给甲、乙、丙、丁、戊5个部门，每个部门至少1本。已知：（1）若《周易》《老子》《孟子》至少有1本分发给甲或乙部门，则《尚书》分发给丁部门且《论语》分发给戊部门；（2）若《诗经》《论语》至少有1本分发给甲或乙部门，则《周易》分发给丙部门且《老子》分发给戊部门。 46.若《尚书》分发给丙部门，则可以得出以下哪项？",
   "options": {
    "A": "《诗经》分发给甲部门",
    "B": "《论语》分发给乙部门",
@@ -2510,7 +2510,7 @@
   "part": "logic",
   "year": 2023,
   "no": 47,
-  "stem": "47.若《老子》分发给丁部门，则以下哪项是不可能的？",
+  "stem": "46~47 题基于以下题干：某单位购买了《尚书》《周易》《诗经》《论语》《老子》《孟子》各1本，分发给甲、乙、丙、丁、戊5个部门，每个部门至少1本。已知：（1）若《周易》《老子》《孟子》至少有1本分发给甲或乙部门，则《尚书》分发给丁部门且《论语》分发给戊部门；（2）若《诗经》《论语》至少有1本分发给甲或乙部门，则《周易》分发给丙部门且《老子》分发给戊部门。 47.若《老子》分发给丁部门，则以下哪项是不可能的？",
   "options": {
    "A": "《周易》分发给甲部门",
    "B": "《周易》分发给乙部门",
@@ -2582,11 +2582,16 @@
   "part": "logic",
   "year": 2023,
   "no": 51,
-  "stem": "51.通过第三方招聘进入甲公司从事销售工作的职员均具有会计学专业背景。孔某的高中同学均没有会计学专业背景，甲公司销售部经理孟某是孔某的高中同学，而孔某是通过第三方招聘进入甲公司的。根据以上信息，可以得出以下哪项?A．孔某具有会计学专业背景。B．孟某不是通过第三方招聘进入甲公司的。56． 1",
-  "options": {},
+  "stem": "51.通过第三方招聘进入甲公司从事销售工作的职员均具有会计学专业背景。孔某的高中同学均没有会计学专业背景，甲公司销售部经理孟某是孔某的高中同学，而孔某是通过第三方招聘进入甲公司的。根据以上信息，可以得出以下哪项？",
+  "options": {
+   "A": "孔某具有会计学专业背景。",
+   "B": "孟某不是通过第三方招聘进入甲公司的。",
+   "C": "孟某曾经自学了会计学专业知识。",
+   "D": "孔某在甲公司做销售工作。",
+   "E": "孔某和孟某在大学阶段不是同学。"
+  },
   "answer": "B",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -2595,12 +2600,12 @@
   "part": "logic",
   "year": 2023,
   "no": 52,
-  "stem": "52.2月+日，某地气象台对未来 3：未来 4每天的最高气温从 57；700- ； - 只（1）未来5 天中的最高气温和最低气温不会出现在同一天，每天的最高气温和最低气温均为整数；（2）若5 号的最低气温是未来5 天中最低的，则2 号的最低气温比4 号的高4℃；（3）2 号和4 号每天的最高气温与最低气温之差均为 5℃。根据以上预报信息，可以得出以下哪项?",
+  "stem": "52.入冬以来，天气渐渐寒冷。11月30日，某地气象台对未来5天的天气预报显示：未来5天每天的最高气温从4℃开始逐日下降至-1℃；每天的最低气温不低于-6℃；最低气温-6℃只出现在其中一天。预报还包含如下信息：（1）未来5天中的最高气温和最低气温不会出现在同一天，每天的最高气温和最低气温均为整数；（2）若5号的最低气温是未来5天中最低的，则2号的最低气温比4号的高4℃；（3）2号和4号每天的最高气温与最低气温之差均为5℃。根据以上预报信息，可以得出以下哪项？",
   "options": {
    "A": "1 号的最低气温比2 号的高 2℃",
    "B": "3 号的最高气温比4 号的高 1℃",
    "C": "4 号的最高气温比 5 号的高 1℃",
-   "D": "3-6℃． 号的最低气温为",
+   "D": "3号的最低气温为-6℃",
    "E": "2 号的最低气温为-3℃"
   },
   "answer": "D",
@@ -2631,7 +2636,7 @@
   "part": "logic",
   "year": 2023,
   "no": 54,
-  "stem": "54.根据上述信息，可以得出以下哪项？",
+  "stem": "54~55 题基于以下题干：某机关甲、乙、丙、丁4人参加本年度综合考评。在德、能、勤、绩、廉5个方面的单项考评中，他们之中都恰有3人被评为\"优秀\"，但没有人5个单项均被评为\"优秀\"。已知：（1）若甲和乙在德方面均被评为\"优秀\"，则他们在廉方面也均被评为\"优秀\"；（2）若乙和丙在德方面均被评为\"优秀\"，则他们在绩方面也均被评为\"优秀\"；（3）若甲在廉方面被评为\"优秀\"，则甲和丁在绩方面均被评为\"优秀\"。 54.根据上述信息，可以得出以下哪项？",
   "options": {
    "A": "甲在廉方面被评为“优秀”",
    "B": "丙在绩方面被评为“优秀”",
@@ -2649,7 +2654,7 @@
   "part": "logic",
   "year": 2023,
   "no": 55,
-  "stem": "55.若甲在绩方面未被评为“优秀”且丁在能方面未被评为“优秀”，则可以得出以下哪项？",
+  "stem": "54~55 题基于以下题干：某机关甲、乙、丙、丁4人参加本年度综合考评。在德、能、勤、绩、廉5个方面的单项考评中，他们之中都恰有3人被评为\"优秀\"，但没有人5个单项均被评为\"优秀\"。已知：（1）若甲和乙在德方面均被评为\"优秀\"，则他们在廉方面也均被评为\"优秀\"；（2）若乙和丙在德方面均被评为\"优秀\"，则他们在绩方面也均被评为\"优秀\"；（3）若甲在廉方面被评为\"优秀\"，则甲和丁在绩方面均被评为\"优秀\"。 55.若甲在绩方面未被评为“优秀”且丁在能方面未被评为“优秀”，则可以得出以下哪项？",
   "options": {
    "A": "甲在勤方面未被评为“优秀”",
    "B": "甲在能方面未被评为“优秀”",
@@ -3353,7 +3358,7 @@
   "part": "logic",
   "year": 2024,
   "no": 35,
-  "stem": "35.根据以上信息，关于上述6种动物的入选情况，可以得出以下哪项？",
+  "stem": "35~36 题基于以下题干：某大学进行校园形象动物评选。对于喜鹊、松鼠、狐狸、刺猬、乌鸦和白鹭6种动物能否进入初选，有人预测如下：（1）上述6种动物中若至少有4种入选，则刺猬和松鼠均入选；（2）若松鼠、狐狸和乌鸦中至少有1种入选，则喜鹊入选，而刺猬不会入选。评选结果表明，上述预测正确。 35.根据以上信息，关于上述6种动物的入选情况，可以得出以下哪项？",
   "options": {
    "A": "至多有3 种入选",
    "B": "至少有3 种入选",
@@ -3371,7 +3376,7 @@
   "part": "logic",
   "year": 2024,
   "no": 36,
-  "stem": "36.若恰好有3 种动物入选，甲可以得出以下哪项？",
+  "stem": "35~36 题基于以下题干：某大学进行校园形象动物评选。对于喜鹊、松鼠、狐狸、刺猬、乌鸦和白鹭6种动物能否进入初选，有人预测如下：（1）上述6种动物中若至少有4种入选，则刺猬和松鼠均入选；（2）若松鼠、狐狸和乌鸦中至少有1种入选，则喜鹊入选，而刺猬不会入选。评选结果表明，上述预测正确。 36.若恰好有3 种动物入选，则可以得出以下哪项？",
   "options": {
    "A": "刺猬入选",
    "E": "白鹭入选",
@@ -3695,7 +3700,7 @@
   "part": "logic",
   "year": 2024,
   "no": 54,
-  "stem": "54.根据以上信息，可以得出以下哪项？",
+  "stem": "54~55 题基于以下题干：甲、乙、丙、丁4位记者对张、陈、王、李4位市民就民生问题进行了访谈。每次访谈均是1对1进行，每个人均进行或接受了至少1次访谈，访谈共进行了6次。已知：（1）若甲、丙至少有1人访谈了陈，则乙分别访谈了王、李各2次；（2）若乙、丁至少有1人访谈了陈，则王只分别接受了丙、丁各1次访谈。 54.根据以上信息，可以得出以下哪项？",
   "options": {
    "A": "甲至少访谈了张、李中的1 人",
    "C": "股至少访谈了张、王中的1 人",
@@ -3713,7 +3718,7 @@
   "part": "logic",
   "year": 2024,
   "no": 55,
-  "stem": "55.若丙访谈了张和李，甲可以得出以下哪项？",
+  "stem": "54~55 题基于以下题干：甲、乙、丙、丁4位记者对张、陈、王、李4位市民就民生问题进行了访谈。每次访谈均是1对1进行，每个人均进行或接受了至少1次访谈，访谈共进行了6次。已知：（1）若甲、丙至少有1人访谈了陈，则乙分别访谈了王、李各2次；（2）若乙、丁至少有1人访谈了陈，则王只分别接受了丙、丁各1次访谈。 55.若丙访谈了张和李，则可以得出以下哪项？",
   "options": {
    "A": "张只接受了1 次访谈",
    "B": "丙只进行了2 次访谈",
@@ -4489,14 +4494,16 @@
   "part": "logic",
   "year": 2025,
   "no": 39,
-  "stem": "39.根据以上信息，可以得出以下哪项？",
+  "stem": "39~40 题基于以下题干：全球气候正在变暖。权威科学报告显示，最近50年的全球气候变暖主要是人类燃烧化石燃料导致的。全球气候变暖已经给人类的生存和发展带来巨大危害。当前，人类的生产生活排放正在逼近多个气候临界点，一旦突破这些临界点，人类的未来将面临巨大风险。如何应对这样的气候风险？以下几位专家相继提出不同看法：甲：各国应当尽快停止依赖化石燃料，转向开发风能、水能、太阳能等清洁能源。乙：有些发展中国家由于经济、技术等条件的限制，目前还无法很快实现能源转型。丙：当前气候风险巨大，不能尽快实现能源转型的国家就是在破坏人类的共同家园。丁：全球气候变暖主要是发达国家200多年的工业排放导致的，他们更应对此负责。戊：若要求发展中国家尽快实现能源转型，发达国家就必须向他们提供资金和技术。己：所谓气候风险目前还存在不确定性，在此情况下花费巨大代价去应对并不明智。根据以上信息，可以得出以下哪项？",
   "options": {
-   "C": "乙反驳了甲。丙反驳了甲。丁反驳了甲",
-   "E": "己反驳了甲。戊反驳了甲"
+   "A": "乙反驳了甲。",
+   "B": "丙反驳了甲。",
+   "C": "丁反驳了甲。",
+   "D": "己反驳了甲。",
+   "E": "戊反驳了甲。"
   },
   "answer": "A",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4505,14 +4512,16 @@
   "part": "logic",
   "year": 2025,
   "no": 40,
-  "stem": "40.对于上述专家的观点，可以得出以下哪项？",
+  "stem": "39~40 题基于以下题干：全球气候正在变暖。权威科学报告显示，最近50年的全球气候变暖主要是人类燃烧化石燃料导致的。全球气候变暖已经给人类的生存和发展带来巨大危害。当前，人类的生产生活排放正在逼近多个气候临界点，一旦突破这些临界点，人类的未来将面临巨大风险。如何应对这样的气候风险？以下几位专家相继提出不同看法：甲：各国应当尽快停止依赖化石燃料，转向开发风能、水能、太阳能等清洁能源。乙：有些发展中国家由于经济、技术等条件的限制，目前还无法很快实现能源转型。丙：当前气候风险巨大，不能尽快实现能源转型的国家就是在破坏人类的共同家园。丁：全球气候变暖主要是发达国家200多年的工业排放导致的，他们更应对此负责。戊：若要求发展中国家尽快实现能源转型，发达国家就必须向他们提供资金和技术。己：所谓气候风险目前还存在不确定性，在此情况下花费巨大代价去应对并不明智。对于上述专家的观点，可以得出以下哪项？",
   "options": {
-   "C": "乙和丁支持丙。丙和戊支持甲。乙和丁支持戊",
-   "E": "乙和丙支持己。戊和己支持乙"
+   "A": "乙和丁支持丙。",
+   "B": "丙和戊支持甲。",
+   "C": "乙和丁支持戊。",
+   "D": "乙和丙支持己。",
+   "E": "戊和己支持乙。"
   },
   "answer": "C",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4532,7 +4541,8 @@
   "answer": "A",
   "img": null,
   "tag": "综合推理-信息处理",
-  "part_name": "逻辑推理"
+  "part_name": "逻辑推理",
+  "broken": true
  },
  {
   "subject": "zg",
@@ -4541,14 +4551,14 @@
   "no": 42,
   "stem": "42.某小区院子里栽种了许多树，既有常绿树也有落叶树。其中，针叶树都是常绿树，阔叶树都不是常绿树;针叶树大都属于观赏树种;果树大部分不是常绿树，少部分是常绿树。根据以上信息，关于小区院子里栽种的树，可以得出以下哪项？",
   "options": {
-   "C": "针叶树有些是果树。有些针叶树不是果树",
-   "B": "阔叶树有些不是果树",
-   "D": "有些果树不是阔叶树",
-   "E": "有些阔叶树是观赏树种"
+   "A": "针叶树有些是果树。",
+   "B": "阔叶树有些不是果树。",
+   "C": "有些针叶树不是果树。",
+   "D": "有些果树不是阔叶树。",
+   "E": "有些阔叶树是观赏树种。"
   },
   "answer": "D",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4557,7 +4567,7 @@
   "part": "logic",
   "year": 2025,
   "no": 43,
-  "stem": "43.75%4某地群山连绵，森林覆盖率高达，具有林海、高山草甸、天坑、峡谷等 种类4型的自然景观，吸引着世界各地的游客、一位细心的游客发现该地 种自然景观共有16 处，每种类型自然景观的数量各不相同。另外，他还发现：16（）林海和峡谷的数量总共是 处；（2）林海和天坑的数量总共是7 处；（） 种类型自然景观中有一种类型的数量是 处。根据以上信息，可以得出以下哪项？",
+  "stem": "43.某地群山连绵，森林覆盖率高达75%，具有林海、高山草甸、天坑、峡谷等4种类型的自然景观，吸引着世界各地的游客。一位细心的游客发现该地4种自然景观共有16处，每种类型自然景观的数量各不相同。另外，他还发现：（1）林海和峡谷的数量总共是6处；（2）林海和天坑的数量总共是7处；（3）4种类型自然景观中有一种类型的数量是3处。根据以上信息，可以得出以下哪项？",
   "options": {
    "A": "2",
    "B": "3该地有 处林海。该地有 处天坑",
@@ -4575,16 +4585,16 @@
   "part": "logic",
   "year": 2025,
   "no": 44,
-  "stem": "44.4某大学的新校区建成后，甲、乙、丙、丁 位校领导对新校区建设中的①②③④⑤51等 项工作进行了检查。已知他们每人至少检查了其中 项工作，每项工作均被检查过 遍，且不会被重复检查。关于他们 人与其检查工作的对应情况，有如下种描述：①②③④⑤对应情况描述正确的数量2描述一乙甲丁丁丙描述二丙甲乙甲丁23描述三甲丙丁乙甲根据上述信息，可以得出以下哪项？",
+  "stem": "44.某大学的新校区建成后，甲、乙、丙、丁4位校领导对新校区建设中的①②③④⑤等5项工作进行了检查。已知他们每人至少检查了其中1项工作，每项工作均被检查过1遍，且不会被重复检查。关于他们4人与其检查工作的对应情况，有如下3种描述：描述一：①乙 ②甲 ③丁 ④丁 ⑤丙（其中2项描述正确）；描述二：①丙 ②甲 ③乙 ④甲 ⑤丁（其中2项描述正确）；描述三：①甲 ②丙 ③丁 ④乙 ⑤甲（其中3项描述正确）。根据上述信息，可以得出以下哪项？",
   "options": {
-   "B": "甲检查了工作④。甲检查了工作⑤",
-   "C": "乙检查了工作③",
-   "D": "丙检查了工作②",
-   "E": "丁检查了工作④"
+   "A": "甲检查了工作④。",
+   "B": "甲检查了工作⑤。",
+   "C": "乙检查了工作③。",
+   "D": "丙检查了工作②。",
+   "E": "丁检查了工作④。"
   },
   "answer": "B",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4593,15 +4603,16 @@
   "part": "logic",
   "year": 2025,
   "no": 45,
-  "stem": "45.近期，某老年大学开设书法、手工、台球古筝、声乐、绘画6 门秋季课程，陆、赵、王、李4 位老人均报名参加了其中2 门课程的学习。已知：11（）上述每门课程均至少有其中的 人报名；（）李所报课程仅与其他 人中的 人所报课程完全不同；（）若李、王 人中至多有 人报书法课程，则李和陆均报了声乐和绘画课程。根据上述信息，可以得出以下哪项？",
+  "stem": "45.近期，某老年大学开设书法、手工、台球、古筝、声乐、绘画6门秋季课程，陆、赵、王、李4位老人均报名参加了其中2门课程的学习。已知：（1）上述每门课程均至少有其中的1人报名；（2）李所报课程仅与其他3人中的1人所报课程完全不同；（3）若李、王2人中至多有1人报书法课程，则李和陆均报了声乐和绘画课程。根据上述信息，可以得出以下哪项？",
   "options": {
-   "B": "赵报了古筝课程。李报了声乐课程",
-   "D": "陆报了绘画课程。王报了台球课程",
-   "E": "李报了书法课程"
+   "A": "赵报了古筝课程。",
+   "B": "李报了声乐课程。",
+   "C": "陆报了绘画课程。",
+   "D": "王报了台球课程。",
+   "E": "李报了书法课程。"
   },
   "answer": "E",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4628,14 +4639,16 @@
   "part": "logic",
   "year": 2025,
   "no": 47,
-  "stem": "47.8某部甲、乙、丙、丁、戊、己、唐、辛 名官兵以一路纵队方式行进（先后顺序未必如此）。已知：甲之后有 名士兵；丙是士兵，其后有 名士兵；丁之前有 名2军官，其后有 名士兵；己之后无士兵。根据以上信息，可以得出以下哪项？",
+  "stem": "47.某部甲、乙、丙、丁、戊、己、庚、辛8名官兵以一路纵队方式行进（先后顺序未必如此）。已知：甲之后有3名士兵；丙是士兵，其后有2名士兵；丁之前有2名军官，其后有2名士兵；己之后无士兵。根据以上信息，可以得出以下哪项？",
   "options": {
-   "C": "乙是军官。丁是军官。戊是士兵",
-   "E": "853己是军官。 人中有 名军官、 名士兵"
+   "A": "乙是军官。",
+   "B": "丁是军官。",
+   "C": "戊是士兵。",
+   "D": "己是军官。",
+   "E": "8人中有5名军官、3名士兵。"
   },
   "answer": "B",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4673,22 +4686,24 @@
   "answer": "D",
   "img": null,
   "tag": "综合推理-信息处理",
-  "part_name": "逻辑推理"
+  "part_name": "逻辑推理",
+  "broken": true
  },
  {
   "subject": "zg",
   "part": "logic",
   "year": 2025,
   "no": 50,
-  "stem": "50.根据以上信息，可以得出以下哪项?？",
+  "stem": "50~51 题基于以下题干：在欣赏一幅中国古代山水画时，某人发现在一片山水屋舍之间，有主人、童子、访客和钓者4种人物共6人点缀其中。3名访客正走在门外的小桥上高声呼喊，画中的主人正要打开院门迎客，童子正在院中煮茶，1名钓者正在远离人群的一条小溪旁安静垂钓。赏画人将这6人当作甲、乙、丙、丁、戊、己，并且设想：（1）如果甲是主人，则乙和丙均是访客；（2）如果丙是访客，则己在院外且甲是童子；（3）如果丙和丁中至多有一人是访客，则甲是主人且戊在院内。根据以上信息，可以得出以下哪项？",
   "options": {
-   "C": "甲是童子。乙是访客。丙是主人",
-   "D": "戊是访客",
-   "E": "己是钓者"
+   "A": "甲是童子。",
+   "B": "乙是访客。",
+   "C": "丙是主人。",
+   "D": "戊是访客。",
+   "E": "己是钓者。"
   },
   "answer": "A",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4697,16 +4712,16 @@
   "part": "logic",
   "year": 2025,
   "no": 51,
-  "stem": "51.如果乙在院外，则可以得出以下哪项？",
+  "stem": "50~51 题基于以下题干：在欣赏一幅中国古代山水画时，某人发现在一片山水屋舍之间，有主人、童子、访客和钓者4种人物共6人点缀其中。3名访客正走在门外的小桥上高声呼喊，画中的主人正要打开院门迎客，童子正在院中煮茶，1名钓者正在远离人群的一条小溪旁安静垂钓。赏画人将这6人当作甲、乙、丙、丁、戊、己，并且设想：（1）如果甲是主人，则乙和丙均是访客；（2）如果丙是访客，则己在院外且甲是童子；（3）如果丙和丁中至多有一人是访客，则甲是主人且戊在院内。如果乙在院外，则可以得出以下哪项？",
   "options": {
-   "A": "丁是钓者",
-   "B": "乙是钓者",
-   "C": "乙是访客",
-   "E": "戊是主人。已是访客"
+   "A": "丁是钓者。",
+   "B": "乙是钓者。",
+   "C": "乙是访客。",
+   "D": "戊是主人。",
+   "E": "己是访客。"
   },
   "answer": "D",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4715,7 +4730,7 @@
   "part": "logic",
   "year": 2025,
   "no": 52,
-  "stem": "52.根据以上信息，以下哪项是可能的？",
+  "stem": "52~53 题基于以下题干：某次考试有10道选择题，小李、小王、小文3人均只答对其中6道题。已知：（1）没有人连续答对3道题；（2）小李第2、4、9题答错了，小王第1、5、8题答错了，小文第3、6、9题答错了。根据以上信息，以下哪项是可能的？",
   "options": {
    "A": "小李第6 题答错了",
    "B": "小李第10 题答错了",
@@ -4733,7 +4748,7 @@
   "part": "logic",
   "year": 2025,
   "no": 53,
-  "stem": "53.33若有一题 人均答对了，有一题 人均答错了，则以下哪项一定是错误的？",
+  "stem": "52~53 题基于以下题干：某次考试有10道选择题，小李、小王、小文3人均只答对其中6道题。已知：（1）没有人连续答对3道题；（2）小李第2、4、9题答错了，小王第1、5、8题答错了，小文第3、6、9题答错了。若有一题3人均答对了，有一题3人均答错了，则以下哪项一定是错误的？",
   "options": {
    "A": "小李第3 题答对了",
    "B": "小王第2 题答对了",
@@ -4751,16 +4766,16 @@
   "part": "logic",
   "year": 2025,
   "no": 54,
-  "stem": "54.若周五安排乙监考，则可以得出以下哪项？",
+  "stem": "54~55 题基于以下题干：某学院尚余9个考场的监考任务供甲、乙、丙、丁、戊5位老师选择。已知，每场考试2小时，每位老师均需监考2~3个考场；有2个考场要求其中2人共同监考；其余7个考场要求单独监考，各需1名监考人员。这9个考场的时间安排如下：上午（09:00~11:00）：周一已安排，周二1个考场，周三1个考场，周四已安排，周五1个考场；下午（14:00~16:00）：周一已安排，周二无监考，周三例会，周四2个考场，周五已安排；晚上（18:30~20:30）：周一1个考场（2人共同监考），周二1个考场，周三1个考场，周四1个考场（2人共同监考），周五已安排。对于监考安排，丙、丁没有任何要求，但其他3位老师有如下要求：甲：我的监考需安排在晚上，但不要连续两个晚上都安排监考；乙：若我的监考没有都安排在前三天，则有一场需安排我和丙在同一天同一时间监考；戊：我想监考三场，但都不要安排在上午。事后得知，这3位老师的要求均得到了满足。若周五安排乙监考，则可以得出以下哪项？",
   "options": {
-   "A": "甲都是单独监考",
-   "B": "乙有一场共同监考",
-   "D": "内都是共同监考。丁有一场共同监考",
-   "E": "戊至少有一场共同监考"
+   "A": "甲都是单独监考。",
+   "B": "乙有一场共同监考。",
+   "C": "丙有一场共同监考。",
+   "D": "丁有一场共同监考。",
+   "E": "戊至少有一场共同监考。"
   },
   "answer": "E",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -4769,16 +4784,16 @@
   "part": "logic",
   "year": 2025,
   "no": 55,
-  "stem": "55.若丁的监考都安排在晚上，则可以得出以下哪项？",
+  "stem": "54~55 题基于以下题干：某学院尚余9个考场的监考任务供甲、乙、丙、丁、戊5位老师选择。已知，每场考试2小时，每位老师均需监考2~3个考场；有2个考场要求其中2人共同监考；其余7个考场要求单独监考，各需1名监考人员。这9个考场的时间安排如下：上午（09:00~11:00）：周一已安排，周二1个考场，周三1个考场，周四已安排，周五1个考场；下午（14:00~16:00）：周一已安排，周二无监考，周三例会，周四2个考场，周五已安排；晚上（18:30~20:30）：周一1个考场（2人共同监考），周二1个考场，周三1个考场，周四1个考场（2人共同监考），周五已安排。对于监考安排，丙、丁没有任何要求，但其他3位老师有如下要求：甲：我的监考需安排在晚上，但不要连续两个晚上都安排监考；乙：若我的监考没有都安排在前三天，则有一场需安排我和丙在同一天同一时间监考；戊：我想监考三场，但都不要安排在上午。事后得知，这3位老师的要求均得到了满足。若丁的监考都安排在晚上，则可以得出以下哪项？",
   "options": {
-   "A": "周一晚上甲有监考",
-   "B": "周五上午乙有监考",
-   "D": "周四下午丙有监考。周三晚上丁有监考",
-   "E": "周二晚上戊有监考。56-57653035"
+   "A": "周一晚上甲有监考。",
+   "B": "周五上午乙有监考。",
+   "C": "周四下午丙有监考。",
+   "D": "周三晚上丁有监考。",
+   "E": "周二晚上戊有监考。"
   },
   "answer": "C",
   "img": null,
-  "broken": true,
   "tag": "综合推理-信息处理",
   "part_name": "逻辑推理"
  },
@@ -5671,7 +5686,7 @@
   "part": "logic",
   "year": 2026,
   "no": 46,
-  "stem": "46.根据以上信息，可以得出以下哪项？",
+  "stem": "46~47 题基于以下题干：田径赛场上，甲、乙、丙、丁、戊5位运动员正在进行100米的决赛，他们每人所穿运动服的颜色分别为红、黄、绿、白、蓝5种颜色中的一种。关于运动员着装的颜色情况，已知：（1）甲穿红色或者丁穿绿色；（2）如果甲或者丁穿红色，则乙穿黄色；（3）如果乙穿黄色，则丙穿蓝色并且甲穿白色。 46.根据以上信息，可以得出以下哪项？",
   "options": {
    "A": "甲穿红色运动服",
    "B": "乙穿黄色运动服",
@@ -5689,7 +5704,7 @@
   "part": "logic",
   "year": 2026,
   "no": 47,
-  "stem": "47.如果乙不穿红色且丙穿黄色，则可以得出以下哪项？",
+  "stem": "46~47 题基于以下题干：田径赛场上，甲、乙、丙、丁、戊5位运动员正在进行100米的决赛，他们每人所穿运动服的颜色分别为红、黄、绿、白、蓝5种颜色中的一种。关于运动员着装的颜色情况，已知：（1）甲穿红色或者丁穿绿色；（2）如果甲或者丁穿红色，则乙穿黄色；（3）如果乙穿黄色，则丙穿蓝色并且甲穿白色。 47.如果乙不穿红色且丙穿黄色，则可以得出以下哪项？",
   "options": {
    "A": "甲穿蓝色运动服",
    "B": "乙穿蓝色运动服",
@@ -5707,7 +5722,7 @@
   "part": "logic",
   "year": 2026,
   "no": 48,
-  "stem": "48.根据上述信息，可以得出以下哪项?",
+  "stem": "48~49 题基于以下题干：某大学人文学院教师中，按职称高低现有教授2人、副教授6人、讲师7人、助教1人。已知甲、乙、丙、丁、戊、己、庚7人是该学院教师，他们现有职称情况如下：（1）乙和戊的职称都比讲师低；（2）丁和己的职称都比乙和戊的高；（3）丙和庚的职称都比甲的职称高，但都比己的低。 48.根据上述信息，可以得出以下哪项?",
   "options": {
    "A": "己是教授",
    "B": "丁是副教授",
@@ -5725,7 +5740,7 @@
   "part": "logic",
   "year": 2026,
   "no": 49,
-  "stem": "49.若7 人中只有1 人是教授，则以下哪项是不可能的?",
+  "stem": "48~49 题基于以下题干：某大学人文学院教师中，按职称高低现有教授2人、副教授6人、讲师7人、助教1人。已知甲、乙、丙、丁、戊、己、庚7人是该学院教师，他们现有职称情况如下：（1）乙和戊的职称都比讲师低；（2）丁和己的职称都比乙和戊的高；（3）丙和庚的职称都比甲的职称高，但都比己的低。 49.若7 人中只有1 人是教授，则以下哪项是不可能的?",
   "options": {
    "A": "甲是助教",
    "B": "乙是助教",
@@ -5743,7 +5758,7 @@
   "part": "logic",
   "year": 2026,
   "no": 50,
-  "stem": "50.根据以上信息，可以得出以下哪项？",
+  "stem": "50~51 题基于以下题干：某村民本周一至周五在不同地块安排了杀虫、播种、施肥、灌溉、除草5项农活（顺序未必对应），每天只安排其中1项且每项均在1天内完成。另外，还知道：（1）若周一未安排除草，则周二安排施肥；（2）若周二安排施肥，则播种安排在杀虫的后一天；（3）若灌溉安排在除草的前面，则施肥安排在播种的前一天。 50.根据以上信息，可以得出以下哪项？",
   "options": {
    "A": "周一除草",
    "B": "周二灌溉",
@@ -5761,7 +5776,7 @@
   "part": "logic",
   "year": 2026,
   "no": 51,
-  "stem": "51.若周二施肥，则以下哪项是不可能的？",
+  "stem": "50~51 题基于以下题干：某村民本周一至周五在不同地块安排了杀虫、播种、施肥、灌溉、除草5项农活（顺序未必对应），每天只安排其中1项且每项均在1天内完成。另外，还知道：（1）若周一未安排除草，则周二安排施肥；（2）若周二安排施肥，则播种安排在杀虫的后一天；（3）若灌溉安排在除草的前面，则施肥安排在播种的前一天。 51.若周二施肥，则以下哪项是不可能的？",
   "options": {
    "A": "周三杀虫",
    "B": "周三灌溉",
@@ -5779,7 +5794,7 @@
   "part": "logic",
   "year": 2026,
   "no": 52,
-  "stem": "52.如果上述4 人报名参加的读书小组均完全不相同，则可以得出以下哪项？",
+  "stem": "52~53 题基于以下题干：某医学院为了增强学生对中医典籍的了解，设立了4个读书小组，分别阅读《黄帝内经》《神农本草经》《金匮要略》《伤寒论》4部中医典籍，并且规定报名者至多报2个读书小组。小王、小李、小徐、小黄4人均报名参加了上述读书小组。已知：（1）如果小李、小徐中至少有1人报了《伤寒论》读书小组，则他们均报了《金匮要略》读书小组；（2）如果小王至少报了《伤寒论》读书小组或《黄帝内经》读书小组之一，则他也报了《神农本草经》读书小组。 52.如果上述4 人报名参加的读书小组均完全不相同，则可以得出以下哪项？",
   "options": {
    "A": "小李报了《伤寒论》读书小组",
    "B": "小王报了《神农本草经》读书小组",
@@ -5797,7 +5812,7 @@
   "part": "logic",
   "year": 2026,
   "no": 53,
-  "stem": "53.如果上述4人均报名参加了上述2个读书小组但均不完全相同，且每个读书小组都有他们中的2 人报名，则可以得出以下哪项？",
+  "stem": "52~53 题基于以下题干：某医学院为了增强学生对中医典籍的了解，设立了4个读书小组，分别阅读《黄帝内经》《神农本草经》《金匮要略》《伤寒论》4部中医典籍，并且规定报名者至多报2个读书小组。小王、小李、小徐、小黄4人均报名参加了上述读书小组。已知：（1）如果小李、小徐中至少有1人报了《伤寒论》读书小组，则他们均报了《金匮要略》读书小组；（2）如果小王至少报了《伤寒论》读书小组或《黄帝内经》读书小组之一，则他也报了《神农本草经》读书小组。 53.如果上述4人均报名参加了上述2个读书小组但均不完全相同，且每个读书小组都有他们中的2 人报名，则可以得出以下哪项？",
   "options": {
    "A": "小王报了《黄帝内经》读书小组",
    "B": "小王报了《神农本草经》读书小组",
@@ -5815,7 +5830,7 @@
   "part": "logic",
   "year": 2026,
   "no": 54,
-  "stem": "54.根据以上信息，可以得出哪项?",
+  "stem": "54~55 题基于以下题干：甲、乙、丙、丁、戊5位画家入选《最美中国画》美术作品展。已知，他们各自画作的主题分别是梅、兰、竹、菊、松之一。另外，还知道：（1）如果丁画的是梅、菊之一，则甲画的是竹；（2）如果甲画的是菊、竹之一，则戊画的是松；（3）如果丁画的是兰、松之一，则甲画的是菊且戊画的是梅。 54.根据以上信息，可以得出哪项?",
   "options": {
    "A": "甲画的不是竹",
    "B": "乙画的不是兰",
@@ -5833,7 +5848,7 @@
   "part": "logic",
   "year": 2026,
   "no": 55,
-  "stem": "55.如果丁画的不是竹，则可以得出以下哪项?",
+  "stem": "54~55 题基于以下题干：甲、乙、丙、丁、戊5位画家入选《最美中国画》美术作品展。已知，他们各自画作的主题分别是梅、兰、竹、菊、松之一。另外，还知道：（1）如果丁画的是梅、菊之一，则甲画的是竹；（2）如果甲画的是菊、竹之一，则戊画的是松；（3）如果丁画的是兰、松之一，则甲画的是菊且戊画的是梅。 55.如果丁画的不是竹，则可以得出以下哪项?",
   "options": {
    "A": "甲画的是梅",
    "B": "乙画的是竹",
@@ -10034,234 +10049,6 @@
  },
  {
   "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 1,
-  "stem": "",
-  "options": {
-   "A": "illusion"
-  },
-  "answer": "D",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 2,
-  "stem": "",
-  "options": {
-   "A": "reluctance"
-  },
-  "answer": "A",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 3,
-  "stem": "",
-  "options": {
-   "A": "attention 4"
-  },
-  "answer": "C",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 5,
-  "stem": "",
-  "options": {
-   "A": "lunrealistic"
-  },
-  "answer": "D",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 6,
-  "stem": "",
-  "options": {
-   "A": "doubts",
-   "B": "discussion",
-   "C": "tradition",
-   "D": "question"
-  },
-  "answer": "B",
-  "img": null,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 8,
-  "stem": "",
-  "options": {
-   "A": "theory 9.「"
-  },
-  "answer": "C",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 10,
-  "stem": "",
-  "options": {
-   "A": "reach out"
-  },
-  "answer": "A",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 11,
-  "stem": "",
-  "options": {
-   "A": "declining"
-  },
-  "answer": "A",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 12,
-  "stem": "",
-  "options": {
-   "A": "unnecessary"
-  },
-  "answer": "B",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 13,
-  "stem": "",
-  "options": {
-   "A": "explain"
-  },
-  "answer": "D",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 14,
-  "stem": "",
-  "options": {
-   "A": "deny"
-  },
-  "answer": "D",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 15,
-  "stem": "",
-  "options": {
-   "A": "disguised 1謾淀聵拆"
-  },
-  "answer": "B",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 17,
-  "stem": "",
-  "options": {
-   "A": "brave"
-  },
-  "answer": "C",
-  "img": null,
-  "broken": true,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
-  "part": "en_cloze",
-  "year": 2025,
-  "no": 18,
-  "stem": "",
-  "options": {
-   "A": "relaxing 19",
-   "B": "Unless",
-   "C": "factor 「",
-   "D": "context"
-  },
-  "answer": "C",
-  "img": null,
-  "tag": "完形填空",
-  "part_name": "完形填空",
-  "passage": "There are many understandable reasons why you might fnd it dificult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people' widespread 2to ask for help has led to some high-profile failures Asking or help takes 3.It involves communicating need on your part-there's something you can't do.4,you're broadcasting your own weaknesses, which can be 5 .You might worry about coming across as incompetent, You might have 6about losing control of whatever it is you're asking for help with. 7someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts, Yet another 8that you might be worried about is being a nuisance or 9 the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to 10 for help because you have the added worry ofthe other person 11your request.\n\nYou might see such refusals as implying something 12 about the status of your relationship with them.To 13these dificulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might 14 coming across as incompetent there's actually research that shows that advice seekers are as more competent. not less. Perhans most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to 16 times they'd sought help in the past. The findings showed that help-seeker generally underestimate how 17 other people will be to help and how good it'll make the help-giver feel (for most people, having the chance to help someone is highly 18 So, bear all this in mind the next time you need to ask for help. 19.take care over who you ask and when you ask them, And if someone can't help right now, avoid talking it personally, They might iust be too 20.or they might not feel confdent about their ability to help."
- },
- {
-  "subject": "en",
   "part": "en_read_a",
   "year": 2025,
   "no": 21,
@@ -10360,12 +10147,12 @@
   "part": "en_read_a",
   "year": 2025,
   "no": 26,
-  "stem": "According to the frst two paragraphs, the NHS",
+  "stem": "According to the first two paragraphs, the NHS",
   "options": {
-   "A": "is troubled by funding defciencies",
+   "A": "is troubled by funding deficiencies",
    "B": "can hardly satisfy people's needs",
    "C": "can barely retain its current employees",
-   "D": "is rivalled by private medical services 27,One answer to the crisis in health and care is to"
+   "D": "is rivalled by private medical services"
   },
   "answer": "B",
   "img": null,
@@ -11188,5 +10975,753 @@
   "part_name": "阅读理解 PartA",
   "tag": "阅读-细节理解",
   "passage": "The Internet may be changing merely what we remember, not our capacity to do so, suggests Columbia University psychology professor Betsy Sparrow. In 2011, Sparrow led a study in which participants were asked to record factoids in a computer (“an ostrich􀆳s eye is bigger than its brain,” for example). Half of the participants were told the information would be erased, while the other half were told it would be saved. Guess what? The latter group made no effort to recall the information when quizzed on it later, because they knew they could find it on their computers. In the same study, a group was asked to remember both the information and the folders it was stored in. They didn􀆳t remember the information, but they remembered how to find the folders. In other words, human memory is not deteriorating but “adapting to new communications technology,” Sparrow says.\n\nIn a very practical way, the Internet is becoming an external hard drive for our memories, a process known as “cognitive offloading.” Traditionally, this role was fulfilled by data banks, libraries, and other humans. Your father may never remember birthdays because your mother does, for instance. Some worry that this is having a destructive effect on society, but Sparrow sees an upside. Perhaps, she suggests, the trend will change our approach to learning from a focus on individual facts and memorization to an emphasis on more conceptual thinking—something that is not available on the Internet. “I personally have never seen all that much intellectual value in memorizing things.” Sparrow says, adding that we haven􀆳t lost our ability to do it.\n\nStill other experts say it􀆳s too soon to understand how the Internet affects our brains. There is no experimental evidence showing that it interferes with our ability to focus, for instance, wrote psychologists Christopher Chabris and Daniel J. Simons. And surfing the web exercised the brain more than reading did among computer-savvy older adults in a 2008 study involving participants at the Semel Institute for Neuroscience and Human Behavior at the University of California, Los Angeles. “\n\nThere may be costs associated with our increased reliance on the Internet, but I􀆳d have to imagine that overall the benefits are going to outweigh those costs,” observes psychology professor Benjamin Storm. “It seems pretty clear that memory is changing, but is it changing for the better? At this point, we don􀆳t know.”"
+ },
+ {
+  "no": 41,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "How to Disagree with Someone More Powerful Than You\n\nYour boss proposes a new initiative you think won't work. Your senior colleague outlines a project timeline you believe is unrealistic. What do you say when you disagree with someone who has more power than you do? How do you decide whether it's worth speaking up? And if you do, what exactly should you say? Here's how to disagree with someone more powerful than you.\n\n41. _______________________\n\nYou may decide it's best to hold off on voicing your opinion. Maybe you haven't finished thinking the problem through, or you want to get a clearer sense of what the group thinks. If you think other people are going to disagree, too, you might want to gather your army first. People can contribute experience or information to your thinking—all the things that would make the disagreement stronger or more valid. It's also a good idea to delay the conversation if you're in a meeting or other public space. Discussing the issue in private will make the powerful person feel less threatened.\n\n42. _______________________\n\nBefore you share your thoughts think about what the powerful person cares about—it may be the credibility of their team or getting a project done on time. You're more likely to be heard if you can connect your disagreement to a higher purpose. State it overtly, contextualizing your statements so that you're seen not as a disagreeable subordinate but as a colleague who's trying to advance a common objective. The discussion will then become more like a chess game than a boxing match.\n\n43. _______________________\n\nThis step may sound overly deferential, but it's a smart way to give the powerful person psychological safety and control. You can say something like, “I know we seem to be moving toward a first-quarter commitment here. I have reasons to think that won't work. I'd like to lay out my reasoning. Would that be OK?” This gives the person a choice, allowing him to verbally opt in. And, assuming he says yes, it will make you feel more confident about voicing your disagreement.\n\n44. _______________________\n\nYou might feel your heart racing or your face turning red, but do whatever you can to remain neutral in both your words and actions. When your body language communicates reluctance or anxiety, it undercuts the message. It sends a mixed message, and your counterpart gets to choose what signals to read. Deep breaths can help, as can speaking more slowly and deliberately. When we feel panicky, we tend to talk louder and faster. Simply slowing the pace and talking in an even tone helps the other person cool down and does the same for you. It also makes you seem confident, even if you aren't.\n\n45. _______________________\n\nEmphasize that you're only offering your opinion, not gospel truth. It may be well-informed, well-researched opinion, but it's still an opinion, so talk tentatively and slightly understate your confidence. Instead of saying, “If we set an end-of-quarter deadline, we'll never make it,” say, “This is just my opinion, but I don't see how we will make that deadline.” Having asserted your position (as a position, not as a fact), demonstrate equal curiosity about other views. Remind the person that this is your point of view, and then invite critique. Be open to hearing other opinions.",
+  "stem": "_______________________",
+  "options": {
+   "A": "Stay calm.",
+   "B": "Stay humble.",
+   "C": "Decide whether to wait.",
+   "D": "Be realistic about the risks.",
+   "E": "Don't make judgments.",
+   "F": "Identify a shared goal.",
+   "G": "Ask permission to disagree."
+  },
+  "answer": "C",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2021
+ },
+ {
+  "no": 42,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "How to Disagree with Someone More Powerful Than You\n\nYour boss proposes a new initiative you think won't work. Your senior colleague outlines a project timeline you believe is unrealistic. What do you say when you disagree with someone who has more power than you do? How do you decide whether it's worth speaking up? And if you do, what exactly should you say? Here's how to disagree with someone more powerful than you.\n\n41. _______________________\n\nYou may decide it's best to hold off on voicing your opinion. Maybe you haven't finished thinking the problem through, or you want to get a clearer sense of what the group thinks. If you think other people are going to disagree, too, you might want to gather your army first. People can contribute experience or information to your thinking—all the things that would make the disagreement stronger or more valid. It's also a good idea to delay the conversation if you're in a meeting or other public space. Discussing the issue in private will make the powerful person feel less threatened.\n\n42. _______________________\n\nBefore you share your thoughts think about what the powerful person cares about—it may be the credibility of their team or getting a project done on time. You're more likely to be heard if you can connect your disagreement to a higher purpose. State it overtly, contextualizing your statements so that you're seen not as a disagreeable subordinate but as a colleague who's trying to advance a common objective. The discussion will then become more like a chess game than a boxing match.\n\n43. _______________________\n\nThis step may sound overly deferential, but it's a smart way to give the powerful person psychological safety and control. You can say something like, “I know we seem to be moving toward a first-quarter commitment here. I have reasons to think that won't work. I'd like to lay out my reasoning. Would that be OK?” This gives the person a choice, allowing him to verbally opt in. And, assuming he says yes, it will make you feel more confident about voicing your disagreement.\n\n44. _______________________\n\nYou might feel your heart racing or your face turning red, but do whatever you can to remain neutral in both your words and actions. When your body language communicates reluctance or anxiety, it undercuts the message. It sends a mixed message, and your counterpart gets to choose what signals to read. Deep breaths can help, as can speaking more slowly and deliberately. When we feel panicky, we tend to talk louder and faster. Simply slowing the pace and talking in an even tone helps the other person cool down and does the same for you. It also makes you seem confident, even if you aren't.\n\n45. _______________________\n\nEmphasize that you're only offering your opinion, not gospel truth. It may be well-informed, well-researched opinion, but it's still an opinion, so talk tentatively and slightly understate your confidence. Instead of saying, “If we set an end-of-quarter deadline, we'll never make it,” say, “This is just my opinion, but I don't see how we will make that deadline.” Having asserted your position (as a position, not as a fact), demonstrate equal curiosity about other views. Remind the person that this is your point of view, and then invite critique. Be open to hearing other opinions.",
+  "stem": "_______________________",
+  "options": {
+   "A": "Stay calm.",
+   "B": "Stay humble.",
+   "C": "Decide whether to wait.",
+   "D": "Be realistic about the risks.",
+   "E": "Don't make judgments.",
+   "F": "Identify a shared goal.",
+   "G": "Ask permission to disagree."
+  },
+  "answer": "F",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2021
+ },
+ {
+  "no": 43,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "How to Disagree with Someone More Powerful Than You\n\nYour boss proposes a new initiative you think won't work. Your senior colleague outlines a project timeline you believe is unrealistic. What do you say when you disagree with someone who has more power than you do? How do you decide whether it's worth speaking up? And if you do, what exactly should you say? Here's how to disagree with someone more powerful than you.\n\n41. _______________________\n\nYou may decide it's best to hold off on voicing your opinion. Maybe you haven't finished thinking the problem through, or you want to get a clearer sense of what the group thinks. If you think other people are going to disagree, too, you might want to gather your army first. People can contribute experience or information to your thinking—all the things that would make the disagreement stronger or more valid. It's also a good idea to delay the conversation if you're in a meeting or other public space. Discussing the issue in private will make the powerful person feel less threatened.\n\n42. _______________________\n\nBefore you share your thoughts think about what the powerful person cares about—it may be the credibility of their team or getting a project done on time. You're more likely to be heard if you can connect your disagreement to a higher purpose. State it overtly, contextualizing your statements so that you're seen not as a disagreeable subordinate but as a colleague who's trying to advance a common objective. The discussion will then become more like a chess game than a boxing match.\n\n43. _______________________\n\nThis step may sound overly deferential, but it's a smart way to give the powerful person psychological safety and control. You can say something like, “I know we seem to be moving toward a first-quarter commitment here. I have reasons to think that won't work. I'd like to lay out my reasoning. Would that be OK?” This gives the person a choice, allowing him to verbally opt in. And, assuming he says yes, it will make you feel more confident about voicing your disagreement.\n\n44. _______________________\n\nYou might feel your heart racing or your face turning red, but do whatever you can to remain neutral in both your words and actions. When your body language communicates reluctance or anxiety, it undercuts the message. It sends a mixed message, and your counterpart gets to choose what signals to read. Deep breaths can help, as can speaking more slowly and deliberately. When we feel panicky, we tend to talk louder and faster. Simply slowing the pace and talking in an even tone helps the other person cool down and does the same for you. It also makes you seem confident, even if you aren't.\n\n45. _______________________\n\nEmphasize that you're only offering your opinion, not gospel truth. It may be well-informed, well-researched opinion, but it's still an opinion, so talk tentatively and slightly understate your confidence. Instead of saying, “If we set an end-of-quarter deadline, we'll never make it,” say, “This is just my opinion, but I don't see how we will make that deadline.” Having asserted your position (as a position, not as a fact), demonstrate equal curiosity about other views. Remind the person that this is your point of view, and then invite critique. Be open to hearing other opinions.",
+  "stem": "_______________________",
+  "options": {
+   "A": "Stay calm.",
+   "B": "Stay humble.",
+   "C": "Decide whether to wait.",
+   "D": "Be realistic about the risks.",
+   "E": "Don't make judgments.",
+   "F": "Identify a shared goal.",
+   "G": "Ask permission to disagree."
+  },
+  "answer": "G",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2021
+ },
+ {
+  "no": 44,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "How to Disagree with Someone More Powerful Than You\n\nYour boss proposes a new initiative you think won't work. Your senior colleague outlines a project timeline you believe is unrealistic. What do you say when you disagree with someone who has more power than you do? How do you decide whether it's worth speaking up? And if you do, what exactly should you say? Here's how to disagree with someone more powerful than you.\n\n41. _______________________\n\nYou may decide it's best to hold off on voicing your opinion. Maybe you haven't finished thinking the problem through, or you want to get a clearer sense of what the group thinks. If you think other people are going to disagree, too, you might want to gather your army first. People can contribute experience or information to your thinking—all the things that would make the disagreement stronger or more valid. It's also a good idea to delay the conversation if you're in a meeting or other public space. Discussing the issue in private will make the powerful person feel less threatened.\n\n42. _______________________\n\nBefore you share your thoughts think about what the powerful person cares about—it may be the credibility of their team or getting a project done on time. You're more likely to be heard if you can connect your disagreement to a higher purpose. State it overtly, contextualizing your statements so that you're seen not as a disagreeable subordinate but as a colleague who's trying to advance a common objective. The discussion will then become more like a chess game than a boxing match.\n\n43. _______________________\n\nThis step may sound overly deferential, but it's a smart way to give the powerful person psychological safety and control. You can say something like, “I know we seem to be moving toward a first-quarter commitment here. I have reasons to think that won't work. I'd like to lay out my reasoning. Would that be OK?” This gives the person a choice, allowing him to verbally opt in. And, assuming he says yes, it will make you feel more confident about voicing your disagreement.\n\n44. _______________________\n\nYou might feel your heart racing or your face turning red, but do whatever you can to remain neutral in both your words and actions. When your body language communicates reluctance or anxiety, it undercuts the message. It sends a mixed message, and your counterpart gets to choose what signals to read. Deep breaths can help, as can speaking more slowly and deliberately. When we feel panicky, we tend to talk louder and faster. Simply slowing the pace and talking in an even tone helps the other person cool down and does the same for you. It also makes you seem confident, even if you aren't.\n\n45. _______________________\n\nEmphasize that you're only offering your opinion, not gospel truth. It may be well-informed, well-researched opinion, but it's still an opinion, so talk tentatively and slightly understate your confidence. Instead of saying, “If we set an end-of-quarter deadline, we'll never make it,” say, “This is just my opinion, but I don't see how we will make that deadline.” Having asserted your position (as a position, not as a fact), demonstrate equal curiosity about other views. Remind the person that this is your point of view, and then invite critique. Be open to hearing other opinions.",
+  "stem": "_______________________",
+  "options": {
+   "A": "Stay calm.",
+   "B": "Stay humble.",
+   "C": "Decide whether to wait.",
+   "D": "Be realistic about the risks.",
+   "E": "Don't make judgments.",
+   "F": "Identify a shared goal.",
+   "G": "Ask permission to disagree."
+  },
+  "answer": "A",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2021
+ },
+ {
+  "no": 45,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "How to Disagree with Someone More Powerful Than You\n\nYour boss proposes a new initiative you think won't work. Your senior colleague outlines a project timeline you believe is unrealistic. What do you say when you disagree with someone who has more power than you do? How do you decide whether it's worth speaking up? And if you do, what exactly should you say? Here's how to disagree with someone more powerful than you.\n\n41. _______________________\n\nYou may decide it's best to hold off on voicing your opinion. Maybe you haven't finished thinking the problem through, or you want to get a clearer sense of what the group thinks. If you think other people are going to disagree, too, you might want to gather your army first. People can contribute experience or information to your thinking—all the things that would make the disagreement stronger or more valid. It's also a good idea to delay the conversation if you're in a meeting or other public space. Discussing the issue in private will make the powerful person feel less threatened.\n\n42. _______________________\n\nBefore you share your thoughts think about what the powerful person cares about—it may be the credibility of their team or getting a project done on time. You're more likely to be heard if you can connect your disagreement to a higher purpose. State it overtly, contextualizing your statements so that you're seen not as a disagreeable subordinate but as a colleague who's trying to advance a common objective. The discussion will then become more like a chess game than a boxing match.\n\n43. _______________________\n\nThis step may sound overly deferential, but it's a smart way to give the powerful person psychological safety and control. You can say something like, “I know we seem to be moving toward a first-quarter commitment here. I have reasons to think that won't work. I'd like to lay out my reasoning. Would that be OK?” This gives the person a choice, allowing him to verbally opt in. And, assuming he says yes, it will make you feel more confident about voicing your disagreement.\n\n44. _______________________\n\nYou might feel your heart racing or your face turning red, but do whatever you can to remain neutral in both your words and actions. When your body language communicates reluctance or anxiety, it undercuts the message. It sends a mixed message, and your counterpart gets to choose what signals to read. Deep breaths can help, as can speaking more slowly and deliberately. When we feel panicky, we tend to talk louder and faster. Simply slowing the pace and talking in an even tone helps the other person cool down and does the same for you. It also makes you seem confident, even if you aren't.\n\n45. _______________________\n\nEmphasize that you're only offering your opinion, not gospel truth. It may be well-informed, well-researched opinion, but it's still an opinion, so talk tentatively and slightly understate your confidence. Instead of saying, “If we set an end-of-quarter deadline, we'll never make it,” say, “This is just my opinion, but I don't see how we will make that deadline.” Having asserted your position (as a position, not as a fact), demonstrate equal curiosity about other views. Remind the person that this is your point of view, and then invite critique. Be open to hearing other opinions.",
+  "stem": "_______________________",
+  "options": {
+   "A": "Stay calm.",
+   "B": "Stay humble.",
+   "C": "Decide whether to wait.",
+   "D": "Be realistic about the risks.",
+   "E": "Don't make judgments.",
+   "F": "Identify a shared goal.",
+   "G": "Ask permission to disagree."
+  },
+  "answer": "B",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2021
+ },
+ {
+  "no": 41,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "Net-zero rules set to send cost of new homes and extensions soaring\n\nNew building regulations aimed at improving energy efficiency are set to increase the price of new homes, as well as those of extensions and loft conversions on existing ones.\n\nThe rules, which came into effect on Wednesday in England, are part of government plans to reduce the UK's carbon emissions to net zero by 2050. They set new standards for ventilation, energy efficiency and heating, and state that new residential buildings must have charging points for electric vehicles.\n\nThe moves are the most significant change to building regulations in years, and industry experts say they will inevitably lead to higher prices at a time when a shortage of materials and high labour costs are already driving up bills.\n\nBrian Berry, chief executive of the Federation of Master Builders, says the measures will require new materials, testing methods, products and systems to be installed. “All this comes at an increased cost during a time when prices are already sky high. Inevitably, consumers will have to pay more,” he says.\n\nGareth Belsham, of surveyors Naismiths, says people who are upgrading, or extending their home, will be directly affected. “The biggest changes relate to heating and insulation,” he explains. “There are new rules concerning the amount of glazing used in extensions, and any new windows or doors must be highly insulated.”\n\nWindows and doors will have to adhere to higher standards, while there are new limits on the amount of glazing you can have to reduce unwanted heat from the sun.\n\nThomas Goodman, of MyJobQuote, says this will bring in new restrictions for extensions. “Glazing on windows, doors and roof lights must cover no more than 25% of the floor area to prevent heat loss,” he says.\n\nAs the rules came into effect last Wednesday, property developers were rushing to file plans just before the deadline. Any plans submitted before that date are considered to be under the previous rules, and can go ahead as long as work starts before 15 June next year.\n\nBuilders which have costed projects, but have not filed the paperwork, may need to go back and submit fresh estimates, says Marcus Jefford of Build Aviator.\n\nMaterials prices are already up 25% in the last two years. How much overall prices will increase as a result of the rule changes is not clear. “While admirable in their intentions, they will add to the cost of housebuilding at a time when many already feel that they are priced out of homeownership,” says Jonathan Rolande of the National Association of Property Buyers. “An average extension will probably see around £3,000 additional cost thanks to the new regs.”\n\nJohn Kelly, a construction lawyer at Freeths law firm, believes prices will eventually come down. But not in the immediate future. “As the marketplace adapts to the new requirements, and the technologies that support them, the scaling up of these technologies will eventually bring costs down, but in the short term, we will all have to pay the price of the necessary transition.” he says.\n\nHowever, the long-term effects of the changes will be more comfortable and energy-efficient homes, adds Andrew Mellor, of PRP architects. “Homeowners will probably recoup that cost over time in energy bill savings. It will obviously be very volatile at the moment, but they will have that benefit over time.”",
+  "stem": "Brian Berry",
+  "options": {
+   "A": "The rise of home prices is a temporary matter.",
+   "B": "Builders possibly need to submit new estimates of their projects.",
+   "C": "There will be specific limits on home extensions to prevent heat loss.",
+   "D": "The new rules will take home prices to an even higher level.",
+   "E": "Many people feel that home prices are already beyond what they can afford.",
+   "F": "The new rules will affect people whose home extensions include new windows or doors.",
+   "G": "The rule changes will benefit homeowners eventually."
+  },
+  "answer": "D",
+  "tag": "新题型-信息匹配",
+  "subject": "en",
+  "year": 2023
+ },
+ {
+  "no": 42,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "Net-zero rules set to send cost of new homes and extensions soaring\n\nNew building regulations aimed at improving energy efficiency are set to increase the price of new homes, as well as those of extensions and loft conversions on existing ones.\n\nThe rules, which came into effect on Wednesday in England, are part of government plans to reduce the UK's carbon emissions to net zero by 2050. They set new standards for ventilation, energy efficiency and heating, and state that new residential buildings must have charging points for electric vehicles.\n\nThe moves are the most significant change to building regulations in years, and industry experts say they will inevitably lead to higher prices at a time when a shortage of materials and high labour costs are already driving up bills.\n\nBrian Berry, chief executive of the Federation of Master Builders, says the measures will require new materials, testing methods, products and systems to be installed. “All this comes at an increased cost during a time when prices are already sky high. Inevitably, consumers will have to pay more,” he says.\n\nGareth Belsham, of surveyors Naismiths, says people who are upgrading, or extending their home, will be directly affected. “The biggest changes relate to heating and insulation,” he explains. “There are new rules concerning the amount of glazing used in extensions, and any new windows or doors must be highly insulated.”\n\nWindows and doors will have to adhere to higher standards, while there are new limits on the amount of glazing you can have to reduce unwanted heat from the sun.\n\nThomas Goodman, of MyJobQuote, says this will bring in new restrictions for extensions. “Glazing on windows, doors and roof lights must cover no more than 25% of the floor area to prevent heat loss,” he says.\n\nAs the rules came into effect last Wednesday, property developers were rushing to file plans just before the deadline. Any plans submitted before that date are considered to be under the previous rules, and can go ahead as long as work starts before 15 June next year.\n\nBuilders which have costed projects, but have not filed the paperwork, may need to go back and submit fresh estimates, says Marcus Jefford of Build Aviator.\n\nMaterials prices are already up 25% in the last two years. How much overall prices will increase as a result of the rule changes is not clear. “While admirable in their intentions, they will add to the cost of housebuilding at a time when many already feel that they are priced out of homeownership,” says Jonathan Rolande of the National Association of Property Buyers. “An average extension will probably see around £3,000 additional cost thanks to the new regs.”\n\nJohn Kelly, a construction lawyer at Freeths law firm, believes prices will eventually come down. But not in the immediate future. “As the marketplace adapts to the new requirements, and the technologies that support them, the scaling up of these technologies will eventually bring costs down, but in the short term, we will all have to pay the price of the necessary transition.” he says.\n\nHowever, the long-term effects of the changes will be more comfortable and energy-efficient homes, adds Andrew Mellor, of PRP architects. “Homeowners will probably recoup that cost over time in energy bill savings. It will obviously be very volatile at the moment, but they will have that benefit over time.”",
+  "stem": "Gareth Belsham",
+  "options": {
+   "A": "The rise of home prices is a temporary matter.",
+   "B": "Builders possibly need to submit new estimates of their projects.",
+   "C": "There will be specific limits on home extensions to prevent heat loss.",
+   "D": "The new rules will take home prices to an even higher level.",
+   "E": "Many people feel that home prices are already beyond what they can afford.",
+   "F": "The new rules will affect people whose home extensions include new windows or doors.",
+   "G": "The rule changes will benefit homeowners eventually."
+  },
+  "answer": "F",
+  "tag": "新题型-信息匹配",
+  "subject": "en",
+  "year": 2023
+ },
+ {
+  "no": 43,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "Net-zero rules set to send cost of new homes and extensions soaring\n\nNew building regulations aimed at improving energy efficiency are set to increase the price of new homes, as well as those of extensions and loft conversions on existing ones.\n\nThe rules, which came into effect on Wednesday in England, are part of government plans to reduce the UK's carbon emissions to net zero by 2050. They set new standards for ventilation, energy efficiency and heating, and state that new residential buildings must have charging points for electric vehicles.\n\nThe moves are the most significant change to building regulations in years, and industry experts say they will inevitably lead to higher prices at a time when a shortage of materials and high labour costs are already driving up bills.\n\nBrian Berry, chief executive of the Federation of Master Builders, says the measures will require new materials, testing methods, products and systems to be installed. “All this comes at an increased cost during a time when prices are already sky high. Inevitably, consumers will have to pay more,” he says.\n\nGareth Belsham, of surveyors Naismiths, says people who are upgrading, or extending their home, will be directly affected. “The biggest changes relate to heating and insulation,” he explains. “There are new rules concerning the amount of glazing used in extensions, and any new windows or doors must be highly insulated.”\n\nWindows and doors will have to adhere to higher standards, while there are new limits on the amount of glazing you can have to reduce unwanted heat from the sun.\n\nThomas Goodman, of MyJobQuote, says this will bring in new restrictions for extensions. “Glazing on windows, doors and roof lights must cover no more than 25% of the floor area to prevent heat loss,” he says.\n\nAs the rules came into effect last Wednesday, property developers were rushing to file plans just before the deadline. Any plans submitted before that date are considered to be under the previous rules, and can go ahead as long as work starts before 15 June next year.\n\nBuilders which have costed projects, but have not filed the paperwork, may need to go back and submit fresh estimates, says Marcus Jefford of Build Aviator.\n\nMaterials prices are already up 25% in the last two years. How much overall prices will increase as a result of the rule changes is not clear. “While admirable in their intentions, they will add to the cost of housebuilding at a time when many already feel that they are priced out of homeownership,” says Jonathan Rolande of the National Association of Property Buyers. “An average extension will probably see around £3,000 additional cost thanks to the new regs.”\n\nJohn Kelly, a construction lawyer at Freeths law firm, believes prices will eventually come down. But not in the immediate future. “As the marketplace adapts to the new requirements, and the technologies that support them, the scaling up of these technologies will eventually bring costs down, but in the short term, we will all have to pay the price of the necessary transition.” he says.\n\nHowever, the long-term effects of the changes will be more comfortable and energy-efficient homes, adds Andrew Mellor, of PRP architects. “Homeowners will probably recoup that cost over time in energy bill savings. It will obviously be very volatile at the moment, but they will have that benefit over time.”",
+  "stem": "Marcus Jefford",
+  "options": {
+   "A": "The rise of home prices is a temporary matter.",
+   "B": "Builders possibly need to submit new estimates of their projects.",
+   "C": "There will be specific limits on home extensions to prevent heat loss.",
+   "D": "The new rules will take home prices to an even higher level.",
+   "E": "Many people feel that home prices are already beyond what they can afford.",
+   "F": "The new rules will affect people whose home extensions include new windows or doors.",
+   "G": "The rule changes will benefit homeowners eventually."
+  },
+  "answer": "B",
+  "tag": "新题型-信息匹配",
+  "subject": "en",
+  "year": 2023
+ },
+ {
+  "no": 44,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "Net-zero rules set to send cost of new homes and extensions soaring\n\nNew building regulations aimed at improving energy efficiency are set to increase the price of new homes, as well as those of extensions and loft conversions on existing ones.\n\nThe rules, which came into effect on Wednesday in England, are part of government plans to reduce the UK's carbon emissions to net zero by 2050. They set new standards for ventilation, energy efficiency and heating, and state that new residential buildings must have charging points for electric vehicles.\n\nThe moves are the most significant change to building regulations in years, and industry experts say they will inevitably lead to higher prices at a time when a shortage of materials and high labour costs are already driving up bills.\n\nBrian Berry, chief executive of the Federation of Master Builders, says the measures will require new materials, testing methods, products and systems to be installed. “All this comes at an increased cost during a time when prices are already sky high. Inevitably, consumers will have to pay more,” he says.\n\nGareth Belsham, of surveyors Naismiths, says people who are upgrading, or extending their home, will be directly affected. “The biggest changes relate to heating and insulation,” he explains. “There are new rules concerning the amount of glazing used in extensions, and any new windows or doors must be highly insulated.”\n\nWindows and doors will have to adhere to higher standards, while there are new limits on the amount of glazing you can have to reduce unwanted heat from the sun.\n\nThomas Goodman, of MyJobQuote, says this will bring in new restrictions for extensions. “Glazing on windows, doors and roof lights must cover no more than 25% of the floor area to prevent heat loss,” he says.\n\nAs the rules came into effect last Wednesday, property developers were rushing to file plans just before the deadline. Any plans submitted before that date are considered to be under the previous rules, and can go ahead as long as work starts before 15 June next year.\n\nBuilders which have costed projects, but have not filed the paperwork, may need to go back and submit fresh estimates, says Marcus Jefford of Build Aviator.\n\nMaterials prices are already up 25% in the last two years. How much overall prices will increase as a result of the rule changes is not clear. “While admirable in their intentions, they will add to the cost of housebuilding at a time when many already feel that they are priced out of homeownership,” says Jonathan Rolande of the National Association of Property Buyers. “An average extension will probably see around £3,000 additional cost thanks to the new regs.”\n\nJohn Kelly, a construction lawyer at Freeths law firm, believes prices will eventually come down. But not in the immediate future. “As the marketplace adapts to the new requirements, and the technologies that support them, the scaling up of these technologies will eventually bring costs down, but in the short term, we will all have to pay the price of the necessary transition.” he says.\n\nHowever, the long-term effects of the changes will be more comfortable and energy-efficient homes, adds Andrew Mellor, of PRP architects. “Homeowners will probably recoup that cost over time in energy bill savings. It will obviously be very volatile at the moment, but they will have that benefit over time.”",
+  "stem": "John Kelly",
+  "options": {
+   "A": "The rise of home prices is a temporary matter.",
+   "B": "Builders possibly need to submit new estimates of their projects.",
+   "C": "There will be specific limits on home extensions to prevent heat loss.",
+   "D": "The new rules will take home prices to an even higher level.",
+   "E": "Many people feel that home prices are already beyond what they can afford.",
+   "F": "The new rules will affect people whose home extensions include new windows or doors.",
+   "G": "The rule changes will benefit homeowners eventually."
+  },
+  "answer": "A",
+  "tag": "新题型-信息匹配",
+  "subject": "en",
+  "year": 2023
+ },
+ {
+  "no": 45,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "passage": "Net-zero rules set to send cost of new homes and extensions soaring\n\nNew building regulations aimed at improving energy efficiency are set to increase the price of new homes, as well as those of extensions and loft conversions on existing ones.\n\nThe rules, which came into effect on Wednesday in England, are part of government plans to reduce the UK's carbon emissions to net zero by 2050. They set new standards for ventilation, energy efficiency and heating, and state that new residential buildings must have charging points for electric vehicles.\n\nThe moves are the most significant change to building regulations in years, and industry experts say they will inevitably lead to higher prices at a time when a shortage of materials and high labour costs are already driving up bills.\n\nBrian Berry, chief executive of the Federation of Master Builders, says the measures will require new materials, testing methods, products and systems to be installed. “All this comes at an increased cost during a time when prices are already sky high. Inevitably, consumers will have to pay more,” he says.\n\nGareth Belsham, of surveyors Naismiths, says people who are upgrading, or extending their home, will be directly affected. “The biggest changes relate to heating and insulation,” he explains. “There are new rules concerning the amount of glazing used in extensions, and any new windows or doors must be highly insulated.”\n\nWindows and doors will have to adhere to higher standards, while there are new limits on the amount of glazing you can have to reduce unwanted heat from the sun.\n\nThomas Goodman, of MyJobQuote, says this will bring in new restrictions for extensions. “Glazing on windows, doors and roof lights must cover no more than 25% of the floor area to prevent heat loss,” he says.\n\nAs the rules came into effect last Wednesday, property developers were rushing to file plans just before the deadline. Any plans submitted before that date are considered to be under the previous rules, and can go ahead as long as work starts before 15 June next year.\n\nBuilders which have costed projects, but have not filed the paperwork, may need to go back and submit fresh estimates, says Marcus Jefford of Build Aviator.\n\nMaterials prices are already up 25% in the last two years. How much overall prices will increase as a result of the rule changes is not clear. “While admirable in their intentions, they will add to the cost of housebuilding at a time when many already feel that they are priced out of homeownership,” says Jonathan Rolande of the National Association of Property Buyers. “An average extension will probably see around £3,000 additional cost thanks to the new regs.”\n\nJohn Kelly, a construction lawyer at Freeths law firm, believes prices will eventually come down. But not in the immediate future. “As the marketplace adapts to the new requirements, and the technologies that support them, the scaling up of these technologies will eventually bring costs down, but in the short term, we will all have to pay the price of the necessary transition.” he says.\n\nHowever, the long-term effects of the changes will be more comfortable and energy-efficient homes, adds Andrew Mellor, of PRP architects. “Homeowners will probably recoup that cost over time in energy bill savings. It will obviously be very volatile at the moment, but they will have that benefit over time.”",
+  "stem": "Andrew Mellor",
+  "options": {
+   "A": "The rise of home prices is a temporary matter.",
+   "B": "Builders possibly need to submit new estimates of their projects.",
+   "C": "There will be specific limits on home extensions to prevent heat loss.",
+   "D": "The new rules will take home prices to an even higher level.",
+   "E": "Many people feel that home prices are already beyond what they can afford.",
+   "F": "The new rules will affect people whose home extensions include new windows or doors.",
+   "G": "The rule changes will benefit homeowners eventually."
+  },
+  "answer": "G",
+  "tag": "新题型-信息匹配",
+  "subject": "en",
+  "year": 2023
+ },
+ {
+  "no": 27,
+  "part": "en_read_a",
+  "part_name": "阅读理解 PartA",
+  "textNo": 2,
+  "img": null,
+  "stem": "One answer to the crisis in health and care is to ______.",
+  "passage": "When it was established, the National Health Service (NHS) was visionary: offering high- quality, timely care to meet the dominant needs of the population it served. Nearly 75 years on, with the UK facing very different health challenges, it is clear that the model is out of date.\n\nFrom life expectancy to cancer and infant mortality rates, we are lagging behind many of our peers. With more than 6.8 million on waitlists, healthcare is becoming increasingly inaccessible for those who can not opt to pay for private treatment, and the cost of providing healthcare is increasingly squeezing our investment in other public seryices, As demand for healthcare continue to grow, pressures on the workforce-which is already near breaking point-will only become more acute.\n\nMany of the answers to the crisis in health and care are well rehearsed, We need to be much better at reducing and diverting demand on health services, rather than simply managing it. Much more needs to be invested in communities and primary care to reduce our reliance on hospitals. And capacity in social care needs to be greater, to support the growing number of people living with long-term conditions.\n\nYet despite two decades of strategies and a number of maior health reforms, we have failed to make meaningful progress on any of these aims, That is why the Reform think tank is launching a new programme of work entitled “Reimagining Health”, supported by ten former health ministers Together, we are calling for a much more open and honest conversation about the future of health in the UK, and an “urgent rethink\" of the hospital-centric model we retain.\n\nThis must begin with the question of how we maximize the health of the nation, rather than “fx” the NHS. It is estimated, for example, that healthcare accounts for only about 20% of health outcomes. Much more important are the places we live, work and socialize-yet there is no clear cross-goyernment strategy for improving these social determinants of health. Worse, when policies like the national obesity strategy are scrapped, taxpayers are left with the hefty price tag of treating the illnesses, like diabetes, that result.\n\nReform wants to ask how power and resources should be distributed in our health system What health functions should remain at the centre, and what should be given to local leaders. often responsible for services that create health, and with a much better understanding of the needs of their populations?",
+  "options": {
+   "A": "boost the efficiency of hospitals",
+   "B": "lighten the burden on social care",
+   "C": "increase resources for primary care",
+   "D": "reduce the pressure on communities"
+  },
+  "answer": "C",
+  "tag": "阅读-细节理解",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 29,
+  "part": "en_read_a",
+  "part_name": "阅读理解 PartA",
+  "textNo": 2,
+  "img": null,
+  "stem": "To maximize the nation’s health, the author suggests ______.",
+  "passage": "When it was established, the National Health Service (NHS) was visionary: offering high- quality, timely care to meet the dominant needs of the population it served. Nearly 75 years on, with the UK facing very different health challenges, it is clear that the model is out of date.\n\nFrom life expectancy to cancer and infant mortality rates, we are lagging behind many of our peers. With more than 6.8 million on waitlists, healthcare is becoming increasingly inaccessible for those who can not opt to pay for private treatment, and the cost of providing healthcare is increasingly squeezing our investment in other public seryices, As demand for healthcare continue to grow, pressures on the workforce-which is already near breaking point-will only become more acute.\n\nMany of the answers to the crisis in health and care are well rehearsed, We need to be much better at reducing and diverting demand on health services, rather than simply managing it. Much more needs to be invested in communities and primary care to reduce our reliance on hospitals. And capacity in social care needs to be greater, to support the growing number of people living with long-term conditions.\n\nYet despite two decades of strategies and a number of maior health reforms, we have failed to make meaningful progress on any of these aims, That is why the Reform think tank is launching a new programme of work entitled “Reimagining Health”, supported by ten former health ministers Together, we are calling for a much more open and honest conversation about the future of health in the UK, and an “urgent rethink\" of the hospital-centric model we retain.\n\nThis must begin with the question of how we maximize the health of the nation, rather than “fx” the NHS. It is estimated, for example, that healthcare accounts for only about 20% of health outcomes. Much more important are the places we live, work and socialize-yet there is no clear cross-goyernment strategy for improving these social determinants of health. Worse, when policies like the national obesity strategy are scrapped, taxpayers are left with the hefty price tag of treating the illnesses, like diabetes, that result.\n\nReform wants to ask how power and resources should be distributed in our health system What health functions should remain at the centre, and what should be given to local leaders. often responsible for services that create health, and with a much better understanding of the needs of their populations?",
+  "options": {
+   "A": "introducing relevant taxation policies",
+   "B": "paying due attention to social factors",
+   "C": "reevaluating major health outcomes",
+   "D": "enhancing the quality of healthcare"
+  },
+  "answer": "B",
+  "tag": "阅读-细节理解",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 1,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "illusion",
+   "B": "discussion",
+   "C": "tradition",
+   "D": "question"
+  },
+  "answer": "D",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 2,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "reluctance",
+   "B": "ambition",
+   "C": "tendency",
+   "D": "enthusiasm"
+  },
+  "answer": "A",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 3,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "attention",
+   "B": "talent",
+   "C": "courage",
+   "D": "patience"
+  },
+  "answer": "C",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 4,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "At any time",
+   "B": "In other words",
+   "C": "By all means",
+   "D": "On the contrary"
+  },
+  "answer": "B",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 5,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "unrealistic",
+   "B": "deceptive",
+   "C": "tiresome",
+   "D": "uncomfortable"
+  },
+  "answer": "D",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 6,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "doubts",
+   "B": "concerns",
+   "C": "suggestions",
+   "D": "secrets"
+  },
+  "answer": "B",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 7,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "Once",
+   "B": "Unless",
+   "C": "Although",
+   "D": "Before"
+  },
+  "answer": "A",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 8,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "theory",
+   "B": "choice",
+   "C": "factor",
+   "D": "context"
+  },
+  "answer": "C",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 9,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "overpraising",
+   "B": "outperforming",
+   "C": "reassessing",
+   "D": "inconveniencing"
+  },
+  "answer": "D",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 10,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "reach out",
+   "B": "settle down",
+   "C": "turn over",
+   "D": "look back"
+  },
+  "answer": "A",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 11,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "declining",
+   "B": "considering",
+   "C": "criticizing",
+   "D": "evaluating"
+  },
+  "answer": "A",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 12,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "unnecessary",
+   "B": "negative",
+   "C": "strange",
+   "D": "impractical"
+  },
+  "answer": "B",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 13,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "explain",
+   "B": "identify",
+   "C": "predict",
+   "D": "overcome"
+  },
+  "answer": "D",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 14,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "deny",
+   "B": "forget",
+   "C": "miss",
+   "D": "fear"
+  },
+  "answer": "D",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 15,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "disguised",
+   "B": "perceived",
+   "C": "followed",
+   "D": "introduced"
+  },
+  "answer": "B",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 16,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "recall",
+   "B": "classify",
+   "C": "analyse",
+   "D": "compare"
+  },
+  "answer": "A",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 17,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "brave",
+   "B": "disapproving",
+   "C": "willing",
+   "D": "hesitant"
+  },
+  "answer": "C",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 18,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "relaxing",
+   "B": "surprising",
+   "C": "rewarding",
+   "D": "demanding"
+  },
+  "answer": "C",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 19,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "Thus",
+   "B": "Also",
+   "C": "Finally",
+   "D": "Instead"
+  },
+  "answer": "B",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 20,
+  "part": "en_cloze",
+  "part_name": "完形填空",
+  "textNo": null,
+  "img": null,
+  "stem": "",
+  "passage": "There are many understandable reasons why you might find it difficult to ask for help when you need it. Psychologists have been interested in this {{1}} for decades, not least because people’s widespread {{2}} to ask for help has led to some high-profile failures.\n\nAsking for help takes {{3}}. It involves communicating a need on your part—there’s something you can’t do. {{4}}, you’re broadcasting your own weaknesses, which can be {{5}}. You might worry about coming across as incompetent. You might have {{6}} about losing control of whatever it is you’re asking for help with. {{7}} someone starts to help, perhaps they’ll take over, or get credit for your earlier efforts.\n\nYet another {{8}} that you might be worried about is being a nuisance or {{9}} the person you go to for help. If you struggle with low self-esteem, you might find it especially difficult to {{10}} for help because you have the added worry of the other person {{11}} your request. You might see such refusals as implying something {{12}} about the status of your relationship with them.\n\nTo {{13}} these difficulties, try to remind yourself that everyone needs help sometimes. Nobody knows everything and can do everything all by themselves. And while you might {{14}} coming across as incompetent, there’s actually research that shows that advice-seekers are {{15}} as more competent, not less.\n\nPerhaps most encouraging of all is a paper from 2022 by researchers at Stanford University, in California, that involved a mix of contrived help-seeking interactions and asking people to {{16}} times they’d sought help in the past. The findings showed that help-seekers generally underestimate how {{17}} other people will be to help and how good it’ll make the help-giver feel (for most people, having the chance to help someone is highly {{18}}).\n\nSo, bear all this in mind the next time you need to ask for help. {{19}}, take care over who you ask and when you ask them. And if someone can’t help right now, avoid taking it personally. They might just be too {{20}}, or they might not feel confident about their ability to help.",
+  "options": {
+   "A": "polite",
+   "B": "proud",
+   "C": "busy",
+   "D": "lazy"
+  },
+  "answer": "C",
+  "tag": "完形填空",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 41,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "stem": "_______________________",
+  "passage": "Five Steps to Suggesting a Change at Work That’ll Actually Get Taken Seriously\n\nEveryone wants to be that person—the one who looks at the same information as everyone else, but who sees a fresh, innovative solution. However, it takes more than simply having a good idea. How you share it is as important as the suggestion itself.\n\nWhy? Because writing a new script—literally or figuratively—means that other team members will have to adapt to something new. Not to mention, if the process you’re scrapping is one someone else suggested, there’s the possibility of hurt feelings.\n\nTo gain buy-in on an innovative, new idea, follow these steps:\n\n41. _______________________\n\nGreat ideas don’t stand alone. In other words, you can’t mention your suggestion once and expect it to be adopted. To see a change, you’ll need to champion your plan and sell its merits. In addition, you need to be willing to stand up to scrutiny and criticism and be prepared to explain your innovation in different ways for various audiences.\n\n42. _______________________\n\nSometimes it makes sense to go to your boss first. But other times, it’s useful to build a coalition among your co-workers or other stakeholders. When it works, it works great—because you’re ready for your stubborn supervisor’s pushback with answers like, “Actually, I connected with a few people in our department to discuss how much time these kinds of websites would take, and they suggested they have the bandwidth.”\n\n43. _______________________\n\nOne of the biggest barriers to gaining buy-in occurs when the owner of an idea is viewed as argumentative, defensive, or close-minded. Because let’s be honest: no one likes a know-it-all. So, if people disagree with you, don’t be indignant. Instead, listen to their concerns fully, try to understand their perspective, and include their concerns (and possible remedies) in future discussions.\n\nSo, instead of saying, “Martha, our current slogan is confusing and should be updated,” you could try, “Martha raises a great point that our current slogan has a long history for our stakeholders, but I wonder if we might be able to brainstorm a tagline on that—and be clearer for new customers.”\n\n44. _______________________\n\nNew ideas are the grandchildren of old ones. In other words, don’t throw old solutions under the bus to make your improvement stand out. Remember that in light of whatever the problem the old system solved—or, maybe, has failed to solve in recent memory—it was a great idea at the time. Appreciating the older contributions as you suggest future innovations helps bolster the credibility of your idea.\n\n45. _______________________\n\nWhen pitching a new idea, it’s important to use the language of abundance instead of deficit. Instead of saying what is wrong, broken, or suboptimal, talk about what is right, fixable or ideal. For example, try, “I can see lots of applications for this new approach” rather than, “This innovation is the only way.” Be optimistic but realistic, and you will stand out.",
+  "options": {
+   "A": "Stay positive",
+   "B": "Respect the past",
+   "C": "Use channels",
+   "D": "Give it time",
+   "E": "Invite resistance",
+   "F": "Be a salesman",
+   "G": "Be humble"
+  },
+  "answer": "F",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 42,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "stem": "_______________________",
+  "passage": "Five Steps to Suggesting a Change at Work That’ll Actually Get Taken Seriously\n\nEveryone wants to be that person—the one who looks at the same information as everyone else, but who sees a fresh, innovative solution. However, it takes more than simply having a good idea. How you share it is as important as the suggestion itself.\n\nWhy? Because writing a new script—literally or figuratively—means that other team members will have to adapt to something new. Not to mention, if the process you’re scrapping is one someone else suggested, there’s the possibility of hurt feelings.\n\nTo gain buy-in on an innovative, new idea, follow these steps:\n\n41. _______________________\n\nGreat ideas don’t stand alone. In other words, you can’t mention your suggestion once and expect it to be adopted. To see a change, you’ll need to champion your plan and sell its merits. In addition, you need to be willing to stand up to scrutiny and criticism and be prepared to explain your innovation in different ways for various audiences.\n\n42. _______________________\n\nSometimes it makes sense to go to your boss first. But other times, it’s useful to build a coalition among your co-workers or other stakeholders. When it works, it works great—because you’re ready for your stubborn supervisor’s pushback with answers like, “Actually, I connected with a few people in our department to discuss how much time these kinds of websites would take, and they suggested they have the bandwidth.”\n\n43. _______________________\n\nOne of the biggest barriers to gaining buy-in occurs when the owner of an idea is viewed as argumentative, defensive, or close-minded. Because let’s be honest: no one likes a know-it-all. So, if people disagree with you, don’t be indignant. Instead, listen to their concerns fully, try to understand their perspective, and include their concerns (and possible remedies) in future discussions.\n\nSo, instead of saying, “Martha, our current slogan is confusing and should be updated,” you could try, “Martha raises a great point that our current slogan has a long history for our stakeholders, but I wonder if we might be able to brainstorm a tagline on that—and be clearer for new customers.”\n\n44. _______________________\n\nNew ideas are the grandchildren of old ones. In other words, don’t throw old solutions under the bus to make your improvement stand out. Remember that in light of whatever the problem the old system solved—or, maybe, has failed to solve in recent memory—it was a great idea at the time. Appreciating the older contributions as you suggest future innovations helps bolster the credibility of your idea.\n\n45. _______________________\n\nWhen pitching a new idea, it’s important to use the language of abundance instead of deficit. Instead of saying what is wrong, broken, or suboptimal, talk about what is right, fixable or ideal. For example, try, “I can see lots of applications for this new approach” rather than, “This innovation is the only way.” Be optimistic but realistic, and you will stand out.",
+  "options": {
+   "A": "Stay positive",
+   "B": "Respect the past",
+   "C": "Use channels",
+   "D": "Give it time",
+   "E": "Invite resistance",
+   "F": "Be a salesman",
+   "G": "Be humble"
+  },
+  "answer": "C",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 43,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "stem": "_______________________",
+  "passage": "Five Steps to Suggesting a Change at Work That’ll Actually Get Taken Seriously\n\nEveryone wants to be that person—the one who looks at the same information as everyone else, but who sees a fresh, innovative solution. However, it takes more than simply having a good idea. How you share it is as important as the suggestion itself.\n\nWhy? Because writing a new script—literally or figuratively—means that other team members will have to adapt to something new. Not to mention, if the process you’re scrapping is one someone else suggested, there’s the possibility of hurt feelings.\n\nTo gain buy-in on an innovative, new idea, follow these steps:\n\n41. _______________________\n\nGreat ideas don’t stand alone. In other words, you can’t mention your suggestion once and expect it to be adopted. To see a change, you’ll need to champion your plan and sell its merits. In addition, you need to be willing to stand up to scrutiny and criticism and be prepared to explain your innovation in different ways for various audiences.\n\n42. _______________________\n\nSometimes it makes sense to go to your boss first. But other times, it’s useful to build a coalition among your co-workers or other stakeholders. When it works, it works great—because you’re ready for your stubborn supervisor’s pushback with answers like, “Actually, I connected with a few people in our department to discuss how much time these kinds of websites would take, and they suggested they have the bandwidth.”\n\n43. _______________________\n\nOne of the biggest barriers to gaining buy-in occurs when the owner of an idea is viewed as argumentative, defensive, or close-minded. Because let’s be honest: no one likes a know-it-all. So, if people disagree with you, don’t be indignant. Instead, listen to their concerns fully, try to understand their perspective, and include their concerns (and possible remedies) in future discussions.\n\nSo, instead of saying, “Martha, our current slogan is confusing and should be updated,” you could try, “Martha raises a great point that our current slogan has a long history for our stakeholders, but I wonder if we might be able to brainstorm a tagline on that—and be clearer for new customers.”\n\n44. _______________________\n\nNew ideas are the grandchildren of old ones. In other words, don’t throw old solutions under the bus to make your improvement stand out. Remember that in light of whatever the problem the old system solved—or, maybe, has failed to solve in recent memory—it was a great idea at the time. Appreciating the older contributions as you suggest future innovations helps bolster the credibility of your idea.\n\n45. _______________________\n\nWhen pitching a new idea, it’s important to use the language of abundance instead of deficit. Instead of saying what is wrong, broken, or suboptimal, talk about what is right, fixable or ideal. For example, try, “I can see lots of applications for this new approach” rather than, “This innovation is the only way.” Be optimistic but realistic, and you will stand out.",
+  "options": {
+   "A": "Stay positive",
+   "B": "Respect the past",
+   "C": "Use channels",
+   "D": "Give it time",
+   "E": "Invite resistance",
+   "F": "Be a salesman",
+   "G": "Be humble"
+  },
+  "answer": "G",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 44,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "stem": "_______________________",
+  "passage": "Five Steps to Suggesting a Change at Work That’ll Actually Get Taken Seriously\n\nEveryone wants to be that person—the one who looks at the same information as everyone else, but who sees a fresh, innovative solution. However, it takes more than simply having a good idea. How you share it is as important as the suggestion itself.\n\nWhy? Because writing a new script—literally or figuratively—means that other team members will have to adapt to something new. Not to mention, if the process you’re scrapping is one someone else suggested, there’s the possibility of hurt feelings.\n\nTo gain buy-in on an innovative, new idea, follow these steps:\n\n41. _______________________\n\nGreat ideas don’t stand alone. In other words, you can’t mention your suggestion once and expect it to be adopted. To see a change, you’ll need to champion your plan and sell its merits. In addition, you need to be willing to stand up to scrutiny and criticism and be prepared to explain your innovation in different ways for various audiences.\n\n42. _______________________\n\nSometimes it makes sense to go to your boss first. But other times, it’s useful to build a coalition among your co-workers or other stakeholders. When it works, it works great—because you’re ready for your stubborn supervisor’s pushback with answers like, “Actually, I connected with a few people in our department to discuss how much time these kinds of websites would take, and they suggested they have the bandwidth.”\n\n43. _______________________\n\nOne of the biggest barriers to gaining buy-in occurs when the owner of an idea is viewed as argumentative, defensive, or close-minded. Because let’s be honest: no one likes a know-it-all. So, if people disagree with you, don’t be indignant. Instead, listen to their concerns fully, try to understand their perspective, and include their concerns (and possible remedies) in future discussions.\n\nSo, instead of saying, “Martha, our current slogan is confusing and should be updated,” you could try, “Martha raises a great point that our current slogan has a long history for our stakeholders, but I wonder if we might be able to brainstorm a tagline on that—and be clearer for new customers.”\n\n44. _______________________\n\nNew ideas are the grandchildren of old ones. In other words, don’t throw old solutions under the bus to make your improvement stand out. Remember that in light of whatever the problem the old system solved—or, maybe, has failed to solve in recent memory—it was a great idea at the time. Appreciating the older contributions as you suggest future innovations helps bolster the credibility of your idea.\n\n45. _______________________\n\nWhen pitching a new idea, it’s important to use the language of abundance instead of deficit. Instead of saying what is wrong, broken, or suboptimal, talk about what is right, fixable or ideal. For example, try, “I can see lots of applications for this new approach” rather than, “This innovation is the only way.” Be optimistic but realistic, and you will stand out.",
+  "options": {
+   "A": "Stay positive",
+   "B": "Respect the past",
+   "C": "Use channels",
+   "D": "Give it time",
+   "E": "Invite resistance",
+   "F": "Be a salesman",
+   "G": "Be humble"
+  },
+  "answer": "B",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2025
+ },
+ {
+  "no": 45,
+  "part": "en_read_b",
+  "part_name": "新题型 PartB",
+  "textNo": null,
+  "img": null,
+  "stem": "_______________________",
+  "passage": "Five Steps to Suggesting a Change at Work That’ll Actually Get Taken Seriously\n\nEveryone wants to be that person—the one who looks at the same information as everyone else, but who sees a fresh, innovative solution. However, it takes more than simply having a good idea. How you share it is as important as the suggestion itself.\n\nWhy? Because writing a new script—literally or figuratively—means that other team members will have to adapt to something new. Not to mention, if the process you’re scrapping is one someone else suggested, there’s the possibility of hurt feelings.\n\nTo gain buy-in on an innovative, new idea, follow these steps:\n\n41. _______________________\n\nGreat ideas don’t stand alone. In other words, you can’t mention your suggestion once and expect it to be adopted. To see a change, you’ll need to champion your plan and sell its merits. In addition, you need to be willing to stand up to scrutiny and criticism and be prepared to explain your innovation in different ways for various audiences.\n\n42. _______________________\n\nSometimes it makes sense to go to your boss first. But other times, it’s useful to build a coalition among your co-workers or other stakeholders. When it works, it works great—because you’re ready for your stubborn supervisor’s pushback with answers like, “Actually, I connected with a few people in our department to discuss how much time these kinds of websites would take, and they suggested they have the bandwidth.”\n\n43. _______________________\n\nOne of the biggest barriers to gaining buy-in occurs when the owner of an idea is viewed as argumentative, defensive, or close-minded. Because let’s be honest: no one likes a know-it-all. So, if people disagree with you, don’t be indignant. Instead, listen to their concerns fully, try to understand their perspective, and include their concerns (and possible remedies) in future discussions.\n\nSo, instead of saying, “Martha, our current slogan is confusing and should be updated,” you could try, “Martha raises a great point that our current slogan has a long history for our stakeholders, but I wonder if we might be able to brainstorm a tagline on that—and be clearer for new customers.”\n\n44. _______________________\n\nNew ideas are the grandchildren of old ones. In other words, don’t throw old solutions under the bus to make your improvement stand out. Remember that in light of whatever the problem the old system solved—or, maybe, has failed to solve in recent memory—it was a great idea at the time. Appreciating the older contributions as you suggest future innovations helps bolster the credibility of your idea.\n\n45. _______________________\n\nWhen pitching a new idea, it’s important to use the language of abundance instead of deficit. Instead of saying what is wrong, broken, or suboptimal, talk about what is right, fixable or ideal. For example, try, “I can see lots of applications for this new approach” rather than, “This innovation is the only way.” Be optimistic but realistic, and you will stand out.",
+  "options": {
+   "A": "Stay positive",
+   "B": "Respect the past",
+   "C": "Use channels",
+   "D": "Give it time",
+   "E": "Invite resistance",
+   "F": "Be a salesman",
+   "G": "Be humble"
+  },
+  "answer": "A",
+  "tag": "新题型-小标题",
+  "subject": "en",
+  "year": 2025
  }
 ]
