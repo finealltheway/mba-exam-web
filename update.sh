@@ -156,11 +156,22 @@ if [ -d "$DEV_DIR" ]; then
   else
     echo "    · index.html 无变化"
   fi
-  # 题库源文件
-  if [ -f "$DEV_DIR/data/question_bank.json" ] && ! diff -q "$DEV_DIR/data/question_bank.json" "$REPO_DIR/data/question_bank.json" >/dev/null 2>&1; then
-    cp "$DEV_DIR/data/question_bank.json" "$REPO_DIR/data/question_bank.json"
-    echo "    ✓ question_bank.json 已更新"
-  fi
+  # data/ 目录下的运行时数据文件
+# dictionary.js 是「双击英文单词弹中文释义」功能的数据源，由
+# build_dictionary.py 生成。app.js 里用
+  #   const DICT = (typeof WORD_DICT_DATA !== 'undefined') ? WORD_DICT_DATA : null;
+  # 读取它，文件缺失时 onerror 静默失败 -> DICT 为 null -> 双击毫无反应，
+  # 但页面上看不出任何异常。**新增这类数据文件时务必加进这个清单。**
+  for f in question_bank.json dictionary.js; do
+    if [ -f "$DEV_DIR/data/$f" ]; then
+      if [ ! -f "$REPO_DIR/data/$f" ] || ! diff -q "$DEV_DIR/data/$f" "$REPO_DIR/data/$f" >/dev/null 2>&1; then
+        cp "$DEV_DIR/data/$f" "$REPO_DIR/data/$f"
+        echo "✓ data/$f 已更新"
+      fi
+    else
+      echo "  · 开发目录没有 data/$f（跳过）"
+    fi
+  done
 
   # 行尾归一化：开发目录在 Windows 上编辑，文件是 CRLF；
   # 发布目录必须存 LF，否则 .gitattributes 生效后 git 会认为整个文件都改了。
@@ -170,7 +181,8 @@ if [ -d "$DEV_DIR" ]; then
 import os, sys
 root = sys.argv[1]
 files = ["index.html", "app.js", "engine.js", "assets.js",
-         "data/question_bank.json", "robots.txt", "README.md"]
+         "data/question_bank.json", "data/dictionary.js",
+         "robots.txt", "README.md"]
 n = 0
 for rel in files:
     p = os.path.join(root, rel)
