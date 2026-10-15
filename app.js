@@ -977,9 +977,10 @@ boot();
 
 /* ---------- 双击查词 ---------- */
 /* 双击英文单词弹出中文释义。词典来自 data/dictionary.js（离线内嵌，
-   由 build_dictionary.py 生成，只收录题库涉及词汇及其原型）。
-   变形还原：直接命中失败后依次尝试复数/时态/比较级/-ly 派生、
-   双写辅音还原与常见不规则变化，规则与 build_dictionary.py 一致。 */
+   由 build_dictionary.py 生成，全量收录 11 本词表 + 有道补抓）。
+   查词链：直接命中 → 变形还原（复数/时态/比较级/-ly 派生/双写辅音/
+   不规则变化/缩略式）→ 所有格剥离（city's → city）→
+   连字符复合词拆部件（animal-friendly → animal + friendly）。 */
 (function () {
   const DICT = (typeof WORD_DICT_DATA !== 'undefined') ? WORD_DICT_DATA : null;
   if (!DICT) return;
@@ -1018,9 +1019,22 @@ boot();
     'wept':'weep','wound':'wind','upset':'upset',
     'men':'man','women':'woman','children':'child','feet':'foot',
     'teeth':'tooth','mice':'mouse','people':'person','geese':'goose',
+    'gentlemen':'gentleman',
     'better':'good','best':'good','worse':'bad','worst':'bad',
     'more':'much','most':'much','less':'little','least':'little',
     'further':'far','furthest':'far','elder':'old','eldest':'old',
+    // 常见缩略式 -> 动词原型（词表不收屈折形式，须落到原型才能查到）
+    "didn't":'do',"doesn't":'do',"don't":'do',"can't":'can',
+    "couldn't":'could',"won't":'will',"wouldn't":'would',
+    "shouldn't":'should',"wasn't":'be',"weren't":'be',
+    "isn't":'be',"aren't":'be',"hasn't":'have',"haven't":'have',"hadn't":'have',
+    // 代词缩略式 -> 代词原型（they're -> they；'s 类由所有格剥离处理）
+    "that'll":'that',"there'll":'there',"they'll":'they',"we'll":'we',
+    "you'll":'you',"he'll":'he',"she'll":'she',
+    "they're":'they',"we're":'we',"you're":'you',
+    "we've":'we',"you've":'you',"they've":'they',
+    "we'd":'we',"you'd":'you',"they'd":'they',"he'd":'he',"she'd":'she',
+    "i'm":'am',
   };
 
   function lemmaCandidates(w) {
@@ -1044,11 +1058,40 @@ boot();
   }
 
   // 词条：DICT[key] = [音标, "词性. 释义|词性. 释义"]
-  function lookup(raw) {
-    const w = String(raw).toLowerCase().replace(/[^a-z''-]/g, '');
-    if (!w || w.length < 2) return null;
+  function lookupExact(w) {
     for (const c of lemmaCandidates(w)) {
-      if (DICT[c]) return { head: c, from: (c === w ? '' : w), phone: DICT[c][0], trans: DICT[c][1] };
+      if (DICT[c]) return { head: c, phone: DICT[c][0], trans: DICT[c][1] };
+    }
+    return null;
+  }
+
+  function lookup(raw) {
+    // 弯引号归一化为直引号（正文 PDF 抽取混有 ’），再去掉其他非词字符
+    const w = String(raw).toLowerCase().replace(/[\u2018\u2019]/g, "'")
+                    .replace(/[^a-z'-]/g, '');
+    if (!w || (w.length < 2 && w !== 'a' && w !== 'i')) return null;
+    // 1) 直接命中 + 变形还原（复数/时态/比较级/-ly/双写辅音/不规则/缩略式）
+    const direct = lookupExact(w);
+    if (direct) return { head: direct.head, from: (direct.head === w ? '' : w),
+                         phone: direct.phone, trans: direct.trans };
+    // 2) 所有格剥离：city's -> city，experts' -> experts
+    let base = w;
+    if (base.endsWith("'s")) base = base.slice(0, -2);
+    else if (base.endsWith("'")) base = base.slice(0, -1);
+    if (base !== w && base.length >= 2) {
+      const hit = lookupExact(base);
+      if (hit) return { head: hit.head, from: w, phone: hit.phone, trans: hit.trans };
+    }
+    // 3) 连字符复合词拆部件回查：animal-friendly -> animal + friendly
+    if (w.indexOf('-') >= 0) {
+      const parts = w.split('-').filter(p => p.length >= 2);
+      if (parts.length >= 2) {
+        const hits = parts.map(p => {
+          const e = lookupExact(p);
+          return e ? { p: p, phone: e.phone, trans: e.trans } : { p: p, miss: true };
+        });
+        if (hits.some(h => !h.miss)) return { head: w, parts: hits };
+      }
     }
     return { head: w, from: '', phone: '', trans: '', miss: true };
   }
@@ -1069,6 +1112,15 @@ boot();
     const p = ensurePop();
     if (entry.miss) {
       p.innerHTML = '<div class="wp-miss">「' + entry.head + '」未收录</div>';
+    } else if (entry.parts) {
+      // 连字符复合词：逐部件展示
+      let html = '<div class="wp-word">' + entry.head + '</div><div class="wp-trans">';
+      for (const h of entry.parts) {
+        html += h.miss
+          ? '<div style="color:var(--tx3)">' + h.p + ' —— 未收录</div>'
+          : '<div><b>' + h.p + '</b> ' + h.trans.split('|').join('；') + '</div>';
+      }
+      p.innerHTML = html + '</div>';
     } else {
       const ph = entry.phone
         ? '<div class="wp-phone">/' + entry.phone + '/</div>' : '';
@@ -1102,7 +1154,7 @@ boot();
     }
     if (!node || node.nodeType !== 3) return null;
     const text = node.textContent;
-    const isW = ch => /[A-Za-z''-]/.test(ch);
+    const isW = ch => /[A-Za-z'’-]/.test(ch);
     let s = off, e = off;
     while (s > 0 && isW(text[s - 1])) s--;
     while (e < text.length && isW(text[e])) e++;
