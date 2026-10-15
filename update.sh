@@ -137,6 +137,71 @@ echo "[✓] token 已读取（${#TOKEN} 字符）"
 #    发布目录 = mba-exam-web，只有 4 个必需文件，是部署用的副本
 echo ""
 echo "[同步] 从开发目录同步网页文件..."
+
+# ---- 防误改检测（必须在覆盖之前跑）----
+# 历史上出过两次事故：用户在**发布目录**里改了题库/代码，
+# 而发布目录是本脚本的输出目标 —— 跑一次就被开发目录的旧版覆盖，修改全丢。
+# 这里主动比对：发布目录比开发目录新、且内容确实不同 -> 停下来报警，
+# 让人先把改动回写到开发目录，而不是默默覆盖。
+echo ""
+echo "[检查] 发布目录是否被误改..."
+CONFLICT=0
+if [ -f "$PY" ]; then
+  CHECK=$("$PY" - "$DEV_DIR" "$REPO_DIR" <<'PYEOF' 2>/dev/null
+import os, sys, hashlib
+dev, pub = sys.argv[1], sys.argv[2]
+
+def h(p):
+    # 必须归一化行尾再比：开发目录在 Windows 上编辑（CRLF），
+    # 发布目录被脚本统一成 LF，不归一化会把纯行尾差异当成内容不同。
+    with open(p, "rb") as f:
+        d = f.read().replace(b"\r\n", b"\n")
+    return hashlib.sha1(d).hexdigest()
+
+warn = []
+# 发布目录 index.html 含内联题库，内容天然与开发版不同，跳过
+targets = ["app.js", "engine.js", "assets.js",
+           "data/question_bank.json", "data/dictionary.js"]
+for rel in targets:
+    d, p = os.path.join(dev, rel), os.path.join(pub, rel)
+    if not (os.path.isfile(d) and os.path.isfile(p)):
+        continue
+    if h(d) == h(p):
+        continue
+    # 内容确实不同：若发布目录更新，说明是有人在这里改的
+    if os.path.getmtime(p) > os.path.getmtime(d) + 2:
+        warn.append(rel)
+
+for w in warn:
+    print(f"    ! {w}")
+if not warn:
+    print("    ✓ 未发现误改")
+PYEOF
+)
+  echo "$CHECK"
+  # CHECK 里带 "!" 行的数量
+  WARN_COUNT=$(echo "$CHECK" | grep -c "^\s*!" || true)
+  if [ "$WARN_COUNT" -gt 0 ]; then
+    CONFLICT=1
+  fi
+fi
+
+if [ "$CONFLICT" -eq 1 ]; then
+  echo ""
+  echo "[X] 检测到你改了**发布目录**（mba-exam-web）里的文件："
+  echo "$CHECK" | grep "^\s*!"
+  echo ""
+  echo "    发布目录是部署副本，跑本脚本会被开发目录覆盖，改动会丢失。"
+  echo "    请先把改动搬到开发目录再更新："
+  echo "      1) 复制上面列出的文件到 模拟考试系统\\对应位置"
+  echo "      2) 或告诉我，我帮你合并"
+  echo ""
+  echo "    确认要放弃发布目录的改动、直接用开发目录覆盖，就按Ctrl+C 退出，"
+  echo "    然后重新运行本脚本。"
+  exit 1
+fi
+
+echo ""
 if [ -d "$DEV_DIR" ]; then
   for f in app.js engine.js assets.js; do
     if [ -f "$DEV_DIR/$f" ]; then
@@ -157,8 +222,8 @@ if [ -d "$DEV_DIR" ]; then
     echo "    · index.html 无变化"
   fi
   # data/ 目录下的运行时数据文件
-# dictionary.js 是「双击英文单词弹中文释义」功能的数据源，由
-# build_dictionary.py 生成。app.js 里用
+  # dictionary.js 是「双击英文单词弹中文释义」功能的数据源，由
+  # build_dictionary.py 生成。app.js 里用
   #   const DICT = (typeof WORD_DICT_DATA !== 'undefined') ? WORD_DICT_DATA : null;
   # 读取它，文件缺失时 onerror 静默失败 -> DICT 为 null -> 双击毫无反应，
   # 但页面上看不出任何异常。**新增这类数据文件时务必加进这个清单。**
@@ -166,7 +231,7 @@ if [ -d "$DEV_DIR" ]; then
     if [ -f "$DEV_DIR/data/$f" ]; then
       if [ ! -f "$REPO_DIR/data/$f" ] || ! diff -q "$DEV_DIR/data/$f" "$REPO_DIR/data/$f" >/dev/null 2>&1; then
         cp "$DEV_DIR/data/$f" "$REPO_DIR/data/$f"
-        echo "✓ data/$f 已更新"
+        echo "    ✓ data/$f 已更新"
       fi
     else
       echo "  · 开发目录没有 data/$f（跳过）"
