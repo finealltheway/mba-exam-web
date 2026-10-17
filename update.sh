@@ -15,7 +15,6 @@ MSG="${1:-更新内容}"
 
 # 开发目录（含全部测试工具，是真正改代码的地方）
 DEV_DIR="$(cd "$REPO_DIR/.." && pwd)/模拟考试系统"
-NEED_REBUILD=0
 
 # Python 解释器（构建 + 行尾归一化都要用）
 PY="/c/Users/77158/.workbuddy/binaries/python/versions/3.13.12/python.exe"
@@ -159,9 +158,10 @@ def h(p):
     return hashlib.sha1(d).hexdigest()
 
 warn = []
-# 发布目录 index.html 含内联题库，内容天然与开发版不同，跳过
-targets = ["app.js", "engine.js", "assets.js",
-           "data/question_bank.json", "data/dictionary.js"]
+# 发布目录 index.html 的脚本标签由 build_secure.mjs 改写，内容天然与开发版不同，跳过。
+# 明文数据文件（assets.js / data/*.json / data/dictionary.js）已不再进入发布树，
+# 密文每次构建都重新生成，无可比性。
+targets = ["app.js", "engine.js", "guard.js"]
 for rel in targets:
     d, p = os.path.join(dev, rel), os.path.join(pub, rel)
     if not (os.path.isfile(d) and os.path.isfile(p)):
@@ -203,7 +203,10 @@ fi
 
 echo ""
 if [ -d "$DEV_DIR" ]; then
-  for f in app.js engine.js assets.js; do
+  # app.js / engine.js 是业务代码；index.html 由 build_secure.mjs 改写为密文加载。
+  # secure.js 由 build_secure.mjs 生成（内含每次构建随机的混淆密钥），
+  # guard.js 也由 build_secure.mjs 随构建同步 —— 两者都绝不从开发目录复制。
+  for f in app.js engine.js; do
     if [ -f "$DEV_DIR/$f" ]; then
       if ! diff -q "$DEV_DIR/$f" "$REPO_DIR/$f" >/dev/null 2>&1; then
         cp "$DEV_DIR/$f" "$REPO_DIR/$f"
@@ -213,28 +216,15 @@ if [ -d "$DEV_DIR" ]; then
       fi
     fi
   done
-  # index.html 单独处理：开发版没有内联题库，覆盖后必须重新内联
-  if [ -f "$DEV_DIR/index.html" ] && ! diff -q "$DEV_DIR/index.html" "$REPO_DIR/index.html" >/dev/null 2>&1; then
-    cp "$DEV_DIR/index.html" "$REPO_DIR/index.html"
-    NEED_REBUILD=1
-    echo "    ✓ index.html 已更新（将重新内联题库）"
-  else
-    echo "    · index.html 无变化"
-  fi
-  # data/ 目录下的运行时数据文件
-  # dictionary.js 是「双击英文单词弹中文释义」功能的数据源，由
-  # build_dictionary.py 生成。app.js 里用
-  #   const DICT = (typeof WORD_DICT_DATA !== 'undefined') ? WORD_DICT_DATA : null;
-  # 读取它，文件缺失时 onerror 静默失败 -> DICT 为 null -> 双击毫无反应，
-  # 但页面上看不出任何异常。**新增这类数据文件时务必加进这个清单。**
-  for f in question_bank.json dictionary.js; do
-    if [ -f "$DEV_DIR/data/$f" ]; then
-      if [ ! -f "$REPO_DIR/data/$f" ] || ! diff -q "$DEV_DIR/data/$f" "$REPO_DIR/data/$f" >/dev/null 2>&1; then
-        cp "$DEV_DIR/data/$f" "$REPO_DIR/data/$f"
-        echo "    ✓ data/$f 已更新"
-      fi
-    else
-      echo "  · 开发目录没有 data/$f（跳过）"
+  # index.html 不在这里同步：build_secure.mjs 每次都以**开发目录**的
+  # index.html 为源重新生成发布版（改脚本标签），不存在漏同步的可能。
+  # 发布树不再存放任何明文数据（题库/词典/图片一律以 AES-256-GCM 密文
+  # 由 build_secure.mjs 生成后写入 data/payload.enc.js）。这里只做清理：
+  # 把旧构建留下的明文文件删掉，防止它们被 git add -A 重新推上线。
+  for rel in assets.js data/question_bank.json data/dictionary.js data/bank.js build_for_pages.py; do
+    if [ -f "$REPO_DIR/$rel" ]; then
+      rm -f "$REPO_DIR/$rel"
+      echo "    ✓ 清理明文遗留 $rel"
     fi
   done
 
@@ -245,9 +235,8 @@ if [ -d "$DEV_DIR" ]; then
     "$PY" - "$REPO_DIR" <<'PYEOF' 2>/dev/null
 import os, sys
 root = sys.argv[1]
-files = ["index.html", "app.js", "engine.js", "assets.js",
-         "data/question_bank.json", "data/dictionary.js",
-         "robots.txt", "README.md"]
+files = ["index.html", "app.js", "engine.js", "guard.js", "secure.js",
+         "data/payload.enc.js", "robots.txt", "README.md"]
 n = 0
 for rel in files:
     p = os.path.join(root, rel)
@@ -279,18 +268,17 @@ if [ "$PDF_FOUND" -gt 0 ]; then
 fi
 echo "[✓] 无 PDF 文件"
 
-# 4. 重新内联题库（GitHub Pages 无法 fetch 本地 JSON）
-#    若 index.html 刚从开发目录覆盖过来，必须强制重建（--force）
+# 4. 构建密文（AES-256-GCM）
+#    题库/词典/图片加密后写入 data/payload.enc.js，随机密钥注入 secure.js，
+#    index.html 脚本标签改为密文加载。明文数据一律不进入发布树。
 echo ""
-echo "[构建] 内联题库到 index.html..."
-if [ -f "$PY" ]; then
-  FORCE_FLAG=""
-  [ "$NEED_REBUILD" = "1" ] && FORCE_FLAG="--force"
-  "$PY" build_for_pages.py $FORCE_FLAG 2>&1 | sed 's/^/    /' || {
-    echo "    [跳过] 构建脚本报错"
-  }
+echo "[构建] 加密数据（AES-256-GCM）..."
+if "$NODE" "$DEV_DIR/build_secure.mjs" "$REPO_DIR" 2>&1 | sed 's/^/    /'; then
+  echo "    ✓ 密文构建完成"
 else
-  echo "    [跳过] 未找到 Python"
+  echo ""
+  echo "    [✗] 密文构建失败，已终止（避免把明文推上线）"
+  exit 1
 fi
 
 # 5. 提交

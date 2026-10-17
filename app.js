@@ -39,16 +39,27 @@ const State = {
 
 /* ---------- 启动 ---------- */
 async function boot() {
-  const inline = typeof BANK_DATA !== 'undefined' && BANK_DATA;
+  const isSecureBuild = typeof window.unpackSecure === 'function';
   try {
+    // 发布版（GitHub Pages / 离线单文件）：先把 payload.enc.js 的密文解密，
+    // 写回 BANK_DATA / ASSETS / WORD_DICT_DATA 全局变量，下游逻辑零改动。
+    // 开发态没有密文文件，unpackSecure 直接跳过，走原明文 fetch 路径。
+    if (isSecureBuild) await window.unpackSecure();
     State.bank = await getBank();
   } catch (e) {
     $('#subj-grid').innerHTML = `<div class="empty-state">题库加载失败：${esc(e.message)}<br>` +
-      `请确认 data/question_bank.json 存在，或改用内置题库的 index_standalone.html</div>`;
+      (isSecureBuild
+        ? '数据解密失败，请刷新重试；持续失败请尝试清理浏览器缓存后重开。'
+        : '请确认 data/question_bank.json 存在，或改用内置题库的 index_standalone.html') +
+      '</div>';
     return;
   }
+  const inline = typeof BANK_DATA !== 'undefined' && BANK_DATA;
   window.__DATASRC__ = { inline: !!inline, count: State.bank.length };
   window.__State = State;
+  // 通知页脚「数据源体检」：解密是异步的，load 事件时 boot 可能还没跑完
+  window.__BOOT_DONE__ = true;
+  window.dispatchEvent(new Event('bootdone'));
   renderHome();
   renderHistory();
   detectResume();          // 检测未完成考试，显示「继续答题」入口

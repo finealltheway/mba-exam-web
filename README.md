@@ -24,14 +24,23 @@ python -m http.server 8899
 
 | 文件 | 说明 |
 | --- | --- |
-| `index.html` | 页面骨架 + 内联题库（`window.BANK_DATA`） |
-| `app.js` | 界面与交互 |
+| `index.html` | 页面骨架 + 密文加载脚本标签 |
+| `secure.js` | 解密运行时（AES-256-GCM，密钥每次构建随机、混淆内嵌） |
+| `guard.js` | 前端防拷贝加固（右键/保存/拖图/devtools 警示） |
 | `engine.js` | 组卷、判分、诊断引擎 |
-| `assets.js` | 图片资源（base64 内联，由 `_embed_assets.py` 生成） |
-| `data/question_bank.json` | 题库源文件 |
+| `app.js` | 界面与交互 |
+| `data/payload.enc.js` | 题库 + 词典 + 图片的 AES-256-GCM 密文（约 8 MB） |
 
-题库以数组形式内联进 HTML（750 KB），因为静态托管无法 `fetch()` 外部 JSON。
-若修改了 `data/question_bank.json`，需重新执行 `python build_for_pages.py`。
+题库、词典（8516 条）、156 张题目图片均以 **AES-256-GCM 密文**形式发布，
+页面加载时由 `secure.js` 解密写回 `BANK_DATA` / `WORD_DICT_DATA` / `ASSETS`
+全局变量，下游引擎与交互层零改动。明文数据只存在于开发目录，绝不入库。
+
+这意味着：右键「另存为」、查看源代码、`curl` 直链、`git clone` 拿到的都只是
+密文——把「零成本扒走」提高到了「需要逆向 JS」。能力边界与完整方案见开发目录
+`安全架构分析与加固方案.md`。
+
+若修改了开发目录的题库，在开发目录重新执行构建并跑 `bash update.sh "说明"`
+即可，密文与密钥会自动重新生成。
 
 ## 内容来源与版权
 
