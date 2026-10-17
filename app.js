@@ -1153,8 +1153,15 @@ boot();
    不规则变化/缩略式）→ 所有格剥离（city's → city）→
    连字符复合词拆部件（animal-friendly → animal + friendly）。 */
 (function () {
-  const DICT = (typeof WORD_DICT_DATA !== 'undefined') ? WORD_DICT_DATA : null;
-  if (!DICT) return;
+  /* 词典在发布版/单文件版里由 secure.js 于 boot() 中**异步解密**写回
+   * （window.WORD_DICT_DATA），本 IIFE 执行时它可能尚不存在。
+   * 因此绝不能在这里同步捕获 DICT——必须每次查词时现取，
+   * 否则密文加载模式下 DICT 会被抓成 null、双击查词静默失效。
+   * （2026-10-17 回归教训：开发态 data/dictionary.js 是同步 script
+   *  标签，加载即存在，正好掩盖这个时序差——测试全过、线上全灭。） */
+  function getDict() {
+    return (typeof WORD_DICT_DATA !== 'undefined') ? WORD_DICT_DATA : null;
+  }
 
   const IRREGULAR = {
     'was':'be','were':'be','been':'be','being':'be','am':'be','is':'be','are':'be',
@@ -1230,6 +1237,8 @@ boot();
 
   // 词条：DICT[key] = [音标, "词性. 释义|词性. 释义"]
   function lookupExact(w) {
+    const DICT = getDict();
+    if (!DICT) return null;
     for (const c of lemmaCandidates(w)) {
       if (DICT[c]) return { head: c, phone: DICT[c][0], trans: DICT[c][1] };
     }
@@ -1237,6 +1246,8 @@ boot();
   }
 
   function lookup(raw) {
+    const DICT = getDict();
+    if (!DICT) return null; // 词典尚未解密就绪
     // 弯引号归一化为直引号（正文 PDF 抽取混有 ’），再去掉其他非词字符
     const w = String(raw).toLowerCase().replace(/[\u2018\u2019]/g, "'")
                     .replace(/[^a-z'-]/g, '');
@@ -1336,7 +1347,9 @@ boot();
     if (e.target.closest('input,textarea,button,nav,header,.modal')) return;
     const raw = wordAtPoint(e.clientX, e.clientY);
     if (!raw) return hidePop();
-    showPop(lookup(raw), e.clientX, e.clientY);
+    const entry = lookup(raw);
+    if (!entry) return hidePop();
+    showPop(entry, e.clientX, e.clientY);
   });
   // 单击空白处 / 滚动 / 缩放 / Esc 收起弹层
   document.addEventListener('click', e => { if (pop && !pop.contains(e.target)) hidePop(); });
