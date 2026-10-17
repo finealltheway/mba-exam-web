@@ -439,6 +439,7 @@ function renderExam() {
     list.appendChild(renderQ(q, i, p));
   });
   paintTimer();
+  syncBlankStates();   // 完形：文章空位按已答状态显示（含断点续答恢复的进度）
 }
 
 function passageLabel(q) {
@@ -480,7 +481,7 @@ function renderArticle(q) {
   const head = el('div', 'art-head');
   head.innerHTML = `<span class="pico"></span>
     <span class="art-title">${esc(q._groupLabel || '文章原文')}</span>
-    <span class="art-meta">${q._gsize || 5} 题共用 · ${q._article.length} 字符${isCloze ? ' · 空位已编号' : ''}</span>
+    <span class="art-meta">${q._gsize || 5} 题共用 · ${q._article.length} 字符${isCloze ? ' · 空位已编号，点编号跳题' : ''}</span>
     <button class="art-toggle">收起</button>`;
   const body = el('div', 'art-body');
   body.innerHTML = passageHTML(q._article);
@@ -490,6 +491,23 @@ function renderArticle(q) {
     body.style.display = hid ? '' : 'none';
     btn.textContent = hid ? '收起' : '展开';
   };
+  // 完形填空：点击正文里的空位编号，直接跳到对应题目。
+  // 与题头的「定位空位」按钮正好反向——那个是题目→文章，这个是文章→题目，
+  // 两个方向都能一键到，不用在文章和选项之间来回翻。
+  if (isCloze) {
+    $$('.cloze-blank', body).forEach(sp => {
+      const n = Number(sp.dataset.n);
+      sp.title = `点击跳到第 ${n} 题`;
+      sp.addEventListener('click', () => {
+        // 正在划词选中（查词 / 复制）时不跳，避免误触
+        const sel = window.getSelection && String(window.getSelection()).trim();
+        if (sel) return;
+        jumpToBlank(n);
+      });
+      // 空位里只有编号和选项字母，双击查词没有意义，还会和跳转打架
+      sp.addEventListener('dblclick', ev => ev.stopPropagation());
+    });
+  }
   wrap.appendChild(head);
   wrap.appendChild(body);
   return wrap;
@@ -508,11 +526,57 @@ function highlightBlank(n, scroll) {
   }
 }
 
+/**
+ * 完形反向定位：点击文章里的空位编号 → 跳到对应题卡。
+ * 题头的「定位空位」是题目→文章，这里是文章→题目，两个方向都通。
+ * 走 jumpTo() 统一跳转，计时、题号导航高亮、自动落盘都带上。
+ */
+function jumpToBlank(n) {
+  highlightBlank(n, false);   // 文章里的空位保持高亮，看得出是从哪跳过来的
+  const card = document.querySelector(`#qlist .qcard[data-blank="${n}"]`);
+  if (!card) return;
+  const qi = Number(card.dataset.qi);
+  if (Number.isInteger(qi) && qi >= 0) {
+    jumpTo(qi);
+  } else if (typeof card.scrollIntoView === 'function') {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // 落点闪烁一下：页面长，光滚动不一定看得出跳到了哪
+  card.classList.remove('flash');
+  void card.offsetWidth;      // 强制重排，让重复点击时动画能重放
+  card.classList.add('flash');
+  setTimeout(() => card.classList.remove('flash'), 1400);
+}
+
+/**
+ * 同步文章空位的作答状态：已答的空位在编号后带上已选字母，
+ * 一眼看出哪些空已做、选了什么，不用逐题翻。
+ * 断点续答恢复的进度也靠它渲染出来。
+ */
+function syncBlankStates() {
+  const blanks = $$('#qlist .cloze-blank');
+  if (!blanks.length || !State.paper) return;
+  const choiceOf = new Map();
+  State.paper.questions.forEach(q => {
+    if (q.part !== 'en_cloze') return;
+    const a = State.answers[q._qid];
+    choiceOf.set(q._seq ?? q.no, a && a.choice ? String(a.choice) : '');
+  });
+  blanks.forEach(sp => {
+    const letter = choiceOf.get(Number(sp.dataset.n)) || '';
+    sp.classList.toggle('done', !!letter);
+    // 编号保留在前（定位按钮与测试都认 data-n），字母跟在后面
+    sp.innerHTML = esc(sp.dataset.n) + (letter ? `<i>${esc(letter)}</i>` : '');
+  });
+}
+
 function renderQ(q, i, part) {
   const a = State.answers[q._qid];
   const card = el('div', 'qcard');
   card.dataset.qi = i;
   card.id = `q-${i}`;
+  // 完形题：挂上空位编号，文章里点击对应空位时按它找回这张题卡
+  if (q.part === 'en_cloze') card.dataset.blank = String(q._seq ?? q.no);
 
   const head = el('div', 'qhead');
   // 完形填空：题号同时标出对应第几空——文章里用同一编号标注，便于定位
@@ -537,7 +601,10 @@ function renderQ(q, i, part) {
       if (!t) return;
       const b = t.querySelector('.art-body');
       if (b) { b.style.display = ''; t.querySelector('.art-toggle').textContent = '收起'; }
-      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // 同 highlightBlank：旧版浏览器 / 测试环境可能没有 scrollIntoView
+      if (typeof t.scrollIntoView === 'function') {
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     };
     head.insertBefore(back, head.querySelector('.qtime'));
   }
@@ -606,6 +673,7 @@ function renderQ(q, i, part) {
         o.classList.add('sel');
         const nb = document.querySelectorAll('.qn')[i];
         if (nb) nb.classList.add('done');
+        syncBlankStates();   // 完形：文章空位上实时显示刚选的字母
         paintTimer();
         saveProgress(false);
       };
@@ -627,7 +695,10 @@ function jumpTo(i) {
   State.lastQEnter = Date.now();
   $$('.qn').forEach((b, k) => b.classList.toggle('cur', k === i));
   const t = document.getElementById(`q-${i}`);
-  if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // 旧版浏览器 / 测试环境可能没有 scrollIntoView（JSDOM 即如此）
+  if (t && typeof t.scrollIntoView === 'function') {
+    t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   saveProgress(false);
 }
 

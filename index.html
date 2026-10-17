@@ -143,6 +143,12 @@ nav button.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(31,111
 .timer.warn{background:var(--amber-bg);color:var(--amber)}
 .timer.over{background:var(--red-bg);color:var(--red);animation:pulse 1.2s infinite}
 @keyframes pulse{50%{opacity:.55}}
+/* 点空位编号跳题后的落点闪烁：外环由实变虚，正常阴影全程保留 */
+@keyframes qflash{
+  from{box-shadow:0 0 0 3px var(--blue),var(--sh)}
+  to{box-shadow:0 0 0 0 var(--blue),var(--sh)}
+}
+.qcard.flash{animation:qflash 1.3s ease-out}
 .prog{font-size:13px;color:var(--tx2)}
 .prog b{color:var(--tx);font-weight:600}
 .exam-actions{margin-left:auto;display:flex;gap:8px}
@@ -162,6 +168,10 @@ nav button.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(31,111
 .qn.writing{background:var(--hover)}
 
 .qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;margin-bottom:16px;box-shadow:var(--sh)}
+/* 滚动落点避开顶部两条固定栏（header + exam-bar）：题号导航跳题、
+   定位空位、点空位编号跳题都走 scrollIntoView，没有这段落点会被
+   钉在固定栏下面。窄屏 --hdr 被 JS 置 0，自动只剩答题栏的高度。 */
+.qcard,.article-block{scroll-margin-top:calc(var(--hdr) + 60px)}
 .qhead{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .qno{font-size:15px;font-weight:600}
 .qtag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--blue-bg);color:var(--blue)}
@@ -207,11 +217,17 @@ nav button.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(31,111
   display:inline-block;min-width:20px;padding:0 3px;margin:0 2px;
   text-align:center;color:var(--blue);font-weight:600;
   border-bottom:1.5px solid var(--blue);
+  cursor:pointer;border-radius:3px;
 }
+.cloze-blank:hover{background:var(--hover)}
+/* 已答的空位：编号后带已选字母，绿色底一眼看得出做过、选了什么 */
+.cloze-blank.done{background:var(--green-bg);color:var(--green);border-bottom-color:var(--green)}
+.cloze-blank.done i{font-style:normal;font-weight:700;margin-left:1px;color:var(--tx)}
 .cloze-blank.active{
   background:var(--blue);color:#fff;border-radius:3px;
   border-bottom-color:transparent;
 }
+.cloze-blank.active i{color:#fff}
 .blank-hint{
   font-size:11px;color:var(--blue);background:var(--blue-bg);
   padding:2px 7px;border-radius:5px;font-weight:500;
