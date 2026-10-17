@@ -445,7 +445,17 @@ const Store = {
   save(rec) {
     const list = this.all();
     list.unshift(rec);
-    localStorage.setItem(this.key, JSON.stringify(list.slice(0, 200)));
+    // 记录里带题目原文与解析，体积较大；localStorage 写满时逐批丢弃最旧记录，
+    // 保证 newest 记录一定能存下（而不是整个抛异常导致交卷后无成绩可看）。
+    let keep = list.slice(0, 200);
+    while (keep.length) {
+      try {
+        localStorage.setItem(this.key, JSON.stringify(keep));
+        return;
+      } catch {
+        keep = keep.slice(0, Math.max(0, keep.length - 10));
+      }
+    }
   },
   remove(id) {
     localStorage.setItem(this.key, JSON.stringify(this.all().filter(r => r.id !== id)));

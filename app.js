@@ -735,7 +735,7 @@ function buildResult() {
     questions: questions.map(q => ({
       _qid: q._qid, no: q.no, part: q.part, year: q.year, tag: q.tag,
       stem: q.stem, options: q.options, answer: q.answer, img: q.img,
-      passage: q.passage, textNo: q.textNo,
+      passage: q.passage, textNo: q.textNo, explanation: q.explanation,
       _seq: q._seq, _group: q._group, _first: q._first, _groupLabel: q._groupLabel,
       part_name: q.part_name,
     })),
@@ -810,13 +810,14 @@ function resultHTML(rec) {
             </div>
           </div>
           <div class="lbl">正确答案：<span class="ok">${esc(q.answer || '—')}</span>　你的答案：<span class="${d2.correct ? 'ok' : 'no'}">${esc(d2.choice || '未答')}</span></div>
-          ${q.explanation ? `<div class="lbl" style="margin-top:8px">解析</div><div>${esc(q.explanation)}</div>` : ''}
+          ${q.explanation ? `<div class="lbl" style="margin-top:8px">解析</div><div style="font-size:13px;line-height:1.75;color:var(--tx2);white-space:pre-wrap;background:var(--hover2);padding:10px;border-radius:6px;margin-top:4px">${esc(q.explanation)}</div>` : ''}
         ` : `
           <div class="lbl">题目</div>
           <div style="font-size:13px;line-height:1.7;white-space:pre-wrap;margin-bottom:10px">${esc(q.stem || '')}</div>
           <div class="lbl">你的作答（${(d2.text || '').length} 字）</div>
           <div style="font-size:13px;line-height:1.7;color:var(--tx2);white-space:pre-wrap;background:var(--hover);padding:10px;border-radius:6px;max-height:200px;overflow:auto">${esc(d2.text || '（未作答）')}</div>
           <div class="lbl" style="margin-top:8px">自评得分 <span class="ok">${d2.gained} / ${d2.full}</span></div>
+          ${q.explanation ? `<div class="lbl" style="margin-top:8px">解析与参考</div><div style="font-size:13px;line-height:1.75;color:var(--tx2);white-space:pre-wrap;background:var(--hover2);padding:10px;border-radius:6px;margin-top:4px">${esc(q.explanation)}</div>` : ''}
         `}
       </div></details>`;
   }).join('');
