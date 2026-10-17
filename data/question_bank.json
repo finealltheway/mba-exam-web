@@ -11284,7 +11284,301 @@
   "score": 15,
   "part_name": "写作·翻译",
   "tag": "en_translation",
-  "explanation": "【参考译文】\n我们往往认为，朋友和家人是我们获得人际联系、快乐与温暖的最大源泉。事实或许确实如此，但研究人员最近也发现，与陌生人交流实际上能提振情绪、增强归属感，这是我们始料未及的。\n在其中一系列研究中，研究人员让芝加哥地区乘坐公共交通工具的通勤者主动与身旁的人攀谈。平均而言，照此执行的参与者比那些被要求安静站坐的人感觉更好。研究人员还指出，我们回避与陌生人的日常寒暄，往往是出于一种错位的焦虑——担心对方并不想搭理我们。然而多数情况下，这种想法是错误的。事实上，许多人非常乐意交谈，甚至会对你的关注感到受宠若惊。\n【采分点】\n1. connection 与 laughter、warmth 并列，指情感上的\"联系、联结\"，不宜译成\"人脉\"。\n2. strike up a conversation 是固定搭配，意为\"攀谈\"，不能按字面直译。\n3. that we didn't expect 是定语从句，修饰 boost，需拆分译出\"这是我们始料未及的\"。\n4. misplaced anxiety 中 misplaced 意为\"错位的、多余的\"，暗含焦虑没有必要。\n5. be flattered to receive your attention 被动转主动，译\"因受到你的关注而受宠若惊\"，语气更自然。"
+  "explanation": "【参考译文】\n我们往往认为，朋友和家人是我们获得人际联系、快乐与温暖的最大源泉。事实或许确实如此，但研究人员最近也发现，与陌生人交流实际上能提振情绪、增强归属感，这是我们始料未及的。\n在其中一系列研究中，研究人员让芝加哥地区乘坐公共交通工具的通勤者主动与身旁的人攀谈。平均而言，照此执行的参与者比那些被要求安静站坐的人感觉更好。研究人员还指出，我们回避与陌生人的日常寒暄，往往是出于一种错位的焦虑——担心对方并不想搭理我们。然而多数情况下，这种想法是错误的。事实上，许多人非常乐意交谈，甚至会对你的关注感到受宠若惊。\n【采分点】\n1. connection 与 laughter、warmth 并列，指情感上的\"联系、联结\"，不宜译成\"人脉\"。\n2. strike up a conversation 是固定搭配，意为\"攀谈\"，不能按字面直译。\n3. that we didn't expect 是定语从句，修饰 boost，需拆分译出\"这是我们始料未及的\"。\n4. misplaced anxiety 中 misplaced 意为\"错位的、多余的\"，暗含焦虑没有必要。\n5. be flattered to receive your attention 被动转主动，译\"因受到你的关注而受宠若惊\"，语气更自然。",
+  "scoring": {
+   "full": 15,
+   "ref": "我们往往认为，朋友和家人是我们获得人际联系、快乐与温暖的最大源泉。事实或许确实如此，但研究人员最近也发现，与陌生人交流实际上能提振情绪、增强归属感，这是我们始料未及的。在其中一系列研究中，研究人员让芝加哥地区乘坐公共交通工具的通勤者主动与身旁的人攀谈。平均而言，照此执行的参与者比那些被要求安静站坐的人感觉更好。研究人员还指出，我们回避与陌生人的日常寒暄，往往是出于一种错位的焦虑——担心对方并不想搭理我们。然而多数情况下，这种想法是错误的。事实上，许多人非常乐意交谈，甚至会对你的关注感到受宠若惊。",
+   "groups": [
+    {
+     "en": "We tend to think that friends and family members are our biggest source of connection, laughter and warmth.",
+     "points": [
+      {
+       "any": [
+        "朋友和家人",
+        "朋友与家人",
+        "家人和朋友",
+        "亲友"
+       ],
+       "note": "朋友和家人"
+      },
+      {
+       "any": [
+        "源泉",
+        "来源",
+        "根源"
+       ],
+       "note": "source（源泉）"
+      },
+      {
+       "any": [
+        "联系",
+        "联结",
+        "连接"
+       ],
+       "note": "connection（情感联系）"
+      },
+      {
+       "any": [
+        "快乐",
+        "欢笑",
+        "愉悦",
+        "笑声",
+        "温暖"
+       ],
+       "note": "laughter/warmth（快乐与温暖）"
+      }
+     ]
+    },
+    {
+     "en": "While that may well be true, researchers have also recently found that interacting with strangers actually brings a boost in mood and feelings of belonging that we didn’t expect.",
+     "points": [
+      {
+       "any": [
+        "研究人员",
+        "研究者",
+        "科研人员"
+       ],
+       "note": "researchers"
+      },
+      {
+       "any": [
+        "陌生人"
+       ],
+       "note": "strangers"
+      },
+      {
+       "any": [
+        "提振",
+        "提升",
+        "改善",
+        "增强",
+        "振奋",
+        "激发"
+       ],
+       "note": "boost（提振）"
+      },
+      {
+       "any": [
+        "归属感",
+        "归属"
+       ],
+       "note": "belonging（归属感）"
+      },
+      {
+       "any": [
+        "始料未及",
+        "意料之外",
+        "出乎意料",
+        "没想到",
+        "未曾想到",
+        "未曾预料",
+        "没有预料",
+        "未预料",
+        "意想不到"
+       ],
+       "note": "didn’t expect（始料未及）"
+      }
+     ]
+    },
+    {
+     "en": "In one series of studies, researchers instructed Chicago-area commuters using public transportation to strike up a conversation with someone near them.",
+     "points": [
+      {
+       "any": [
+        "芝加哥"
+       ],
+       "note": "Chicago"
+      },
+      {
+       "any": [
+        "通勤者",
+        "通勤人员",
+        "上班族",
+        "通勤族"
+       ],
+       "note": "commuters（通勤者）"
+      },
+      {
+       "any": [
+        "公共交通",
+        "公共交通工具",
+        "公交",
+        "公共运输"
+       ],
+       "note": "public transportation"
+      },
+      {
+       "any": [
+        "攀谈",
+        "交谈",
+        "闲聊",
+        "搭讪",
+        "聊天",
+        "说话"
+       ],
+       "note": "strike up a conversation（攀谈）"
+      }
+     ]
+    },
+    {
+     "en": "On average, participants who followed this instruction felt better than those who had been told to stand or sit in silence.",
+     "points": [
+      {
+       "any": [
+        "平均而言",
+        "平均来看",
+        "平均来说",
+        "平均"
+       ],
+       "note": "on average"
+      },
+      {
+       "any": [
+        "参与者",
+        "参加者",
+        "被试",
+        "受试者"
+       ],
+       "note": "participants"
+      },
+      {
+       "any": [
+        "感觉更好",
+        "感到更好",
+        "更好",
+        "感受更好"
+       ],
+       "note": "felt better"
+      },
+      {
+       "any": [
+        "沉默",
+        "安静",
+        "无声",
+        "静默"
+       ],
+       "note": "silence"
+      }
+     ]
+    },
+    {
+     "en": "The researchers also argued that when we shy away from casual interactions with strangers, it is often due to a misplaced anxiety that they might not want to talk to us.",
+     "points": [
+      {
+       "any": [
+        "回避",
+        "避开",
+        "躲避",
+        "逃避",
+        "躲开"
+       ],
+       "note": "shy away from（回避）"
+      },
+      {
+       "any": [
+        "寒暄",
+        "闲聊",
+        "日常交流",
+        "日常互动",
+        "随意交谈",
+        "随口交谈"
+       ],
+       "note": "casual interactions（寒暄）"
+      },
+      {
+       "any": [
+        "错位",
+        "多余",
+        "不必要",
+        "没有必要",
+        "没来由",
+        "莫名"
+       ],
+       "note": "misplaced（错位的）"
+      },
+      {
+       "any": [
+        "焦虑",
+        "不安",
+        "担忧",
+        "紧张",
+        "担心"
+       ],
+       "note": "anxiety"
+      },
+      {
+       "any": [
+        "不想",
+        "不愿意",
+        "不愿",
+        "不乐意",
+        "并无意"
+       ],
+       "note": "might not want（否定：不想）",
+       "neg": true
+      }
+     ]
+    },
+    {
+     "en": "Much of the time, however, this belief is false.",
+     "points": [
+      {
+       "any": [
+        "多数情况下",
+        "大多数时候",
+        "很多时候",
+        "大多数情况",
+        "多数时候",
+        "大多时候"
+       ],
+       "note": "much of the time"
+      },
+      {
+       "any": [
+        "错误",
+        "不正确",
+        "并不正确",
+        "并非如此",
+        "假的",
+        "有误",
+        "不对"
+       ],
+       "note": "false（否定：错误的）",
+       "neg": true
+      }
+     ]
+    },
+    {
+     "en": "As it turns out, many people are actually perfectly willing to talk and may even be flattered to receive your attention.",
+     "points": [
+      {
+       "any": [
+        "乐意",
+        "愿意",
+        "欣然"
+       ],
+       "note": "willing（乐意）"
+      },
+      {
+       "any": [
+        "交谈",
+        "聊天",
+        "攀谈",
+        "说话"
+       ],
+       "note": "talk"
+      },
+      {
+       "any": [
+        "受宠若惊",
+        "荣幸"
+       ],
+       "note": "flattered（受宠若惊）"
+      }
+     ]
+    }
+   ]
+  }
  },
  {
   "subject": "en",
@@ -11326,7 +11620,264 @@
   "score": 15,
   "part_name": "写作·翻译",
   "tag": "en_translation",
-  "explanation": "【参考译文】\n尽管我们全力以赴，画作有时终究难以完全按照最初的构想呈现。光线的变化、绘画材料的局限，以及经验与技法的欠缺，都意味着一开始想要实现的效果，可能无法如预期般跃然纸上。\n尽管这令人沮丧失望，但事实证明它对你其实大有裨益。意外的结果带来两点好处：你很快能学会应对失望，并领悟\"当一扇门关闭时，另一扇门会为你打开\"；你也能迅速学会适应，针对画作呈现的问题想出创造性的解法，于是\"跳出框架思考\"将成为你的第二天性。\n事实上，创造性地解决问题的技能在日常生活中极为有用，有了它，问题出现时你更有可能找到解决方案。\n【采分点】\n1. turn out as planned：turn out 表\"最终结果是\"，整句译作\"最终往往与计划不符\"。\n2. come to life 是固定搭配，本义\"获得生命\"，此处指画面\"生动呈现、跃然纸上\"。\n3. when one door closes, another opens 是英语谚语，加引号译出更清晰。\n4. the problems the painting presents 含省略 that 的定语从句，present 意为\"呈现、带来\"。\n5. with which you're more likely to... 是\"介词+which\"从句，拆译为\"有了它，你更有可能……\"。"
+  "explanation": "【参考译文】\n尽管我们全力以赴，画作有时终究难以完全按照最初的构想呈现。光线的变化、绘画材料的局限，以及经验与技法的欠缺，都意味着一开始想要实现的效果，可能无法如预期般跃然纸上。\n尽管这令人沮丧失望，但事实证明它对你其实大有裨益。意外的结果带来两点好处：你很快能学会应对失望，并领悟\"当一扇门关闭时，另一扇门会为你打开\"；你也能迅速学会适应，针对画作呈现的问题想出创造性的解法，于是\"跳出框架思考\"将成为你的第二天性。\n事实上，创造性地解决问题的技能在日常生活中极为有用，有了它，问题出现时你更有可能找到解决方案。\n【采分点】\n1. turn out as planned：turn out 表\"最终结果是\"，整句译作\"最终往往与计划不符\"。\n2. come to life 是固定搭配，本义\"获得生命\"，此处指画面\"生动呈现、跃然纸上\"。\n3. when one door closes, another opens 是英语谚语，加引号译出更清晰。\n4. the problems the painting presents 含省略 that 的定语从句，present 意为\"呈现、带来\"。\n5. with which you're more likely to... 是\"介词+which\"从句，拆译为\"有了它，你更有可能……\"。",
+  "scoring": {
+   "full": 15,
+   "ref": "尽管我们全力以赴，画作有时终究难以完全按照最初的构想呈现。光线的变化、绘画材料的局限，以及经验与技法的欠缺，都意味着一开始想要实现的效果，可能无法如预期般跃然纸上。尽管这令人沮丧失望，但事实证明它对你其实大有裨益。意外的结果带来两点好处：你很快能学会应对失望，并领悟“当一扇门关闭时，另一扇门会为你打开”；你也能迅速学会适应，针对画作呈现的问题想出创造性的解法，于是“跳出框架思考”将成为你的第二天性。事实上，创造性地解决问题的技能在日常生活中极为有用，有了它，问题出现时你更有可能找到解决方案。",
+   "groups": [
+    {
+     "en": "Although we try our best, sometimes our paintings rarely turn out as originally planned.",
+     "points": [
+      {
+       "any": [
+        "全力以赴",
+        "尽力",
+        "竭尽全力",
+        "努力"
+       ],
+       "note": "try our best"
+      },
+      {
+       "any": [
+        "画作",
+        "绘画",
+        "作品"
+       ],
+       "note": "paintings"
+      },
+      {
+       "any": [
+        "计划",
+        "构想",
+        "规划",
+        "预期",
+        "设想"
+       ],
+       "note": "as planned（按计划）"
+      },
+      {
+       "any": [
+        "难以",
+        "很少",
+        "并非",
+        "不一定",
+        "无法",
+        "未必"
+       ],
+       "note": "rarely（否定：难以/很少）",
+       "neg": true
+      }
+     ]
+    },
+    {
+     "en": "Changes in the light, the limitations of your painting materials and the lack of experience and technique mean that what you start out trying to achieve may not come to life the way that you expected.",
+     "points": [
+      {
+       "any": [
+        "光线",
+        "光照",
+        "光影",
+        "灯光"
+       ],
+       "note": "light（光线）"
+      },
+      {
+       "any": [
+        "局限",
+        "限制",
+        "限定",
+        "制约"
+       ],
+       "note": "limitations（局限）"
+      },
+      {
+       "any": [
+        "材料",
+        "颜料",
+        "画材",
+        "绘画材料"
+       ],
+       "note": "materials"
+      },
+      {
+       "any": [
+        "经验"
+       ],
+       "note": "experience（经验）"
+      },
+      {
+       "any": [
+        "跃然纸上",
+        "生动",
+        "鲜活",
+        "栩栩如生",
+        "获得生命"
+       ],
+       "note": "come to life（跃然纸上）"
+      },
+      {
+       "any": [
+        "预期",
+        "期待",
+        "预料",
+        "期望"
+       ],
+       "note": "expected"
+      }
+     ]
+    },
+    {
+     "en": "Although this can be frustrating and disappointing, it turns out that this can actually be good for you.",
+     "points": [
+      {
+       "any": [
+        "沮丧",
+        "失望",
+        "失落",
+        "懊恼"
+       ],
+       "note": "frustrating/disappointing"
+      },
+      {
+       "any": [
+        "大有裨益",
+        "有好处",
+        "有益",
+        "有帮助",
+        "有利",
+        "是好事"
+       ],
+       "note": "good for you（有好处）"
+      }
+     ]
+    },
+    {
+     "en": "Unexpected results have two benefits: you pretty quickly learn to deal with disappointment and realise that when one door closes, another opens.",
+     "points": [
+      {
+       "any": [
+        "好处",
+        "益处",
+        "收益"
+       ],
+       "note": "benefits"
+      },
+      {
+       "any": [
+        "失望",
+        "失落",
+        "沮丧"
+       ],
+       "note": "disappointment"
+      },
+      {
+       "any": [
+        "一扇门",
+        "另一扇门",
+        "门关上",
+        "门关闭",
+        "关门"
+       ],
+       "note": "谚语 one door closes"
+      },
+      {
+       "any": [
+        "很快",
+        "迅速",
+        "快速"
+       ],
+       "note": "quickly"
+      }
+     ]
+    },
+    {
+     "en": "You also quickly learn to adapt and come up with creative solutions to the problems the painting presents and thinking outside the box will become your second nature.",
+     "points": [
+      {
+       "any": [
+        "适应",
+        "调整",
+        "应变"
+       ],
+       "note": "adapt（适应）"
+      },
+      {
+       "any": [
+        "创造性",
+        "创意",
+        "创造力"
+       ],
+       "note": "creative"
+      },
+      {
+       "any": [
+        "解决方案",
+        "解决办法",
+        "解法"
+       ],
+       "note": "solutions"
+      },
+      {
+       "any": [
+        "跳出框架",
+        "跳出框框",
+        "跳出思维定势",
+        "跳出常规",
+        "跳出固有思维",
+        "框架之外"
+       ],
+       "note": "outside the box"
+      },
+      {
+       "any": [
+        "第二天性",
+        "本能",
+        "天性",
+        "习惯成自然"
+       ],
+       "note": "second nature"
+      }
+     ]
+    },
+    {
+     "en": "In fact, creative problem-solving skills are incredibly useful in daily life, with which you’re more likely to be able to find a solution when a problem arises.",
+     "points": [
+      {
+       "any": [
+        "解决问题",
+        "解难"
+       ],
+       "note": "problem-solving"
+      },
+      {
+       "any": [
+        "日常",
+        "生活"
+       ],
+       "note": "daily life"
+      },
+      {
+       "any": [
+        "解决方案",
+        "解决办法",
+        "解法"
+       ],
+       "note": "solution"
+      },
+      {
+       "any": [
+        "很可能",
+        "更有可能",
+        "可能性",
+        "更容易",
+        "多半"
+       ],
+       "note": "more likely"
+      }
+     ]
+    }
+   ]
+  }
  },
  {
   "subject": "en",
@@ -11368,7 +11919,342 @@
   "score": 15,
   "part_name": "写作·翻译",
   "tag": "en_translation",
-  "explanation": "【参考译文】\n18 世纪晚期，威廉·华兹华斯因其描写自然的诗歌而声名鹊起。他还是浪漫主义运动的创始人之一，这场运动旨在赞美自然世界的奇观。\n诗歌是强大的。它的力量与节奏能够俘获读者，将他们带入另一个世界，让他们以不同的眼光看待事物。借助精心挑选的词语和短语，诗歌可以戏剧、可以有趣、可以美丽、可以动人、可以鼓舞人心。\n没有人确切知道诗歌起源于何时，但它已存在数千年，甚至在人们学会书写之前。它是讲述故事、传承历史的方式。诗歌与歌曲密切相关，即便是书面创作，通常也是为了高声吟诵而作。诗歌在被朗诵时才真正鲜活起来。这也有助于理解诗歌，因为词语的节奏与音韵变得更加清晰。\n【采分点】\n1. became famous for：表原因，译为\"因……而闻名\"，语序调整为\"以其自然诗作声名鹊起\"。\n2. celebrated the wonders：celebrate 此处意为\"赞颂、颂扬\"，而非\"庆祝\"。\n3. capture a reader：capture 由\"捕获\"引申为\"吸引、打动\"，译\"俘获读者\"最贴切。\n4. pass down history：固定搭配，\"传承历史\"，down 含代际相传之意。\n5. come to life：意为\"鲜活起来\"，主语转为朗诵行为，译\"被朗诵时才真正鲜活\"。"
+  "explanation": "【参考译文】\n18 世纪晚期，威廉·华兹华斯因其描写自然的诗歌而声名鹊起。他还是浪漫主义运动的创始人之一，这场运动旨在赞美自然世界的奇观。\n诗歌是强大的。它的力量与节奏能够俘获读者，将他们带入另一个世界，让他们以不同的眼光看待事物。借助精心挑选的词语和短语，诗歌可以戏剧、可以有趣、可以美丽、可以动人、可以鼓舞人心。\n没有人确切知道诗歌起源于何时，但它已存在数千年，甚至在人们学会书写之前。它是讲述故事、传承历史的方式。诗歌与歌曲密切相关，即便是书面创作，通常也是为了高声吟诵而作。诗歌在被朗诵时才真正鲜活起来。这也有助于理解诗歌，因为词语的节奏与音韵变得更加清晰。\n【采分点】\n1. became famous for：表原因，译为\"因……而闻名\"，语序调整为\"以其自然诗作声名鹊起\"。\n2. celebrated the wonders：celebrate 此处意为\"赞颂、颂扬\"，而非\"庆祝\"。\n3. capture a reader：capture 由\"捕获\"引申为\"吸引、打动\"，译\"俘获读者\"最贴切。\n4. pass down history：固定搭配，\"传承历史\"，down 含代际相传之意。\n5. come to life：意为\"鲜活起来\"，主语转为朗诵行为，译\"被朗诵时才真正鲜活\"。",
+  "scoring": {
+   "full": 15,
+   "ref": "18 世纪晚期，威廉·华兹华斯因其描写自然的诗歌而声名鹊起。他还是浪漫主义运动的创始人之一，这场运动旨在赞美自然世界的奇观。诗歌是强大的。它的力量与节奏能够俘获读者，将他们带入另一个世界，让他们以不同的眼光看待事物。借助精心挑选的词语和短语，诗歌可以戏剧、可以有趣、可以美丽、可以动人、可以鼓舞人心。没有人确切知道诗歌起源于何时，但它已存在数千年，甚至在人们学会书写之前。它是讲述故事、传承历史的方式。诗歌与歌曲密切相关，即便是书面创作，通常也是为了高声吟诵而作。诗歌在被朗诵时才真正鲜活起来。这也有助于理解诗歌，因为词语的节奏与音韵变得更加清晰。",
+   "groups": [
+    {
+     "en": "In the late 18th century, William Wordsworth became famous for his poems about nature.",
+     "points": [
+      {
+       "any": [
+        "18世纪",
+        "十八世纪"
+       ],
+       "note": "late 18th century"
+      },
+      {
+       "any": [
+        "华兹华斯"
+       ],
+       "note": "Wordsworth"
+      },
+      {
+       "any": [
+        "诗歌",
+        "诗作",
+        "诗篇"
+       ],
+       "note": "poems"
+      },
+      {
+       "any": [
+        "自然",
+        "大自然"
+       ],
+       "note": "nature"
+      }
+     ]
+    },
+    {
+     "en": "And he was one of the founders of a movement called Romanticism, which celebrated the wonders of the natural world.",
+     "points": [
+      {
+       "any": [
+        "创始人",
+        "奠基人",
+        "创立者",
+        "开创者"
+       ],
+       "note": "founders"
+      },
+      {
+       "any": [
+        "浪漫主义"
+       ],
+       "note": "Romanticism"
+      },
+      {
+       "any": [
+        "赞颂",
+        "赞美",
+        "颂扬",
+        "赞扬",
+        "讴歌",
+        "礼赞"
+       ],
+       "note": "celebrated（赞颂）"
+      },
+      {
+       "any": [
+        "奇观",
+        "奇迹",
+        "奇妙",
+        "奥妙"
+       ],
+       "note": "wonders"
+      }
+     ]
+    },
+    {
+     "en": "Poetry is powerful.",
+     "points": [
+      {
+       "any": [
+        "强大",
+        "力量",
+        "有力"
+       ],
+       "note": "powerful"
+      }
+     ]
+    },
+    {
+     "en": "Its energy and rhythm can capture a reader, transport them to another world and make them see things differently.",
+     "points": [
+      {
+       "any": [
+        "能量",
+        "力量",
+        "活力",
+        "韵律"
+       ],
+       "note": "energy"
+      },
+      {
+       "any": [
+        "节奏",
+        "韵律"
+       ],
+       "note": "rhythm"
+      },
+      {
+       "any": [
+        "俘获",
+        "吸引",
+        "抓住",
+        "打动",
+        "捕获"
+       ],
+       "note": "capture（俘获）"
+      },
+      {
+       "any": [
+        "另一个世界",
+        "另外一个世界",
+        "异世界"
+       ],
+       "note": "another world"
+      },
+      {
+       "any": [
+        "不同",
+        "不一样",
+        "另一种"
+       ],
+       "note": "differently"
+      }
+     ]
+    },
+    {
+     "en": "Through carefully selected words and phrases, poems can be dramatic, funny, beautiful, moving and inspiring.",
+     "points": [
+      {
+       "any": [
+        "精心挑选",
+        "仔细挑选",
+        "精心选择",
+        "精挑细选",
+        "悉心挑选"
+       ],
+       "note": "carefully selected"
+      },
+      {
+       "any": [
+        "戏剧"
+       ],
+       "note": "dramatic"
+      },
+      {
+       "any": [
+        "美丽",
+        "优美",
+        "美好"
+       ],
+       "note": "beautiful"
+      },
+      {
+       "any": [
+        "鼓舞",
+        "激励",
+        "振奋",
+        "启发",
+        "启迪"
+       ],
+       "note": "inspiring"
+      }
+     ]
+    },
+    {
+     "en": "No one knows for sure when poetry began but it has been around for thousands of years, even before people could write.",
+     "points": [
+      {
+       "any": [
+        "确切",
+        "清楚",
+        "确定"
+       ],
+       "note": "for sure"
+      },
+      {
+       "any": [
+        "起源",
+        "开始",
+        "发源",
+        "诞生"
+       ],
+       "note": "began"
+      },
+      {
+       "any": [
+        "数千年",
+        "几千年",
+        "上千年",
+        "千年"
+       ],
+       "note": "thousands of years"
+      },
+      {
+       "any": [
+        "书写",
+        "写作",
+        "文字"
+       ],
+       "note": "write"
+      },
+      {
+       "any": [
+        "之前",
+        "以前",
+        "此前",
+        "早在"
+       ],
+       "note": "before（之前）"
+      }
+     ]
+    },
+    {
+     "en": "It was a way to tell stories and pass down history.",
+     "points": [
+      {
+       "any": [
+        "故事",
+        "讲述",
+        "传说"
+       ],
+       "note": "tell stories"
+      },
+      {
+       "any": [
+        "传承",
+        "传递",
+        "流传",
+        "传颂"
+       ],
+       "note": "pass down（传承）"
+      }
+     ]
+    },
+    {
+     "en": "It is closely related to song and even when written it is usually created to be performed out loud.",
+     "points": [
+      {
+       "any": [
+        "密切相关",
+        "密切",
+        "紧密",
+        "息息相关",
+        "紧密相连"
+       ],
+       "note": "closely related"
+      },
+      {
+       "any": [
+        "歌曲",
+        "音乐",
+        "歌唱"
+       ],
+       "note": "song"
+      },
+      {
+       "any": [
+        "高声",
+        "大声",
+        "朗声",
+        "吟诵",
+        "朗诵",
+        "朗读"
+       ],
+       "note": "out loud（高声）"
+      }
+     ]
+    },
+    {
+     "en": "Poems really come to life when they are recited.",
+     "points": [
+      {
+       "any": [
+        "鲜活",
+        "生动",
+        "生命力",
+        "栩栩如生"
+       ],
+       "note": "come to life（鲜活）"
+      },
+      {
+       "any": [
+        "朗诵",
+        "吟诵",
+        "朗读",
+        "诵读"
+       ],
+       "note": "recited"
+      }
+     ]
+    },
+    {
+     "en": "This can also help with understanding them too, because the rhythm and sounds of the words become clearer.",
+     "points": [
+      {
+       "any": [
+        "理解",
+        "领悟",
+        "读懂",
+        "了解"
+       ],
+       "note": "understanding"
+      },
+      {
+       "any": [
+        "节奏",
+        "韵律"
+       ],
+       "note": "rhythm"
+      },
+      {
+       "any": [
+        "清晰",
+        "清楚",
+        "明晰",
+        "明了"
+       ],
+       "note": "clearer"
+      }
+     ]
+    }
+   ]
+  }
  },
  {
   "subject": "en",
@@ -11410,7 +12296,286 @@
   "score": 15,
   "part_name": "写作·翻译",
   "tag": "en_translation",
-  "explanation": "【参考译文】\n空气中飘荡着咖啡与新鲜面包的香气，摊位上摆满了色彩缤纷的蔬菜和诱人的奶酪，还有人们友好闲聊的嗡嗡声——农贸市场堪称一场感官盛宴。它们还让你有机会与负责种植、饲养你食材的人直接交谈，支持本地经济，同时还能买到新鲜的时令农产品。\n农贸市场通常是每周或每月举办一次的活动，大多设有户外摊位，让农户或生产者直接向顾客销售食品。市场规模和举办频率因季节而异，取决于当地农事安排，一年中不同时节你很可能看到不同的农产品在售。由于省去中间商，农户能从产品中获得更多利润，顾客也能确切知道自己的钱流向了哪里、给了谁。\n【采分点】\n1. a feast for the senses 是固定搭配，\"感官盛宴\"；前面三个并列名词短语需拆解并重组句式。\n2. the people responsible for growing or raising your food 是后置定语，译为\"负责种植、饲养你食材的人\"，定语提前。\n3. allow farmers or producers to sell... 是 allow sb. to do 结构，与 which 定语从句一起拆分翻译。\n4. agricultural calendar 意为\"农业日历、农事安排\"，切不可误作\"农历节令\"。\n5. cutting out the middleman 中 cut out 意为\"省去、去掉\"；文末 to who 应为 to whom，介词+关系代词，译\"给了谁\"。"
+  "explanation": "【参考译文】\n空气中飘荡着咖啡与新鲜面包的香气，摊位上摆满了色彩缤纷的蔬菜和诱人的奶酪，还有人们友好闲聊的嗡嗡声——农贸市场堪称一场感官盛宴。它们还让你有机会与负责种植、饲养你食材的人直接交谈，支持本地经济，同时还能买到新鲜的时令农产品。\n农贸市场通常是每周或每月举办一次的活动，大多设有户外摊位，让农户或生产者直接向顾客销售食品。市场规模和举办频率因季节而异，取决于当地农事安排，一年中不同时节你很可能看到不同的农产品在售。由于省去中间商，农户能从产品中获得更多利润，顾客也能确切知道自己的钱流向了哪里、给了谁。\n【采分点】\n1. a feast for the senses 是固定搭配，\"感官盛宴\"；前面三个并列名词短语需拆解并重组句式。\n2. the people responsible for growing or raising your food 是后置定语，译为\"负责种植、饲养你食材的人\"，定语提前。\n3. allow farmers or producers to sell... 是 allow sb. to do 结构，与 which 定语从句一起拆分翻译。\n4. agricultural calendar 意为\"农业日历、农事安排\"，切不可误作\"农历节令\"。\n5. cutting out the middleman 中 cut out 意为\"省去、去掉\"；文末 to who 应为 to whom，介词+关系代词，译\"给了谁\"。",
+  "scoring": {
+   "full": 15,
+   "ref": "空气中飘荡着咖啡与新鲜面包的香气，摊位上摆满了色彩缤纷的蔬菜和诱人的奶酪，还有人们友好闲聊的嗡嗡声——农贸市场堪称一场感官盛宴。它们还让你有机会与负责种植、饲养你食材的人直接交谈，支持本地经济，同时还能买到新鲜的时令农产品。农贸市场通常是每周或每月举办一次的活动，大多设有户外摊位，让农户或生产者直接向顾客销售食品。市场规模和举办频率因季节而异，取决于当地农事安排，一年中不同时节你很可能看到不同的农产品在售。由于省去中间商，农户能从产品中获得更多利润，顾客也能确切知道自己的钱流向了哪里、给了谁。",
+   "groups": [
+    {
+     "en": "With the smell of coffee and fresh bread floating in the air, stalls bursting with colourful vegetables and tempting cheeses, and the buzz of friendly chats, farmers’ markets are a feast for the senses.",
+     "points": [
+      {
+       "any": [
+        "咖啡"
+       ],
+       "note": "coffee"
+      },
+      {
+       "any": [
+        "面包"
+       ],
+       "note": "bread"
+      },
+      {
+       "any": [
+        "摊位",
+        "摊子",
+        "货摊"
+       ],
+       "note": "stalls"
+      },
+      {
+       "any": [
+        "蔬菜"
+       ],
+       "note": "vegetables"
+      },
+      {
+       "any": [
+        "奶酪",
+        "芝士",
+        "干酪"
+       ],
+       "note": "cheeses"
+      },
+      {
+       "any": [
+        "感官盛宴",
+        "感官",
+        "盛宴"
+       ],
+       "note": "feast for the senses"
+      }
+     ]
+    },
+    {
+     "en": "They also provide an opportunity to talk to the people responsible for growing or raising your food, support your local economy and pick up fresh seasonal produce — all at the same time.",
+     "points": [
+      {
+       "any": [
+        "机会",
+        "契机"
+       ],
+       "note": "opportunity"
+      },
+      {
+       "any": [
+        "交谈",
+        "谈话",
+        "交流",
+        "聊天"
+       ],
+       "note": "talk"
+      },
+      {
+       "any": [
+        "种植",
+        "栽种",
+        "耕种",
+        "饲养",
+        "养殖",
+        "培育"
+       ],
+       "note": "growing or raising"
+      },
+      {
+       "any": [
+        "本地经济",
+        "当地经济",
+        "地方经济"
+       ],
+       "note": "local economy"
+      },
+      {
+       "any": [
+        "时令",
+        "应季",
+        "新鲜"
+       ],
+       "note": "seasonal（时令）"
+      },
+      {
+       "any": [
+        "农产品",
+        "食材",
+        "粮食",
+        "物产"
+       ],
+       "note": "produce（农产品）"
+      }
+     ]
+    },
+    {
+     "en": "Farmers’ markets are usually weekly or monthly events, most often with outdoor stalls, which allow farmers or producers to sell their food directly to customers.",
+     "points": [
+      {
+       "any": [
+        "每周"
+       ],
+       "note": "weekly"
+      },
+      {
+       "any": [
+        "每月"
+       ],
+       "note": "monthly"
+      },
+      {
+       "any": [
+        "户外",
+        "室外",
+        "露天"
+       ],
+       "note": "outdoor"
+      },
+      {
+       "any": [
+        "农户",
+        "农民",
+        "生产者",
+        "种植者"
+       ],
+       "note": "farmers or producers"
+      },
+      {
+       "any": [
+        "直接"
+       ],
+       "note": "directly"
+      }
+     ]
+    },
+    {
+     "en": "The size or regularity of markets can vary from season to season, depending on the area’s agricultural calendar, and you’re likely to find different produce on sale at different times of the year.",
+     "points": [
+      {
+       "any": [
+        "规模",
+        "大小"
+       ],
+       "note": "size"
+      },
+      {
+       "any": [
+        "频率",
+        "规律",
+        "次数"
+       ],
+       "note": "regularity"
+      },
+      {
+       "any": [
+        "季节",
+        "时节"
+       ],
+       "note": "season"
+      },
+      {
+       "any": [
+        "农事",
+        "农业日历",
+        "农业",
+        "农时",
+        "农耕"
+       ],
+       "note": "agricultural calendar（农事）"
+      },
+      {
+       "any": [
+        "不同",
+        "不一样",
+        "各异"
+       ],
+       "note": "different"
+      },
+      {
+       "any": [
+        "在售",
+        "出售",
+        "售卖",
+        "销售"
+       ],
+       "note": "on sale"
+      }
+     ]
+    },
+    {
+     "en": "By cutting out the middleman, the farmers secure more profit for their produce.",
+     "points": [
+      {
+       "any": [
+        "省去",
+        "去掉",
+        "去除",
+        "削减",
+        "砍掉"
+       ],
+       "note": "cutting out（省去）"
+      },
+      {
+       "any": [
+        "中间商",
+        "中介",
+        "中间人",
+        "中间环节"
+       ],
+       "note": "middleman"
+      },
+      {
+       "any": [
+        "利润",
+        "收益",
+        "盈利",
+        "获利"
+       ],
+       "note": "profit"
+      }
+     ]
+    },
+    {
+     "en": "Shoppers also benefit from seeing exactly where — and to who — their money is going.",
+     "points": [
+      {
+       "any": [
+        "顾客",
+        "购物者",
+        "消费者",
+        "买家"
+       ],
+       "note": "shoppers"
+      },
+      {
+       "any": [
+        "受益",
+        "获益",
+        "得到好处",
+        "获利",
+        "也能"
+       ],
+       "note": "benefit"
+      },
+      {
+       "any": [
+        "钱",
+        "资金",
+        "金钱"
+       ],
+       "note": "money"
+      },
+      {
+       "any": [
+        "流向",
+        "花在",
+        "用于",
+        "去处",
+        "去向"
+       ],
+       "note": "where…going（流向）"
+      }
+     ]
+    }
+   ]
+  }
  },
  {
   "subject": "en",
@@ -11452,7 +12617,333 @@
   "score": 15,
   "part_name": "写作·翻译",
   "tag": "en_translation",
-  "explanation": "【参考译文】\n可穿戴服饰对心理的影响，指的是我们所穿着的衣物如何影响我们的思维、情感和行为。服装不仅仅是为了遮体，它在塑造自我认知以及与他人的互动中发挥着重要作用。\n这种影响的一个方面是自我表达。我们所选择的衣物可以反映出我们的个性、情绪和身份认同。无论我们选择大胆鲜艳的着装，还是偏爱更为低调的风格，我们的穿衣选择都在传递关于我们是谁以及我们希望如何被看待的信息。此外，着装能够影响我们的自信心。研究表明，穿着我们感觉良好或认为有吸引力的衣服，可以对我们的自尊和整体情绪产生积极影响。\n再者，文化和社会的影响在塑造我们的穿衣选择方面起着重要作用。不同的文化对于着装有着各自的规范和期望，这会影响人们穿着的服装类型及其被赋予的意义。\n【采分点讲解】\n1. wearables 译「可穿戴服饰」，与 clothes 对应；influence on... 译「对……的影响」。\n2. plays a significant role in shaping our self-perception and interactions with others 译「在塑造自我认知以及与他人的互动中发挥着重要作用」；play a significant role in doing sth.，中文把「发挥着重要作用」后置收尾，属语序调整。\n3. Whether we opt for bold, colorful outfits or prefer more understated styles 译「无论我们选择大胆鲜艳的着装，还是偏爱更为低调的风格」；whether...or... 译「无论……还是……」；opt for 意为选择；understated 意为低调。\n4. positively affect our self-esteem and overall mood 译「对我们的自尊和整体情绪产生积极影响」；self-esteem 译「自尊」，overall mood 译「整体情绪」，positively 转作「积极的」。\n5. the meanings attributed to them 译「被赋予的意义」；attributed to 为被动结构，译「被赋予」，them 指 clothing，需点明「服装」。"
+  "explanation": "【参考译文】\n可穿戴服饰对心理的影响，指的是我们所穿着的衣物如何影响我们的思维、情感和行为。服装不仅仅是为了遮体，它在塑造自我认知以及与他人的互动中发挥着重要作用。\n这种影响的一个方面是自我表达。我们所选择的衣物可以反映出我们的个性、情绪和身份认同。无论我们选择大胆鲜艳的着装，还是偏爱更为低调的风格，我们的穿衣选择都在传递关于我们是谁以及我们希望如何被看待的信息。此外，着装能够影响我们的自信心。研究表明，穿着我们感觉良好或认为有吸引力的衣服，可以对我们的自尊和整体情绪产生积极影响。\n再者，文化和社会的影响在塑造我们的穿衣选择方面起着重要作用。不同的文化对于着装有着各自的规范和期望，这会影响人们穿着的服装类型及其被赋予的意义。\n【采分点讲解】\n1. wearables 译「可穿戴服饰」，与 clothes 对应；influence on... 译「对……的影响」。\n2. plays a significant role in shaping our self-perception and interactions with others 译「在塑造自我认知以及与他人的互动中发挥着重要作用」；play a significant role in doing sth.，中文把「发挥着重要作用」后置收尾，属语序调整。\n3. Whether we opt for bold, colorful outfits or prefer more understated styles 译「无论我们选择大胆鲜艳的着装，还是偏爱更为低调的风格」；whether...or... 译「无论……还是……」；opt for 意为选择；understated 意为低调。\n4. positively affect our self-esteem and overall mood 译「对我们的自尊和整体情绪产生积极影响」；self-esteem 译「自尊」，overall mood 译「整体情绪」，positively 转作「积极的」。\n5. the meanings attributed to them 译「被赋予的意义」；attributed to 为被动结构，译「被赋予」，them 指 clothing，需点明「服装」。",
+  "scoring": {
+   "full": 15,
+   "ref": "可穿戴服饰对心理的影响，指的是我们所穿着的衣物如何影响我们的思维、情感和行为。服装不仅仅是为了遮体，它在塑造自我认知以及与他人的互动中发挥着重要作用。这种影响的一个方面是自我表达。我们所选择的衣物可以反映出我们的个性、情绪和身份认同。无论我们选择大胆鲜艳的着装，还是偏爱更为低调的风格，我们的穿衣选择都在传递关于我们是谁以及我们希望如何被看待的信息。此外，着装能够影响我们的自信心。当我们穿着让自己感觉舒适和自信的衣服时，它能够对我们的自尊和整体情绪产生积极影响。再者，文化和社会的影响在塑造我们的穿衣选择方面起着重要作用。不同的文化对于着装有着各自的规范和期望，这会影响人们穿着的服装类型及其被赋予的意义。",
+   "groups": [
+    {
+     "en": "The influence of wearables on psychology refers to how the clothes we wear affect our thoughts, feelings, and behaviors.",
+     "points": [
+      {
+       "any": [
+        "可穿戴",
+        "穿戴",
+        "穿着"
+       ],
+       "note": "wearables（可穿戴）"
+      },
+      {
+       "any": [
+        "心理"
+       ],
+       "note": "psychology"
+      },
+      {
+       "any": [
+        "影响"
+       ],
+       "note": "influence/affect"
+      },
+      {
+       "any": [
+        "思维",
+        "思想",
+        "思考"
+       ],
+       "note": "thoughts"
+      },
+      {
+       "any": [
+        "情感",
+        "情绪",
+        "感情"
+       ],
+       "note": "feelings"
+      },
+      {
+       "any": [
+        "行为",
+        "举止"
+       ],
+       "note": "behaviors"
+      }
+     ]
+    },
+    {
+     "en": "Clothing is not just about covering our bodies; it plays a significant role in shaping our self-perception and interactions with others.",
+     "points": [
+      {
+       "any": [
+        "遮体",
+        "蔽体",
+        "遮盖身体",
+        "遮挡身体",
+        "覆盖身体",
+        "遮身"
+       ],
+       "note": "covering bodies（遮体）"
+      },
+      {
+       "any": [
+        "重要作用",
+        "重要角色"
+       ],
+       "note": "significant role"
+      },
+      {
+       "any": [
+        "自我认知",
+        "自我认识",
+        "自我感知",
+        "自我形象"
+       ],
+       "note": "self-perception"
+      },
+      {
+       "any": [
+        "互动",
+        "交往",
+        "交际",
+        "相处"
+       ],
+       "note": "interactions"
+      }
+     ]
+    },
+    {
+     "en": "One aspect of this influence is self-expression.",
+     "points": [
+      {
+       "any": [
+        "自我表达",
+        "自我表现"
+       ],
+       "note": "self-expression"
+      }
+     ]
+    },
+    {
+     "en": "The clothes we choose can reflect our personality, mood, and identity.",
+     "points": [
+      {
+       "any": [
+        "反映",
+        "体现",
+        "展现",
+        "表现"
+       ],
+       "note": "reflect"
+      },
+      {
+       "any": [
+        "个性",
+        "性格",
+        "人格"
+       ],
+       "note": "personality"
+      },
+      {
+       "any": [
+        "情绪",
+        "心情"
+       ],
+       "note": "mood"
+      },
+      {
+       "any": [
+        "身份"
+       ],
+       "note": "identity"
+      }
+     ]
+    },
+    {
+     "en": "Whether we opt for bold, colorful outfits or prefer more understated styles, our dress choices convey messages about who we are and how we want to be perceived.",
+     "points": [
+      {
+       "any": [
+        "无论",
+        "不论",
+        "不管"
+       ],
+       "note": "whether（无论）"
+      },
+      {
+       "any": [
+        "大胆",
+        "鲜艳",
+        "亮眼",
+        "明艳"
+       ],
+       "note": "bold, colorful"
+      },
+      {
+       "any": [
+        "低调",
+        "朴素",
+        "内敛",
+        "简约",
+        "素雅"
+       ],
+       "note": "understated（低调）"
+      },
+      {
+       "any": [
+        "传递",
+        "传达",
+        "表达"
+       ],
+       "note": "convey（传递）"
+      },
+      {
+       "any": [
+        "看待",
+        "认知",
+        "印象",
+        "评价"
+       ],
+       "note": "be perceived（看待）"
+      }
+     ]
+    },
+    {
+     "en": "Additionally, clothing can impact our confidence levels.",
+     "points": [
+      {
+       "any": [
+        "自信",
+        "信心"
+       ],
+       "note": "confidence"
+      },
+      {
+       "any": [
+        "影响",
+        "作用"
+       ],
+       "note": "impact"
+      }
+     ]
+    },
+    {
+     "en": "When we wear clothes that make us feel comfortable and confident, it can positively affect our self-esteem and overall mood.",
+     "points": [
+      {
+       "any": [
+        "舒适",
+        "舒服",
+        "惬意",
+        "自在"
+       ],
+       "note": "comfortable"
+      },
+      {
+       "any": [
+        "自尊",
+        "自尊心"
+       ],
+       "note": "self-esteem"
+      },
+      {
+       "any": [
+        "积极",
+        "正向",
+        "正面"
+       ],
+       "note": "positively"
+      },
+      {
+       "any": [
+        "整体情绪",
+        "总体情绪",
+        "整体心情"
+       ],
+       "note": "overall mood"
+      }
+     ]
+    },
+    {
+     "en": "Moreover, cultural and societal influences play a significant role in shaping our dress choices.",
+     "points": [
+      {
+       "any": [
+        "文化"
+       ],
+       "note": "cultural"
+      },
+      {
+       "any": [
+        "社会"
+       ],
+       "note": "societal"
+      },
+      {
+       "any": [
+        "塑造",
+        "形成",
+        "造就"
+       ],
+       "note": "shaping"
+      },
+      {
+       "any": [
+        "穿衣",
+        "着装",
+        "穿着",
+        "服饰",
+        "衣着"
+       ],
+       "note": "dress choices"
+      }
+     ]
+    },
+    {
+     "en": "Different cultures have their norms and expectations regarding dress, which can influence the types of clothing people wear and the meanings attributed to them.",
+     "points": [
+      {
+       "any": [
+        "规范",
+        "准则",
+        "规则"
+       ],
+       "note": "norms"
+      },
+      {
+       "any": [
+        "期望",
+        "期待"
+       ],
+       "note": "expectations"
+      },
+      {
+       "any": [
+        "服装",
+        "衣物",
+        "衣服",
+        "服饰",
+        "衣着"
+       ],
+       "note": "clothing"
+      },
+      {
+       "any": [
+        "赋予"
+       ],
+       "note": "attributed（被赋予）"
+      },
+      {
+       "any": [
+        "意义",
+        "含义",
+        "内涵"
+       ],
+       "note": "meanings"
+      }
+     ]
+    }
+   ]
+  }
  },
  {
   "subject": "en",
@@ -11494,7 +12985,101 @@
   "score": 15,
   "part_name": "写作·翻译",
   "tag": "en_translation",
-  "explanation": "【参考译文】你一定知道这样的时刻——谈话渐渐放缓，随后便是一段沉默。这很尴尬，尴尬到有些人会惊慌失措，干脆随便说点什么。是不是所有人都觉得这种沉默如此令人焦虑？\n研究人员分析了对话中超过 2 秒的停顿的出现频率及其影响，其中还包括对以往研究的综述。这些研究表明，人们对尴尬沉默的恐惧可能极其强烈，以至于会避免与陌生人交谈，尽管与陌生人交谈很可能是一次愉快的体验。\n在仅有短暂停顿的对话中，人们会感觉与交谈对象更为亲近；但这种亲近感一旦遇到长时间停顿便会明显下降。陌生人之间出现长时间停顿后，话题很可能发生转换。\n但朋友之间的对话似乎恰恰相反：长时间的停顿反而让彼此更亲近。在朋友之间，较长的停顿似乎为反思与表达提供了自然的间隙。\n采分点讲解：① “the conversation slows” 中 slow 结合语境译“渐渐放缓、冷场”，勿直译“变慢”；② “so awkward that... panic and say anything” 用 so...that... 句型，译“如此尴尬以至于惊慌失措、随便说点什么”，say anything 指随便说点什么来打破沉默；③ “gaps greater than 2 seconds” 中 gaps 指对话中的“停顿、间隙”，勿误作“差距”；④ “including an overview of previous studies which indicate that...” 是长句，宜把 which 从句拆译：“其中还包括对以往研究的综述。这些研究表明……”；⑤ “Long gaps there saw increased connection” 中 saw 表“伴随、产生”，there 指 between friends，应意译为“长时间的停顿反而让彼此更亲近”。"
+  "explanation": "【参考译文】你一定知道这样的时刻——谈话渐渐放缓，随后便是一段沉默。这很尴尬，尴尬到有些人会惊慌失措，干脆随便说点什么。是不是所有人都觉得这种沉默如此令人焦虑？\n研究人员分析了对话中超过 2 秒的停顿的出现频率及其影响，其中还包括对以往研究的综述。这些研究表明，人们对尴尬沉默的恐惧可能极其强烈，以至于会避免与陌生人交谈，尽管与陌生人交谈很可能是一次愉快的体验。\n在仅有短暂停顿的对话中，人们会感觉与交谈对象更为亲近；但这种亲近感一旦遇到长时间停顿便会明显下降。陌生人之间出现长时间停顿后，话题很可能发生转换。\n但朋友之间的对话似乎恰恰相反：长时间的停顿反而让彼此更亲近。在朋友之间，较长的停顿似乎为反思与表达提供了自然的间隙。\n采分点讲解：① “the conversation slows” 中 slow 结合语境译“渐渐放缓、冷场”，勿直译“变慢”；② “so awkward that... panic and say anything” 用 so...that... 句型，译“如此尴尬以至于惊慌失措、随便说点什么”，say anything 指随便说点什么来打破沉默；③ “gaps greater than 2 seconds” 中 gaps 指对话中的“停顿、间隙”，勿误作“差距”；④ “including an overview of previous studies which indicate that...” 是长句，宜把 which 从句拆译：“其中还包括对以往研究的综述。这些研究表明……”；⑤ “Long gaps there saw increased connection” 中 saw 表“伴随、产生”，there 指 between friends，应意译为“长时间的停顿反而让彼此更亲近”。",
+  "scoring": {
+   "full": 15,
+   "ref": "你一定知道这样的时刻——谈话渐渐放缓，随后便是一段沉默。这很尴尬，尴尬到有些人会惊慌失措，干脆随便说点什么。是不是所有人都觉得这种沉默如此令人焦虑？",
+   "groups": [
+    {
+     "en": "You know the moment-the conversation slows and then there's a pause.",
+     "points": [
+      {
+       "any": [
+        "谈话",
+        "对话",
+        "交谈",
+        "聊天"
+       ],
+       "note": "conversation"
+      },
+      {
+       "any": [
+        "放缓",
+        "慢下来",
+        "冷场",
+        "变慢",
+        "减缓"
+       ],
+       "note": "slows（放缓）"
+      },
+      {
+       "any": [
+        "沉默",
+        "停顿",
+        "静默",
+        "间隙"
+       ],
+       "note": "pause"
+      }
+     ]
+    },
+    {
+     "en": "It's awkward, and so awkward that some people will panic and say anything.",
+     "points": [
+      {
+       "any": [
+        "尴尬",
+        "难堪",
+        "窘迫"
+       ],
+       "note": "awkward"
+      },
+      {
+       "any": [
+        "惊慌失措",
+        "慌乱",
+        "慌张",
+        "恐慌",
+        "惊慌"
+       ],
+       "note": "panic"
+      },
+      {
+       "any": [
+        "随便",
+        "任何",
+        "胡乱",
+        "随口"
+       ],
+       "note": "say anything（随便）"
+      }
+     ]
+    },
+    {
+     "en": "Do we all find such silences so stressful?",
+     "points": [
+      {
+       "any": [
+        "焦虑",
+        "紧张",
+        "不安",
+        "压力"
+       ],
+       "note": "stressful"
+      },
+      {
+       "any": [
+        "所有人",
+        "每个人",
+        "人人",
+        "大家"
+       ],
+       "note": "all（所有人）"
+      }
+     ]
+    }
+   ]
+  }
  },
  {
   "subject": "en",

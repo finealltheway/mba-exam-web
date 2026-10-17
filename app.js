@@ -474,6 +474,41 @@ function passageHTML(text) {
     .join('');
 }
 
+/**
+ * 翻译自动评分明细面板：总分、官方档位、逐句群采分点命中情况、扣分项。
+ * 口径见 engine.js 的 scoreTranslation 注释。
+ */
+function transPanelHTML(r) {
+  const groupHTML = (g, gi) => {
+    const pts = g.points.map(p =>
+      `<span class="tp ${p.hit ? 'ok' : (p.neg ? 'neg' : 'miss')}" title="${esc(p.note)}">` +
+      `${p.hit ? '✓' : '✗'} ${esc(p.note)}${p.neg ? '（否定）' : ''}</span>`
+    ).join('');
+    return `<div class="tg">
+      <div class="tg-h">
+        <span class="tg-i">句群 ${gi + 1}</span>
+        <span class="tg-en">${esc(g.en)}</span>
+        <span class="tg-s">${g.got} / ${g.base} 分${g.capped ? ' · 否定漏译封顶' : ''}</span>
+      </div>
+      <div class="tg-p">${pts}</div>
+    </div>`;
+  };
+  return `
+    <div class="tp-head">
+      <div class="tp-score">${r.score}<span> / ${r.full} 分</span></div>
+      <div class="tp-tier">${esc(r.tierLabel)}</div>
+      <div class="tp-cov">采分点命中 ${r.hitPoints} / ${r.points}（单点 ${r.per} 分）</div>
+    </div>
+    ${r.ded.length
+      ? `<div class="tp-ded">${r.ded.map(d => `<div>· ${esc(d.label)}</div>`).join('')}</div>`
+      : ''}
+    ${(r.warns && r.warns.length)
+      ? `<div class="tp-warn">${r.warns.map(w => `<div>· ${esc(w)}</div>`).join('')}</div>`
+      : ''}
+    ${r.groups.map(groupHTML).join('')}
+    <div class="tp-foot">评分依据考研英语二翻译官方标准：句群采分点制、错别字满 3 个扣 0.5、漏译扣分，按四档给分；结果为系统预估，可手动修正上方得分。</div>`;
+}
+
 function renderArticle(q) {
   const wrap = el('div', 'article-block');
   wrap.id = `art-${q._group.replace(/[#·]/g, '-')}`;
@@ -637,16 +672,37 @@ function renderQ(q, i, part) {
       en_writing_big: '在此撰写大作文（约 150 词）：图表作文，先描述再分析…',
     })[q.part] || '在此作答…';
     ta.value = a.text || '';
+    // 翻译题自动评分：按钮/面板先建好（DOM 顺序跟在正文后面），
+    // run() 里要用到下面的自评分输入框，所以回调统一放到 inp 定义之后再挂。
+    const isTrans = q.part === 'en_translation' && !!q.scoring;
+    let scoreBtn = null, scoreHint = null, scorePanel = null, runScore = null;
+    let scoredText = a.autoScored ? (a.text || '') : null;
     const wc = el('div', 'wc', `${(a.text || '').length} 字`);
     ta.oninput = () => {
       State.answers[q._qid].text = ta.value;
       wc.textContent = `${ta.value.length} 字`;
+      if (scoreBtn) {
+        scoreBtn.textContent = (scoredText !== null && scoredText !== ta.value) ? '重新评分' : '自动评分';
+      }
       saveProgress(false);
     };
     card.appendChild(ta);
     card.appendChild(wc);
+    if (isTrans) {
+      const bar = el('div', 'trans-bar');
+      scoreBtn = el('button', 'trans-btn', '自动评分');
+      scoreHint = el('span', 'trans-hint', '按考研英语二翻译评分标准（句群采分点制）自动打分');
+      bar.appendChild(scoreBtn);
+      bar.appendChild(scoreHint);
+      scorePanel = el('div', 'trans-panel');
+      scorePanel.style.display = 'none';
+      card.appendChild(bar);
+      card.appendChild(scorePanel);
+    }
     const ss = el('div', 'selfscore');
-    ss.innerHTML = `<span style="font-size:13px;color:var(--tx2)">自评得分（0–${part.score}）</span>`;
+    ss.innerHTML = isTrans
+      ? `<span style="font-size:13px;color:var(--tx2)">得分（0–${part.score}）· 自动评分后填入，可修正</span>`
+      : `<span style="font-size:13px;color:var(--tx2)">自评得分（0–${part.score}）</span>`;
     const inp = el('input');
     inp.type = 'number'; inp.min = 0; inp.max = part.score; inp.step = 0.5;
     inp.placeholder = '0';
@@ -656,8 +712,39 @@ function renderQ(q, i, part) {
       saveProgress(false);
     };
     ss.appendChild(inp);
-    ss.appendChild(el('span', '', `<span style="font-size:12px;color:var(--tx3)">交卷前可留空，交卷时再评</span>`));
+    ss.appendChild(el('span', '', isTrans
+      ? `<span style="font-size:12px;color:var(--tx3)">留空则按 0 分计入</span>`
+      : `<span style="font-size:12px;color:var(--tx3)">交卷前可留空，交卷时再评</span>`));
     card.appendChild(ss);
+
+    if (isTrans) {
+      // keepScore：断点续答恢复时只重建明细面板，不覆盖用户手动修正过的分数
+      runScore = (silent, keepScore) => {
+        const r = scoreTranslation(q, ta.value);
+        if (!r) { if (!silent) scoreHint.textContent = '请先输入译文再评分'; return null; }
+        if (!keepScore) {
+          // 自动分直接作为本题得分（自评输入框同步显示，用户可改）
+          State.answers[q._qid].selfScore = r.score;
+          inp.value = r.score;
+        }
+        State.answers[q._qid].autoScored = true;
+        scoredText = ta.value;
+        scoreBtn.textContent = '重新评分';
+        const cur = State.answers[q._qid].selfScore;
+        scoreHint.textContent = keepScore
+          ? `上次自动评分 ${r.score} / ${r.full} 分${cur !== r.score ? `（当前得分 ${cur}，可重新评分或手动修正）` : '，可重新评分'}`
+          : `已打分：${r.score} / ${r.full} 分（${r.tierLabel.split('（')[0]}）`;
+        scorePanel.innerHTML = transPanelHTML(r);
+        scorePanel.style.display = '';
+        if (!keepScore) saveProgress(false);
+        return r;
+      };
+      scoreBtn.onclick = () => runScore(false);
+      // 失焦自动评分：有译文且文本变过才跑，不打扰输入
+      ta.onblur = () => { if (ta.value.trim() && scoredText !== ta.value) runScore(true); };
+      // 断点续答恢复：上次已自动评分的，把明细补回来（不动已修正的分数）
+      if (a.autoScored && (a.text || '').trim()) runScore(true, true);
+    }
   } else {
     const box = el('div', 'opts' + (q.optionsInImage ? ' compact' : ''));
     OPT_KEYS.forEach(k => {
@@ -801,6 +888,7 @@ function buildResult() {
       qid: d.qid, no: d.no, seq: d.seq, part: d.part, tag: d.tag, year: d.year,
       choice: d.choice, text: d.text || '', correct: d.correct, gained: d.gained, full: d.full,
       seconds: Math.round(d.seconds), selfScore: d.selfScore,
+      autoScored: !!(State.answers[d.qid] && State.answers[d.qid].autoScored),
     })),
     times, diag: { list: diag.list, weak: diag.weak, mid: diag.mid, good: diag.good },
     questions: questions.map(q => ({
@@ -851,7 +939,7 @@ function resultHTML(rec) {
     const p = cfg.parts.find(x => x.key === d2.part) || {};
     const isSub = !!p.subjective;
     const state = isSub
-      ? `<span class="pill a">自评 ${d2.gained} / ${d2.full}</span>`
+      ? `<span class="pill a">${d2.part === 'en_translation' && d2.autoScored ? '自动评分' : '自评'} ${d2.gained} / ${d2.full}</span>`
       : d2.choice == null ? `<span class="pill r">未答</span>`
       : d2.correct ? `<span class="pill g">正确</span>`
       : `<span class="pill r">错误</span>`;
@@ -887,7 +975,7 @@ function resultHTML(rec) {
           <div style="font-size:13px;line-height:1.7;white-space:pre-wrap;margin-bottom:10px">${esc(q.stem || '')}</div>
           <div class="lbl">你的作答（${(d2.text || '').length} 字）</div>
           <div style="font-size:13px;line-height:1.7;color:var(--tx2);white-space:pre-wrap;background:var(--hover);padding:10px;border-radius:6px;max-height:200px;overflow:auto">${esc(d2.text || '（未作答）')}</div>
-          <div class="lbl" style="margin-top:8px">自评得分 <span class="ok">${d2.gained} / ${d2.full}</span></div>
+          <div class="lbl" style="margin-top:8px">${d2.part === 'en_translation' && d2.autoScored ? '系统自动评分' : '自评得分'} <span class="ok">${d2.gained} / ${d2.full}</span>${d2.part === 'en_translation' && d2.autoScored ? '（按官方评分标准预估，可复核）' : ''}</div>
           ${q.explanation ? `<div class="lbl" style="margin-top:8px">解析与参考</div><div style="font-size:13px;line-height:1.75;color:var(--tx2);white-space:pre-wrap;background:var(--hover2);padding:10px;border-radius:6px;margin-top:4px">${esc(q.explanation)}</div>` : ''}
         `}
       </div></details>`;

@@ -434,6 +434,136 @@ function timeByPart(detail, subject) {
   });
 }
 
+/* ---------- 翻译题自动评分 ----------
+   依据考研英语二翻译官方评分标准（已联网核实）：
+   ① 分档给分：13-15 / 9-12 / 5-8 / 0-4 四档；
+   ② 句群采分点制：阅卷把一个句子拆成 3-4 个采分点按点给分
+      ——本题库每道翻译题的 scoring.groups 即按句群预置了采分点，
+      每个采分点等权（单点分 = 满分 / 全篇采分点总数）；
+   ③ 细则：明显扭曲原意的句群得分封顶——漏掉带否定语义的采分点
+      （points[].neg）时，该句群最多得一半分；
+   ④ 整篇扣分：错别字不个别计分、满 3 个扣 0.5；篇幅明显短于
+      参考译文只提示不漏译（缺译句群的采分点本就全部落空，
+      不重复扣分）。
+   纯本地确定性算法，不依赖网络，离线版同样可用。 */
+
+/* 常见错别字表（错误写法，仅用于计数）。
+   收录高频音近/形近误写，命中即按官方规则累计。 */
+const TRANS_TYPOS = [
+  ['按装'], ['暖昧'], ['甘败下风'], ['自抱自弃'], ['针贬'], ['脉博'], ['松驰'], ['一愁莫展'],
+  ['穿流不息'], ['精萃'], ['催毁'], ['震憾'], ['凑和'], ['侯车室'], ['迫不急待'], ['一如继往'],
+  ['草管人命'], ['娇揉造作'], ['挖墙角'], ['悬粱刺股'], ['名列前矛'], ['再所不辞'], ['急功进利'],
+  ['受益非浅'], ['兴高彩烈'], ['旁证博引'], ['烩炙人口'], ['语无论次'], ['心恢意冷'], ['走头无路'],
+  ['原形必露'], ['如火如茶'], ['熙熙嚷嚷'], ['妄费心机'], ['曲高合寡'], ['生死悠关'], ['任劳任愿'],
+  ['不知所错'], ['司惯见空'], ['各舒己见'], ['掉以经心'], ['陈词烂调'], ['趁火打铁'], ['发人深醒'],
+  ['翻天复地'], ['顾此失被'], ['害人听闻'], ['含糊其词'], ['花团紧簇'], ['援兵之计'], ['记意犹新'],
+  ['见义思迁'], ['举世闻明'], ['可哥可泣'], ['莫明其妙'], ['目不瑕接'], ['破斧沉舟'], ['齐心胁力'],
+  ['千均一发'], ['情不自尽'], ['锐不可挡'], ['三翻五次'], ['世外桃园'], ['谈笑风声'], ['万籁具寂'],
+  ['无原无故'], ['息息相官'], ['义愤填鹰'], ['与日具增'], ['载哥载舞'], ['自期欺人'], ['左顾右畔'],
+  ['半途而费'], ['包罗万像'], ['毕恭毕敬'], ['变本加励'], ['不加思索'], ['不屑一故'], ['苍海一粟'],
+  ['层出不全'], ['春风话雨'], ['粗制烂造'], ['当务之极'], ['雕粱画栋'], ['东施效频'], ['阿谀风承'],
+  ['发号司令'], ['按步就班'], ['白璧无瑕'], ['不加思索'], ['不言而谕'], ['步履惟坚'],
+];
+
+/** 中文否定词（用于“否定漏译 → 全文封顶”启发式）。 */
+const TRANS_NEGATORS = ['不', '没', '无', '非', '未', '否', '毫无', '并非', '并不', '决不', '绝不'];
+
+/**
+ * 翻译题自动评分。
+ * @param {object} q    题目（需带 scoring 字段）
+ * @param {string} text 学生译文
+ * @returns {object|null} 评分结果；无评分数据或译文为空时返回 null
+ *   { score, full, tier, tierLabel, groups[], ded[], warns[], typos, points, hitPoints, refLen, textLen, per }
+ *   groups[]: { en, base, got, points: [{note, hit, neg}], capped }
+ *   ded[]   实际扣分项；warns[] 只提示不扣分（如篇幅偏短疑似漏译）
+ */
+function scoreTranslation(q, text) {
+  const sc = q && q.scoring;
+  if (!sc || !Array.isArray(sc.groups) || !sc.groups.length) return null;
+  const raw = String(text || '').trim();
+  if (!raw) return null;
+
+  const full = sc.full || q.score || 15;
+  // 匹配前去掉所有空白（学生可能在采分点内部加空格/换行）
+  const norm = raw.replace(/\s+/g, '');
+  const hit = (arr) => (arr || []).some(k => norm.includes(String(k).replace(/\s+/g, '')));
+
+  // ① 句群采分点：全篇单点等权
+  const totalPts = sc.groups.reduce((s, g) => s + (g.points || []).length, 0);
+  if (!totalPts) return null;
+  const per = full / totalPts;
+  const groups = sc.groups.map(g => {
+    const pts = (g.points || []).map(p => ({
+      note: p.note || '', hit: hit(p.any), neg: !!p.neg,
+    }));
+    let got = pts.filter(p => p.hit).length * per;
+    // 否定采分点漏译 → 意思被扭曲，该句群封顶一半（官方细则）
+    const negMiss = pts.some(p => p.neg && !p.hit);
+    const half = per * pts.length / 2;
+    const capped = negMiss && got > half;
+    if (capped) got = half;
+    return {
+      en: g.en || '',
+      base: Math.round(per * pts.length * 100) / 100,
+      got: Math.round(got * 100) / 100,
+      points: pts, capped,
+    };
+  });
+
+  let score = groups.reduce((s, g) => s + g.got, 0);
+  const ded = [];
+
+  // ② 错别字：满 3 个扣 0.5（官方：不个别计分，整篇累计）
+  let typos = 0;
+  for (const [bad] of TRANS_TYPOS) {
+    let i = 0;
+    while ((i = norm.indexOf(bad, i)) >= 0) { typos++; i += bad.length; }
+  }
+  if (typos >= 3) {
+    const cut = Math.floor(typos / 3) * 0.5;
+    score -= cut;
+    ded.push({ k: 'typo', label: `错别字 ${typos} 处，满 3 个扣 0.5`, v: -cut });
+  }
+
+  // ③ 漏译提示：篇幅明显短于参考译文时给出提示（不另扣分——
+  //    缺译句群的采分点本来就全部落空，官方即"缺译按完全译错处理"，
+  //    再扣一次属于重复惩罚）。
+  const refLen = String(sc.ref || '').replace(/\s+/g, '').length;
+  const textLen = norm.length;
+  const warns = [];
+  if (refLen > 0 && textLen < refLen * 0.6) {
+    warns.push(`译文篇幅偏短（${textLen} 字 / 参考 ${refLen} 字），请检查是否漏译`);
+  }
+
+  // ④ 否定词整体漏译 → 全文意思可能被扭曲，封顶第 3 档（5-8 分）
+  const hasNeg = sc.groups.some(g => (g.points || []).some(p => p.neg));
+  if (hasNeg && !TRANS_NEGATORS.some(n => norm.includes(n))) {
+    const cap = Math.round(full * 8 / 15 * 2) / 2;   // 第 3 档上限
+    if (score > cap) {
+      score = cap;
+      ded.push({ k: 'neg', label: '全文未见否定词，疑似漏译否定成分（意思可能被扭曲），按第 3 档封顶', v: null });
+    }
+  }
+
+  score = Math.max(0, Math.min(full, Math.round(score * 2) / 2));   // 半分粒度
+  const ratio = score / full;
+  const tier = ratio >= 0.867 ? 1 : ratio >= 0.6 ? 2 : ratio >= 0.333 ? 3 : 4;
+  const tierLabel = {
+    1: '第 1 档（13-15 分）很好地完成了试题规定的任务：理解准确无误，表达通顺清楚',
+    2: '第 2 档（9-12 分）基本完成了试题规定的任务：理解基本准确，表达比较通顺',
+    3: '第 3 档（5-8 分）未能按要求完成试题规定的任务：理解不够准确，有明显漏译、错译',
+    4: '第 4 档（0-4 分）未完成试题规定的任务：表达不通顺，文字支离破碎',
+  }[tier];
+
+  const hitPoints = groups.reduce((s, g) => s + g.points.filter(p => p.hit).length, 0);
+  return {
+    score, full, tier, tierLabel, groups, ded, warns, typos,
+    points: totalPts, hitPoints,
+    refLen, textLen,
+    per: Math.round(per * 100) / 100,
+  };
+}
+
 /* ---------- 本地存储 ---------- */
 
 const Store = {
@@ -486,7 +616,8 @@ const ResumeStore = {
         subject: q.subject, part: q.part, year: q.year, no: q.no,
         textNo: q.textNo ?? null,
         a: { choice: a.choice ?? null, text: a.text || '',
-             selfScore: a.selfScore ?? null, seconds: a.seconds || 0 },
+             selfScore: a.selfScore ?? null, seconds: a.seconds || 0,
+             autoScored: !!a.autoScored },
       };
       for (const f of groupFields) if (q[f] !== undefined) row[f] = q[f];
       return row;
@@ -546,6 +677,7 @@ const ResumeStore = {
       answers[q._qid] = {
         choice: a.choice ?? null, text: a.text || '',
         selfScore: a.selfScore ?? null, seconds: a.seconds || 0,
+        autoScored: !!a.autoScored,
       };
     }
     return {
