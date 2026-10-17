@@ -10,11 +10,15 @@ const EXAM = {
     duration: 180 * 60,
     full: 200,
     parts: [
-      { key: 'math_solving', name: '数学·问题求解', count: 15, score: 3, minutes: 25 },
-      { key: 'math_sufficiency', name: '数学·条件充分性判断', count: 10, score: 3, minutes: 15 },
+      /* minutes = 主流机构建议用时（新东方/启航/海文/品睿 2026 备考资料交叉校准）：
+         数学 25 题共 55 分钟（每题约 2.2 分钟，各源建议 55-60）、
+         逻辑 30 题 50 分钟、论效 25 + 论说 35（共 60）。
+         合计 165 分钟，余 15 分钟涂卡检查，与 180 分钟总时长对齐。 */
+      { key: 'math_solving', name: '数学·问题求解', count: 15, score: 3, minutes: 35 },
+      { key: 'math_sufficiency', name: '数学·条件充分性判断', count: 10, score: 3, minutes: 20 },
       { key: 'logic', name: '逻辑推理', count: 30, score: 2, minutes: 50 },
-      { key: 'writing_effect', name: '写作·论证有效性分析', short: '效', count: 1, score: 30, minutes: 30, subjective: true },
-      { key: 'writing_essay', name: '写作·论说文', short: '说', count: 1, score: 35, minutes: 30, subjective: true },
+      { key: 'writing_effect', name: '写作·论证有效性分析', short: '效', count: 1, score: 30, minutes: 25, subjective: true },
+      { key: 'writing_essay', name: '写作·论说文', short: '说', count: 1, score: 35, minutes: 35, subjective: true },
     ],
   },
   en: {
@@ -23,11 +27,15 @@ const EXAM = {
     duration: 180 * 60,
     full: 100,
     parts: [
+      /* minutes = 英语二专用建议（新东方/启航/海文 2026 备考资料交叉校准）：
+         完形 15（10-20）、阅读 PartA 4 篇 70（60-80，每篇约 17 分钟）、
+         新题型 15（15-20）、英译汉 20（20-25）、小作文 15（15-20）、
+         大作文 30（25-30）。合计 165 分钟，余 15 分钟涂卡检查。 */
       { key: 'en_cloze', name: '完形填空', count: 20, score: 0.5, minutes: 15 },
       { key: 'en_read_a', name: '阅读理解 PartA', count: 20, score: 2, minutes: 70 },
       { key: 'en_read_b', name: '新题型 PartB', count: 5, score: 2, minutes: 15 },
-      { key: 'en_translation', name: '写作·翻译（英译汉）', short: '译', count: 1, score: 15, minutes: 25, subjective: true },
-      { key: 'en_writing_small', name: '写作·小作文（应用文）', short: '小', count: 1, score: 10, minutes: 20, subjective: true },
+      { key: 'en_translation', name: '写作·翻译（英译汉）', short: '译', count: 1, score: 15, minutes: 20, subjective: true },
+      { key: 'en_writing_small', name: '写作·小作文（应用文）', short: '小', count: 1, score: 10, minutes: 15, subjective: true },
       { key: 'en_writing_big', name: '写作·大作文（图表）', short: '大', count: 1, score: 15, minutes: 30, subjective: true },
     ],
   },

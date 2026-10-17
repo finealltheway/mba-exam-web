@@ -198,14 +198,24 @@ function renderHome() {
     const st = $(`#struct-${s}`);
     if (st) st.innerHTML = EXAM[s].parts.map(p =>
       `<div><span>${p.name}</span><span>${p.count}题 · ${p.score}分</span></div>`).join('');
+    /* 科目标题旁标注建议完成时间（= 各题型建议用时之和），
+       从 EXAM 配置实时求和，配置调整后自动跟随；余量为涂卡检查时间 */
+    const h3 = $(`.subj[data-s="${s}"] h3`);
+    if (h3 && !h3.querySelector('.sugg')) {
+      const sum = EXAM[s].parts.reduce((a, p) => a + p.minutes, 0);
+      const sp = document.createElement('span');
+      sp.className = 'sugg';
+      sp.textContent = `（建议 ${sum} 分钟完成）`;
+      h3.appendChild(sp);
+    }
   }
   initSubjModes();
   $('#rules').innerHTML = `
-    <b style="color:var(--tx)">管理类联考综合能力（150 分钟客观题 + 30 分钟写作）</b><br>
+    <b style="color:var(--tx)">管理类联考综合能力（建议 165 分钟完成，余 15 分钟涂卡检查）</b><br>
     · 数学 25 题按应用题 / 代数 / 几何 / 数据分析约 25% : 30% : 25% : 20% 抽取<br>
     · 逻辑 30 题按论证逻辑约 50%、综合推理约 35%、形式逻辑约 15% 抽取<br>
     · 写作各 1 题，含 2021–2026 全部论效文与论说文真题<br><br>
-    <b style="color:var(--tx)">英语（二）</b><br>
+    <b style="color:var(--tx)">英语（二）（建议 165 分钟完成，余 15 分钟涂卡检查）</b><br>
     · 完形 20 题、阅读 PartA 20 题、新题型 PartB 5 题<br>
     · 优先抽取最近年份（2026 &gt; 2025 &gt; 2024 …），同考点内随机
   `;
