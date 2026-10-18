@@ -244,6 +244,18 @@ if [ -d "$DEV_DIR" ]; then
     echo "    [提示] 找不到 $ESSAY_SRC，保留发布目录现有 essay.html"
   fi
 
+  # 站点级账号层：auth.js（会话 + 守卫）与登录页
+  for f in auth.js login.html; do
+    if [ -f "$DEV_DIR/$f" ]; then
+      if ! diff -q "$DEV_DIR/$f" "$REPO_DIR/$f" >/dev/null 2>&1; then
+        cp "$DEV_DIR/$f" "$REPO_DIR/$f"
+        echo "    ✓ $f 已更新"
+      fi
+    else
+      echo "    [警告] 开发目录缺 $f"
+    fi
+  done
+
   # exam/index.html 不在这里同步：build_secure.mjs 每次都以**开发目录**的
   # index.html 为源重新生成发布版（改脚本标签），不存在漏同步的可能。
   # 发布树不再存放任何明文数据（题库/词典/图片一律以 AES-256-GCM 密文
@@ -265,7 +277,7 @@ if [ -d "$DEV_DIR" ]; then
     "$PY" - "$REPO_DIR" <<'PYEOF' 2>/dev/null
 import os, sys
 root = sys.argv[1]
-files = ["index.html", "essay.html",
+files = ["index.html", "essay.html", "auth.js", "login.html",
          "exam/index.html", "exam/app.js", "exam/engine.js", "exam/guard.js",
          "exam/secure.js", "exam/data/payload.enc.js",
          "robots.txt", "README.md"]

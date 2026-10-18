@@ -574,8 +574,32 @@ function scoreTranslation(q, text) {
 
 /* ---------- 本地存储 ---------- */
 
+/* 当前账号（站点账号层，会话由根目录 auth.js 写入 mba_auth）。
+   所有持久化键都带账号后缀——「记录与数据以账号为单位」。
+   无会话（本地单文件版 / 测试环境）回落到 local，行为与旧版一致。 */
+const AUTH_USER = (() => {
+  try {
+    const s = JSON.parse(localStorage.getItem('mba_auth') || 'null');
+    return (s && s.u) || 'local';
+  } catch { return 'local'; }
+})();
+
+/* 旧版数据（无账号后缀时代）一次性迁移：搬到当前账号名下后删除原键。
+   放在 Store 定义之前，boot 前完成，读写两端都只见新键。 */
+(function migrateLegacyStores() {
+  for (const base of ['mba_exam_records_v1', 'mba_exam_resume_v1']) {
+    try {
+      const legacy = localStorage.getItem(base);
+      if (legacy == null) continue;
+      const acct = base + ':' + AUTH_USER;
+      if (localStorage.getItem(acct) == null) localStorage.setItem(acct, legacy);
+      localStorage.removeItem(base);
+    } catch { /* 存储不可用时忽略，Store 自身还有兜底 */ }
+  }
+})();
+
 const Store = {
-  key: 'mba_exam_records_v1',
+  get key() { return 'mba_exam_records_v1:' + AUTH_USER; },
   all() {
     try { return JSON.parse(localStorage.getItem(this.key) || '[]'); }
     catch { return []; }
@@ -609,7 +633,7 @@ const Store = {
 
    只保留最近一份未完成试卷（key 里带 v1）；交卷或手动放弃时清除。 */
 const ResumeStore = {
-  key: 'mba_exam_resume_v1',
+  get key() { return 'mba_exam_resume_v1:' + AUTH_USER; },
 
   /** 把当前试卷压成可持久化的最小快照。 */
   snapshot(paper, answers, remaining, cursor) {

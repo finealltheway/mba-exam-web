@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>登录 · MBA 备考中心</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", -apple-system, sans-serif;
+    background: linear-gradient(180deg, #eef3fb 0%, #f4f6fa 320px);
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 24px 18px calc(24px + env(safe-area-inset-bottom));
+  }
+  .box {
+    width: 100%; max-width: 380px;
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 16px;
+    padding: 34px 32px 30px; box-shadow: 0 6px 24px rgba(15,23,42,.07);
+  }
+  .box h1 { font-size: 21px; font-weight: 700; text-align: center; color: #0f172a; }
+  .box h1 .accent { color: #1d4ed8; }
+  .box .sub { margin: 8px 0 24px; font-size: 13px; color: #64748b; text-align: center; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+  .field input {
+    width: 100%; padding: 11px 13px; font-size: 15px;
+    border: 1px solid #cbd5e1; border-radius: 9px; outline: none;
+    transition: border-color .12s, box-shadow .12s;
+  }
+  .field input:focus { border-color: #1d4ed8; box-shadow: 0 0 0 3px rgba(29,78,216,.12); }
+  .err {
+    display: none; margin-bottom: 14px; padding: 9px 12px;
+    font-size: 13px; color: #dc2626; background: #fee2e2;
+    border: 1px solid #fecaca; border-radius: 8px;
+  }
+  button {
+    width: 100%; padding: 12px; font-size: 15px; font-weight: 600;
+    color: #fff; background: #1d4ed8; border: none; border-radius: 9px;
+    cursor: pointer; transition: background .12s;
+  }
+  button:hover { background: #1e40af; }
+  button:disabled { opacity: .6; cursor: default; }
+  .back { margin-top: 18px; text-align: center; }
+  .back a { font-size: 13px; color: #64748b; text-decoration: none; }
+  .back a:hover { color: #1d4ed8; }
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h1>MBA <span class="accent">备考中心</span></h1>
+  <div class="sub">请登录后使用模考与作文背诵功能</div>
+  <div class="err" id="err">账号或密码不正确</div>
+  <form id="form">
+    <div class="field">
+      <label for="u">账号</label>
+      <input id="u" autocomplete="username" autocapitalize="off" spellcheck="false" required>
+    </div>
+    <div class="field">
+      <label for="p">密码</label>
+      <input id="p" type="password" autocomplete="current-password" required>
+    </div>
+    <button id="btn" type="submit">登 录</button>
+  </form>
+  <div class="back"><a href="index.html">← 返回首页</a></div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+(function () {
+  // 登录后要去的页面：?next= 相对路径；只放行站内相对路径，防外跳
+  let next = new URLSearchParams(location.search).get('next') || '';
+  if (!/^[A-Za-z0-9_\-./]+$/.test(next) || next.includes('..')) next = '';
+
+  // 已登录就直接进目标页，不再看登录框
+  if (window.MBAAuth && MBAAuth.user()) { location.replace(next || 'index.html'); return; }
+
+  const form = document.getElementById('form');
+  const btn = document.getElementById('btn');
+  const err = document.getElementById('err');
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    err.style.display = 'none';
+    btn.disabled = true; btn.textContent = '登录中…';
+    const ok = await MBAAuth.login(
+      document.getElementById('u').value,
+      document.getElementById('p').value);
+    if (ok) {
+      location.replace(next || 'index.html');
+    } else {
+      err.style.display = 'block';
+      btn.disabled = false; btn.textContent = '登 录';
+    }
+  };
+})();
+</script>
+
+</body>
+</html>

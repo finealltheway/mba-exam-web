@@ -151,6 +151,19 @@
 </head>
 <body>
 
+<script>
+/* 站点账号层守卫（发布为 essay.html 时生效）。
+   本地 file:// 打开时跳过登录；线上未登录 → 跳 login.html 并带 next 回跳。
+   与根目录 auth.js 同一套会话键（mba_auth）——改动需两处同步。 */
+(function () {
+  if (location.protocol === 'file:') { window.__ACCT__ = 'local'; return; }
+  var s = null;
+  try { s = JSON.parse(localStorage.getItem('mba_auth') || 'null'); } catch (e) {}
+  if (s && s.u) { window.__ACCT__ = s.u; return; }
+  location.replace('login.html?next=' + encodeURIComponent('essay.html'));
+})();
+</script>
+
 <header>
   <h1>📝 英语作文背诵助手</h1>
   <div class="hdr-actions">
@@ -176,7 +189,13 @@
 
 <script>
 /* ================= 数据层 ================= */
-const LS_KEY = 'essay_memo_v2';
+/* 数据键按账号隔离（__ACCT__ 由上方守卫脚本设置；file:// 下为 local）。
+   旧版无后缀数据在 load() 里一次性迁移。 */
+const LS_KEY = 'essay_memo_v2:' + (window.__ACCT__ || 'local');
+if (!window.__ACCT__ && location.protocol !== 'file:') {
+  // 未登录且守卫已发起跳转：终止本脚本，避免渲染半屏后跳走
+  throw new Error('redirecting to login');
+}
 
 function defaultEssays() {
   return [
@@ -216,6 +235,8 @@ function load() {
   try {
     const v2 = JSON.parse(localStorage.getItem(LS_KEY));
     if (Array.isArray(v2) && v2.length) return v2;
+    const legacy = JSON.parse(localStorage.getItem('essay_memo_v2'));   // 无账号时代的数据，迁移一次
+    if (Array.isArray(legacy) && legacy.length) { localStorage.setItem(LS_KEY, JSON.stringify(legacy)); return legacy; }
     const v1 = JSON.parse(localStorage.getItem('essay_memo_v1'));
     if (Array.isArray(v1) && v1.length) { localStorage.setItem(LS_KEY, JSON.stringify(v1)); return v1; }
   } catch (e) {}

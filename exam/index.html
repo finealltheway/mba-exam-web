@@ -607,6 +607,8 @@ summary{font-size:13px;color:var(--blue);cursor:pointer;padding:6px 0}
 </div>
 
 <!-- 内置题库。没有这两个文件时自动回退到 fetch（开发态） -->
+<script src="../auth.js"></script>
+<script>MBAAuth.guard("../login.html", "exam/index.html")</script>
 <script src="data/payload.enc.js"></script>
 <script src="secure.js"></script>
 <script src="guard.js"></script>

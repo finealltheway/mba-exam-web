@@ -51,6 +51,19 @@
   .card .go::after { content: "→"; transition: transform .15s; }
   a.card:hover .go::after { transform: translateX(3px); }
   footer { margin-top: auto; padding: 42px 0 26px; font-size: 12px; color: #94a3b8; text-align: center; }
+  .topbar {
+    width: 100%; max-width: 820px;
+    display: flex; justify-content: flex-end; padding-top: 16px;
+  }
+  .chip {
+    font-size: 13px; color: #475569; background: #fff;
+    border: 1px solid #e2e8f0; border-radius: 999px;
+    padding: 6px 14px; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .chip b { font-weight: 650; color: #0f172a; }
+  .chip a { color: #1d4ed8; text-decoration: none; font-weight: 600; }
+  .chip a:hover { text-decoration: underline; }
+  .chip .sep { color: #cbd5e1; }
   @media (max-width: 480px) {
     .hero { padding: 52px 0 30px; }
     .hero h1 { font-size: 24px; }
@@ -59,6 +72,10 @@
 </style>
 </head>
 <body>
+
+<div class="topbar">
+  <span id="acct-chip" class="chip"></span>
+</div>
 
 <div class="hero">
   <h1>MBA <span class="accent">备考中心</span></h1>
@@ -94,6 +111,27 @@
 </div>
 
 <footer>MBA 备考中心 · 自用工具，内容加密存放，请勿外传</footer>
+
+<script src="auth.js"></script>
+<script>
+(function () {
+  const chip = document.getElementById('acct-chip');
+  const u = window.MBAAuth && MBAAuth.user();
+  if (u) {
+    // 已登录：显示账号 + 退出（退出后留在首页，再进功能页会要求重新登录）
+    chip.innerHTML = '当前账号 <b></b> <span class="sep">|</span> <a href="#" id="logout">退出登录</a>';
+    chip.querySelector('b').textContent = u;
+    chip.querySelector('#logout').onclick = (e) => {
+      e.preventDefault();
+      MBAAuth.logout();
+      location.reload();
+    };
+  } else {
+    // 未登录：功能页会先跳登录页，这里给个主动入口
+    chip.innerHTML = '未登录 <span class="sep">|</span> <a href="login.html">登录</a>';
+  }
+})();
+</script>
 
 </body>
 </html>
