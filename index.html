@@ -154,6 +154,22 @@ nav button.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(31,111
 .prog b{color:var(--tx);font-weight:600}
 .exam-actions{margin-left:auto;display:flex;gap:8px}
 
+/* 版块导航（第一行）：每个题型一个页签，点击切换到该版块的独立答题视图 */
+.partnav{
+  display:flex;flex-wrap:wrap;gap:8px;
+  padding:12px 0 2px;
+}
+.ptab{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:8px;border:1px solid var(--line2);
+  background:var(--card);font-size:13px;color:var(--tx2);cursor:pointer;
+  transition:all .1s;white-space:nowrap;
+}
+.ptab:hover{border-color:var(--blue);background:var(--hover2)}
+.ptab.on{background:var(--blue-bg);border-color:var(--blue);color:var(--blue);font-weight:600}
+.ptab .pcnt{font-size:11px;font-weight:400;color:var(--tx3);font-variant-numeric:tabular-nums}
+.ptab.on .pcnt{color:var(--blue)}
+
 .qnav{
   display:flex;flex-wrap:wrap;gap:5px;padding:14px 0;
   border-bottom:1px solid var(--line);margin-bottom:20px;
@@ -403,7 +419,14 @@ summary{font-size:13px;color:var(--blue);cursor:pointer;padding:6px 0}
   .card{padding:16px}
   .subj-grid{grid-template-columns:1fr}
 
-  /* 题目导航做成横向滚动条，省纵向空间 */
+  /* 版块页签与题目导航都做成横向滚动条，省纵向空间 */
+  .partnav{
+    flex-wrap:nowrap;overflow-x:auto;gap:6px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .partnav::-webkit-scrollbar{display:none}
+  .ptab{flex:0 0 auto}
+
   .qnav{
     flex-wrap:nowrap;overflow-x:auto;gap:6px;
     padding:12px 0;margin-bottom:16px;
@@ -539,6 +562,7 @@ summary{font-size:13px;color:var(--blue);cursor:pointer;padding:6px 0}
     </div>
   </div>
   <div class="wrap">
+    <div class="partnav" id="partnav"></div>
     <div class="qnav" id="qnav"></div>
     <div id="qlist"></div>
   </div>

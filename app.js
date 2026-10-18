@@ -121,6 +121,7 @@ function resumeExam() {
   State.paper = r.paper;
   State.answers = r.answers;
   State.cursor = r.cursor;
+  State.currentPart = (r.paper.questions[r.cursor] || r.paper.questions[0]).part;
   State.remaining = r.remaining;
   State.paused = false;
   State.finished = false;
@@ -352,6 +353,7 @@ function beginExam(subject, qs, year) {
   };
   State.answers = {};
   State.cursor = 0;
+  State.currentPart = qs[0].part;   // 初始版块 = 第一道题所在版块
   State.remaining = EXAM[subject].duration;
   State.paused = false;
   State.finished = false;
@@ -406,6 +408,11 @@ function paintTimer() {
     return p.subjective ? (a.text && a.text.trim()) : a.choice;
   }).length;
   $('#prog').innerHTML = `已答 <b>${done}</b> / ${State.paper.questions.length}`;
+  // 各版块已用时长（按题目用时累计，当前题由每秒 tick 实时累加）
+  $$('#qlist .part-block').forEach(blk => {
+    const sp = blk.querySelector('.part-elapsed');
+    if (sp) sp.textContent = fmtTime(partSeconds(blk.dataset.part));
+  });
 }
 $('#btn-pause').onclick = () => {
   State.paused = !State.paused;
@@ -427,40 +434,127 @@ $('#btn-submit').onclick = () => {
 };
 
 /* ---------- 渲染答题区 ---------- */
+
+/** 一道题是否已作答（客观题看选项，主观题看文本非空）。 */
+function isAnswered(q, p) {
+  const a = State.answers[q._qid];
+  return p.subjective ? (a.text && a.text.trim()) : a.choice;
+}
+
+/** 某版块的已用时长（秒）。口径 = 该版块各题累计用时（当前题由每秒 tick 实时累加）。 */
+function partSeconds(key) {
+  return State.paper.questions.reduce(
+    (s, q) => q.part === key ? s + (State.answers[q._qid].seconds || 0) : s, 0);
+}
+
 function renderExam() {
   const { subject, questions } = State.paper;
-  // 题号导航
+  const parts = EXAM[subject].parts;
+  // 当前版块：断点续答恢复 / 首次开考时落到光标所在版块
+  if (!State.currentPart || !parts.some(p => p.key === State.currentPart)) {
+    State.currentPart = (questions[State.cursor] || questions[0]).part;
+  }
+
+  // 第一行：版块页签。点击切换到该版块的独立视图（整块显隐，DOM 不重建）。
+  const pn = $('#partnav');
+  pn.innerHTML = '';
+  parts.forEach(p => {
+    const qs = questions.filter(q => q.part === p.key);
+    const done = qs.filter(q => isAnswered(q, p)).length;
+    const b = el('button', 'ptab' + (p.key === State.currentPart ? ' on' : ''));
+    b.dataset.part = p.key;
+    b.innerHTML = `${esc(p.name)}<span class="pcnt">${done}/${qs.length}</span>`;
+    b.onclick = () => switchPart(p.key);
+    pn.appendChild(b);
+  });
+
+  // 第二行：题号导航。全部按钮按题目顺序渲染（保持全局索引对齐），
+  // 非当前版块的按钮隐藏——这样 querySelectorAll('.qn')[i] 永远对应第 i 题。
   const nav = $('#qnav');
   nav.innerHTML = '';
   questions.forEach((q, i) => {
-    const p = EXAM[subject].parts.find(x => x.key === q.part);
-    const a = State.answers[q._qid];
-    const done = p.subjective ? (a.text && a.text.trim()) : a.choice;
+    const p = parts.find(x => x.key === q.part);
+    const done = isAnswered(q, p);
     const b = el('button', 'qn' + (done ? ' done' : '') + (i === State.cursor ? ' cur' : '') + (p.subjective ? ' writing' : ''));
+    b.dataset.i = String(i);
     b.textContent = p.subjective ? (p.short || '写') : (q._seq ?? q.no);
     b.onclick = () => { jumpTo(i); };
+    if (q.part !== State.currentPart) b.style.display = 'none';
     nav.appendChild(b);
   });
 
+  // 题目列表：按版块分块。非当前版块整块 display:none——「切版块 = 切视图」，
+  // DOM 保持整卷完整，全局题号 / 文章块 / 测试索引全部不受影响。
   const list = $('#qlist');
   list.innerHTML = '';
-  let curPart = null, curGroup = null;
+  const blocks = {};
+  parts.forEach(p => {
+    const blk = el('div', 'part-block');
+    blk.dataset.part = p.key;
+    blk.appendChild(el('div', '',
+      `<div class="sect-head">${esc(p.name)} · ${p.count} 题 · 每题 ${p.score} 分 · 建议 ${p.minutes} 分钟 · ` +
+      `已用 <span class="part-elapsed">--</span></div>`));
+    blocks[p.key] = blk;
+    list.appendChild(blk);
+  });
+  let curGroup = null;
   questions.forEach((q, i) => {
-    const p = EXAM[subject].parts.find(x => x.key === q.part);
-    if (p.key !== curPart) {
-      curPart = p.key;
-      list.appendChild(el('div', '',
-        `<div class="sect-head">${p.name} · ${p.count} 题 · 每题 ${p.score} 分 · 建议 ${p.minutes} 分钟</div>`));
-    }
+    const p = parts.find(x => x.key === q.part);
     // 文章整篇抽取：同一组的题目共用一篇原文，只在组首渲染一次
     if (q._group && q._group !== curGroup) {
       curGroup = q._group;
-      if (q._first && q._article) list.appendChild(renderArticle(q));
+      if (q._first && q._article) blocks[q.part].appendChild(renderArticle(q));
     }
-    list.appendChild(renderQ(q, i, p));
+    blocks[q.part].appendChild(renderQ(q, i, p));
   });
+  for (const k in blocks) blocks[k].style.display = k === State.currentPart ? '' : 'none';
   paintTimer();
   syncBlankStates();   // 完形：文章空位按已答状态显示（含断点续答恢复的进度）
+}
+
+/**
+ * 切换版块：显示目标版块、隐藏其余，光标落到该版块的题上。
+ * @param {string} key   版块 key（EXAM parts 的 key）
+ * @param {number} [targetIdx] 可选——直接落到该版块的第几道题（全局索引）；
+ *                             跨版块跳题（jumpTo / 键盘导航）会带上这个参数。
+ */
+function switchPart(key, targetIdx) {
+  const { subject, questions } = State.paper;
+  if (!EXAM[subject].parts.some(p => p.key === key)) return;
+  // 结算当前题用时（与 jumpTo 同口径），保证版块计时准确
+  const prev = questions[State.cursor];
+  if (prev && State.answers[prev._qid] && State.running && !State.paused) {
+    const dt = (Date.now() - State.lastQEnter) / 1000;
+    if (dt > 0 && dt < 3600) State.answers[prev._qid].seconds += dt;
+  }
+  State.currentPart = key;
+  if (targetIdx != null) {
+    State.cursor = targetIdx;
+  } else {
+    const first = questions.findIndex(q => q.part === key);
+    if (first >= 0 && (questions[State.cursor] || {}).part !== key) State.cursor = first;
+  }
+  State.lastQEnter = Date.now();
+  // 显隐切换（DOM 不重建：输入中的文本、滚动位置等状态都保留）
+  $$('#qlist .part-block').forEach(blk => {
+    blk.style.display = blk.dataset.part === key ? '' : 'none';
+  });
+  $$('.qn').forEach(b => {
+    const q = questions[Number(b.dataset.i)];
+    if (q) b.style.display = q.part === key ? '' : 'none';
+    b.classList.toggle('cur', Number(b.dataset.i) === State.cursor);
+  });
+  $$('.ptab').forEach(b => b.classList.toggle('on', b.dataset.part === key));
+  paintTimer();
+  if (targetIdx != null) {
+    const t = document.getElementById(`q-${targetIdx}`);
+    if (t && typeof t.scrollIntoView === 'function') {
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  } else {
+    window.scrollTo(0, 0);
+  }
+  saveProgress(false);
 }
 
 function passageLabel(q) {
@@ -793,6 +887,10 @@ function renderQ(q, i, part) {
 }
 
 function jumpTo(i) {
+  const target = State.paper.questions[i];
+  if (!target) return;
+  // 跨版块跳题（题号导航只显示当前版块，跨版块来自键盘/空位跳转）：先切视图再落点
+  if (target.part !== State.currentPart) { switchPart(target.part, i); return; }
   // 结算上一题用时
   const prev = State.paper.questions[State.cursor];
   if (prev && State.answers[prev._qid] && State.running && !State.paused) {
@@ -801,7 +899,8 @@ function jumpTo(i) {
   }
   State.cursor = i;
   State.lastQEnter = Date.now();
-  $$('.qn').forEach((b, k) => b.classList.toggle('cur', k === i));
+  // 题号按钮带 data-i（导航含全部题目、非当前版块隐藏），不能按数组下标对位
+  $$('.qn').forEach(b => b.classList.toggle('cur', Number(b.dataset.i) === i));
   const t = document.getElementById(`q-${i}`);
   // 旧版浏览器 / 测试环境可能没有 scrollIntoView（JSDOM 即如此）
   if (t && typeof t.scrollIntoView === 'function') {
