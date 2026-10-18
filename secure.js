@@ -19,11 +19,11 @@
      段序打乱存放（段内自带原始序号）。运行时逆变换、按序号排序、
      拼接还原。目的是让 grep 一个完整密钥变得不可能。 */
   var _KS = [
-    [2, "b/cdQymT"],
-    [1, "xeBb5OCT"],
-    [4, "DrEJGV7dIA=="],
-    [3, "ikUsS1Q1rA=="],
-    [0, "KKdeiYDt"],
+    [0, "ztWhs3Bc"],
+    [2, "6DFvzsik"],
+    [4, "iZZT9k14yg=="],
+    [1, "fTsPT77t"],
+    [3, "AIcNSvSVVA=="],
   ];
 
   // 每段的循环移位量，与段的原始序号绑定

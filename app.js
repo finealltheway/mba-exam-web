@@ -8,6 +8,17 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 // 原来各处写死 A–E，导致 F、G 渲染不出来、也选不了。
 const OPT_KEYS = 'ABCDEFG'.split('');
 
+// 条件充分性判断（管综数学 16-25 题）的标准选项含义。
+// 题库里这部分题目 optionsInImage=true、options 为空串，答题页只渲染字母，
+// 用户不知道 A–E 各代表什么——这里统一补全，答题页和诊断页共用。
+const SUFF_OPT_TEXT = {
+  A: '条件（1）充分，但条件（2）不充分',
+  B: '条件（2）充分，但条件（1）不充分',
+  C: '条件（1）和（2）单独都不充分，但条件（1）和条件（2）联合起来充分',
+  D: '条件（1）充分，条件（2）也充分',
+  E: '条件（1）和（2）单独都不充分，条件（1）和条件（2）联合起来也不充分',
+};
+
 const el = (tag, cls, html) => {
   const n = document.createElement(tag);
   if (cls) n.className = cls;
@@ -512,6 +523,12 @@ function renderExam() {
     blk.appendChild(el('div', '',
       `<div class="sect-head">${esc(p.name)} · ${p.count} 题 · 每题 ${p.score} 分 · 建议 ${p.minutes} 分钟 · ` +
       `已用 <span class="part-elapsed">--</span></div>`));
+    // 条件充分性判断版块：开头给一行 A–E 选项含义速览
+    if (p.key === 'math_sufficiency') {
+      blk.appendChild(el('div', 'suff-legend',
+        `<b>选项含义</b>　A：条件(1)充分，(2)不充分　B：条件(2)充分，(1)不充分　` +
+        `C：单独都不充分，联合起来充分　D：条件(1)、(2)都充分　E：单独、联合都不充分`));
+    }
     blocks[p.key] = blk;
     list.appendChild(blk);
   });
@@ -884,14 +901,19 @@ function renderQ(q, i, part) {
       if (a.autoScored && (a.text || '').trim()) runScore(true, true);
     }
   } else {
-    const box = el('div', 'opts' + (q.optionsInImage ? ' compact' : ''));
+    // 条件充分性判断：题面图里只有题干和条件(1)(2)，A–E 是标准固定选项，
+    // 直接把含义写在选项行里（不再用 compact 单字母模式）
+    const isSuff = q.part === 'math_sufficiency';
+    const box = el('div', 'opts' + (q.optionsInImage && !isSuff ? ' compact' : ''));
     OPT_KEYS.forEach(k => {
       const v = q.options[k];
       if (v == null) return;
+      const text = isSuff ? SUFF_OPT_TEXT[k] : v;
+      if (text == null) return;
       const o = el('div', 'opt' + (a.choice === k ? ' sel' : ''));
-      o.innerHTML = q.optionsInImage
+      o.innerHTML = (q.optionsInImage && !isSuff)
         ? `<span class="k">${k}</span>`
-        : `<span class="k">${k}</span><span class="v">${esc(v)}</span>`;
+        : `<span class="k">${k}</span><span class="v">${esc(text)}</span>`;
       o.onclick = () => {
         State.answers[q._qid].choice = k;
         $$('.opt', box).forEach(x => x.classList.remove('sel'));
@@ -1106,7 +1128,9 @@ function resultHTML(rec) {
                 const mine = d2.choice === k, right2 = q.answer === k;
                 const col = right2 ? 'var(--green)' : mine ? 'var(--red)' : 'var(--tx2)';
                 const w = right2 ? 'font-weight:600' : mine ? 'font-weight:600' : 'font-weight:400';
-                const label = q.optionsInImage ? `${k}.（选项见题面图）` : `${k}. ${esc(q.options[k])}`;
+                const label = (q.optionsInImage && q.part !== 'math_sufficiency')
+                  ? `${k}.（选项见题面图）`
+                  : `${k}. ${esc(q.part === 'math_sufficiency' ? SUFF_OPT_TEXT[k] : q.options[k])}`;
                 return `<div style="color:${col};${w}">${label}${right2 ? '  ✓' : mine ? '  ✗' : ''}</div>`;
               }).join('')}
             </div>
