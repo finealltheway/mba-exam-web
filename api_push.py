@@ -57,7 +57,8 @@ def curl(method, url, payload=None, timeout=180, retries=4):
     RESOLVE 允许 update.sh 传「--resolve api.github.com:443:IP」，
     绕过被污染的 DNS——这台机器上 DNS 常把 GitHub 指到连不上的 IP。
     """
-    retryable_codes = ("000", "400", "502", "503", "504", "429", "408")
+    retryable_codes = ("000", "400", "502", "503", "504", "429", "408",
+                       "301", "302", "307", "308")
     # 400/000 这类网络诱发的错误给足重试次数（默认 4 次）
     attempts = 6 if retries == 4 else retries
 

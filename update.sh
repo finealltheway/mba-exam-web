@@ -45,15 +45,19 @@ NET_OK=0
 
 # 上传只需要 api.github.com（blob/tree/commit/ref 全在这）。
 # git push 才需要 github.com。所以先探API——它通常比主站稳。
-if probe https://api.github.com/zen; then
+# 注意必须见到 HTTP 200 才算通：个别网页边缘 IP 会用 301 应答 API
+# 请求（2026-10-18 实测），curl 退出码为 0 但根本不能用。
+API_CODE() { curl -s -o /dev/null -w "%{http_code}" --max-time 8 "$1" 2>/dev/null; }
+if [ "$(API_CODE https://api.github.com/zen)" = "200" ]; then
   NET_OK=1
   echo "[网络] GitHub API 可用"
 else
   echo "[网络] API 探测失败，尝试换 IP..."
-  for ip in 20.205.243.169 20.205.243.171 140.82.112.3 140.82.113.3 \
-            140.82.114.3 140.82.116.3 140.82.121.3; do
-    if timeout 6 curl -sI --resolve "api.github.com:443:$ip" https://api.github.com/zen \
-         -o /dev/null 2>/dev/null; then
+  # API 边缘是 .5/.6 段；.3/.4 是 github.com 网页边缘，对 API Host 会 301
+  for ip in 140.82.112.6 140.82.113.6 140.82.114.6 140.82.116.6 140.82.121.6 \
+            20.205.243.169 20.205.243.171; do
+    if [ "$(curl -s -o /dev/null -w "%{http_code}" --max-time 6 \
+           --resolve "api.github.com:443:$ip" https://api.github.com/zen 2>/dev/null)" = "200" ]; then
       RESOLVE_OPT="--resolve api.github.com:443:$ip"
       NET_OK=1
       echo "[网络] API 已切换到可用 IP $ip"

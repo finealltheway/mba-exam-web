@@ -32,6 +32,10 @@ const State = {
   bank: [], paper: null, answers: {}, cursor: 0,
   remaining: 0, running: false, paused: false, tick: null,
   qStart: {}, lastTick: 0, showPassage: true,
+  // 分版块计时：partElapsed[key] = 该版块的已用秒数。只有「当前可见版块」
+  // 会在 tick 里累加——切走自动暂停、切回自动继续。partCursor[key] 记录
+  // 离开版块时的题号，回到该版块时恢复到上次做到的位置。
+  partElapsed: {}, partCursor: {},
   // 断点续答：pendingSnap 是启动时读到的未完成试卷，等用户决定「继续 / 放弃」；
   // autoTimer 是自动落盘的节流定时器；finished 标记已交卷，避免卸载时又写回快照。
   pendingSnap: null, autoTimer: null, finished: false,
@@ -123,6 +127,10 @@ function resumeExam() {
   State.cursor = r.cursor;
   State.currentPart = (r.paper.questions[r.cursor] || r.paper.questions[0]).part;
   State.remaining = r.remaining;
+  // 分版块时钟：以各题已累计用时为初值（历史进度不丢），之后只有当前版块在走
+  State.partElapsed = {};
+  EXAM[r.paper.subject].parts.forEach(p => { State.partElapsed[p.key] = partSeconds(p.key); });
+  State.partCursor = {};
   State.paused = false;
   State.finished = false;
   State.qStart = {};
@@ -355,6 +363,8 @@ function beginExam(subject, qs, year) {
   State.cursor = 0;
   State.currentPart = qs[0].part;   // 初始版块 = 第一道题所在版块
   State.remaining = EXAM[subject].duration;
+  State.partElapsed = {};   // 分版块时钟清零（只有当前版块在走）
+  State.partCursor = {};    // 各版块上次做到的题号
   State.paused = false;
   State.finished = false;
   State.qStart = {};
@@ -383,9 +393,12 @@ function startTick() {
     State.lastTick = now;
     State.remaining -= dt;
 
-    // 累计当前题用时
+    // 分版块计时：只给当前可见版块累加——切到别的版块，这个钟就自动停了
+    State.partElapsed[State.currentPart] = (State.partElapsed[State.currentPart] || 0) + dt;
+
+    // 累计当前题用时（光标异常漂到别的版块时跳过，保证题时归属正确）
     const cur = State.paper.questions[State.cursor];
-    if (cur && State.answers[cur._qid]) {
+    if (cur && cur.part === State.currentPart && State.answers[cur._qid]) {
       State.answers[cur._qid].seconds = (State.answers[cur._qid].seconds || 0) + dt;
       const badge = document.querySelector(`[data-qt="${cur._qid}"]`);
       if (badge) badge.textContent = fmtTime(State.answers[cur._qid].seconds);
@@ -408,10 +421,15 @@ function paintTimer() {
     return p.subjective ? (a.text && a.text.trim()) : a.choice;
   }).length;
   $('#prog').innerHTML = `已答 <b>${done}</b> / ${State.paper.questions.length}`;
-  // 各版块已用时长（按题目用时累计，当前题由每秒 tick 实时累加）
+  // 各版块时钟：页签与版块抬头同步显示（非当前版块的钟是冻结的，
+  // 切走自动暂停、切回自动继续，页签上一眼可见）
   $$('#qlist .part-block').forEach(blk => {
     const sp = blk.querySelector('.part-elapsed');
-    if (sp) sp.textContent = fmtTime(partSeconds(blk.dataset.part));
+    if (sp) sp.textContent = fmtTime(State.partElapsed[blk.dataset.part] || 0);
+  });
+  $$('.ptab').forEach(t => {
+    const sp = t.querySelector('.ptime');
+    if (sp) sp.textContent = fmtTime(State.partElapsed[t.dataset.part] || 0);
   });
 }
 $('#btn-pause').onclick = () => {
@@ -463,7 +481,7 @@ function renderExam() {
     const done = qs.filter(q => isAnswered(q, p)).length;
     const b = el('button', 'ptab' + (p.key === State.currentPart ? ' on' : ''));
     b.dataset.part = p.key;
-    b.innerHTML = `${esc(p.name)}<span class="pcnt">${done}/${qs.length}</span>`;
+    b.innerHTML = `${esc(p.name)}<span class="pcnt">${done}/${qs.length}</span><span class="ptime">--:--</span>`;
     b.onclick = () => switchPart(p.key);
     pn.appendChild(b);
   });
@@ -521,18 +539,23 @@ function renderExam() {
 function switchPart(key, targetIdx) {
   const { subject, questions } = State.paper;
   if (!EXAM[subject].parts.some(p => p.key === key)) return;
-  // 结算当前题用时（与 jumpTo 同口径），保证版块计时准确
+  // 结算当前题用时（与 jumpTo 同口径，只影响题目级用时统计；
+  // 版块时钟由 tick 只累加当前版块，切走即自动暂停，无需在此结算）
   const prev = questions[State.cursor];
   if (prev && State.answers[prev._qid] && State.running && !State.paused) {
     const dt = (Date.now() - State.lastQEnter) / 1000;
     if (dt > 0 && dt < 3600) State.answers[prev._qid].seconds += dt;
   }
+  // 记住离开版块的进度位置，下次回到该版块时恢复
+  if (prev) State.partCursor[prev.part] = State.cursor;
   State.currentPart = key;
   if (targetIdx != null) {
     State.cursor = targetIdx;
   } else {
-    const first = questions.findIndex(q => q.part === key);
-    if (first >= 0 && (questions[State.cursor] || {}).part !== key) State.cursor = first;
+    // 回到版块：优先恢复上次做到的位置（没有记录则落第一题）
+    const saved = State.partCursor[key];
+    State.cursor = (saved != null && questions[saved] && questions[saved].part === key)
+      ? saved : questions.findIndex(q => q.part === key);
   }
   State.lastQEnter = Date.now();
   // 显隐切换（DOM 不重建：输入中的文本、滚动位置等状态都保留）
