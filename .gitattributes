@@ -5,6 +5,7 @@
 # 如果 *.js 排在它前面，它会被当成文本做行尾转换。
 # 密文 base64 不含 \r\n，转换本身无害，但标记 binary 最稳妥。
 data/payload.enc.js binary
+exam/data/payload.enc.js binary
 
 *.js    text eol=lf
 *.json  text eol=lf

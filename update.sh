@@ -162,10 +162,11 @@ def h(p):
     return hashlib.sha1(d).hexdigest()
 
 warn = []
-# 发布目录 index.html 的脚本标签由 build_secure.mjs 改写，内容天然与开发版不同，跳过。
+# 发布目录 exam/index.html 的脚本标签由 build_secure.mjs 改写，内容天然与开发版不同，跳过。
 # 明文数据文件（assets.js / data/*.json / data/dictionary.js）已不再进入发布树，
 # 密文每次构建都重新生成，无可比性。
-targets = ["app.js", "engine.js", "guard.js"]
+# 2026-10-18 起站点分层：根目录 = 首页 + essay.html，模考系统整体在 exam/ 子目录。
+targets = ["exam/app.js", "exam/engine.js", "exam/guard.js"]
 for rel in targets:
     d, p = os.path.join(dev, rel), os.path.join(pub, rel)
     if not (os.path.isfile(d) and os.path.isfile(p)):
@@ -207,25 +208,50 @@ fi
 
 echo ""
 if [ -d "$DEV_DIR" ]; then
-  # app.js / engine.js 是业务代码；index.html 由 build_secure.mjs 改写为密文加载。
+  # 模考系统整体住在发布仓库的 exam/ 子目录（根目录是首页 + essay.html）。
+  # app.js / engine.js 是业务代码；exam/index.html 由 build_secure.mjs 改写为密文加载。
   # secure.js 由 build_secure.mjs 生成（内含每次构建随机的混淆密钥），
   # guard.js 也由 build_secure.mjs 随构建同步 —— 两者都绝不从开发目录复制。
+  mkdir -p "$REPO_DIR/exam/data"
   for f in app.js engine.js; do
     if [ -f "$DEV_DIR/$f" ]; then
-      if ! diff -q "$DEV_DIR/$f" "$REPO_DIR/$f" >/dev/null 2>&1; then
-        cp "$DEV_DIR/$f" "$REPO_DIR/$f"
-        echo "    ✓ $f 已更新"
+      if ! diff -q "$DEV_DIR/$f" "$REPO_DIR/exam/$f" >/dev/null 2>&1; then
+        cp "$DEV_DIR/$f" "$REPO_DIR/exam/$f"
+        echo "    ✓ exam/$f 已更新"
       else
-        echo "    · $f 无变化"
+        echo "    · exam/$f 无变化"
       fi
     fi
   done
-  # index.html 不在这里同步：build_secure.mjs 每次都以**开发目录**的
+
+  # 首页（exam/ 之外的两个静态页，不在密文构建范围内）：
+  #   根 index.html ← 开发目录 home.html；essay.html ← E:\MBA\英语作文背诵助手.html
+  if [ -f "$DEV_DIR/home.html" ]; then
+    if ! diff -q "$DEV_DIR/home.html" "$REPO_DIR/index.html" >/dev/null 2>&1; then
+      cp "$DEV_DIR/home.html" "$REPO_DIR/index.html"
+      echo "    ✓ index.html（首页）已更新"
+    fi
+  else
+    echo "    [警告] 开发目录缺 home.html，跳过首页同步"
+  fi
+  ESSAY_SRC="/e/MBA/英语作文背诵助手.html"
+  if [ -f "$ESSAY_SRC" ]; then
+    if ! diff -q "$ESSAY_SRC" "$REPO_DIR/essay.html" >/dev/null 2>&1; then
+      cp "$ESSAY_SRC" "$REPO_DIR/essay.html"
+      echo "    ✓ essay.html（英语作文背诵助手）已更新"
+    fi
+  else
+    echo "    [提示] 找不到 $ESSAY_SRC，保留发布目录现有 essay.html"
+  fi
+
+  # exam/index.html 不在这里同步：build_secure.mjs 每次都以**开发目录**的
   # index.html 为源重新生成发布版（改脚本标签），不存在漏同步的可能。
   # 发布树不再存放任何明文数据（题库/词典/图片一律以 AES-256-GCM 密文
-  # 由 build_secure.mjs 生成后写入 data/payload.enc.js）。这里只做清理：
+  # 由 build_secure.mjs 生成后写入 exam/data/payload.enc.js）。这里只做清理：
   # 把旧构建留下的明文文件删掉，防止它们被 git add -A 重新推上线。
-  for rel in assets.js data/question_bank.json data/dictionary.js data/bank.js build_for_pages.py; do
+  for rel in assets.js data/bank.js data/question_bank.json data/dictionary.js \
+             exam/assets.js exam/data/bank.js exam/data/question_bank.json exam/data/dictionary.js \
+             exam/build_for_pages.py build_for_pages.py; do
     if [ -f "$REPO_DIR/$rel" ]; then
       rm -f "$REPO_DIR/$rel"
       echo "    ✓ 清理明文遗留 $rel"
@@ -239,8 +265,10 @@ if [ -d "$DEV_DIR" ]; then
     "$PY" - "$REPO_DIR" <<'PYEOF' 2>/dev/null
 import os, sys
 root = sys.argv[1]
-files = ["index.html", "app.js", "engine.js", "guard.js", "secure.js",
-         "data/payload.enc.js", "robots.txt", "README.md"]
+files = ["index.html", "essay.html",
+         "exam/index.html", "exam/app.js", "exam/engine.js", "exam/guard.js",
+         "exam/secure.js", "exam/data/payload.enc.js",
+         "robots.txt", "README.md"]
 n = 0
 for rel in files:
     p = os.path.join(root, rel)
@@ -273,11 +301,12 @@ fi
 echo "[✓] 无 PDF 文件"
 
 # 4. 构建密文（AES-256-GCM）
-#    题库/词典/图片加密后写入 data/payload.enc.js，随机密钥注入 secure.js，
-#    index.html 脚本标签改为密文加载。明文数据一律不进入发布树。
+#    题库/词典/图片加密后写入 exam/data/payload.enc.js，随机密钥注入 exam/secure.js，
+#    exam/index.html 脚本标签改为密文加载。明文数据一律不进入发布树。
+#    构建目标 = exam/ 子目录（根 index.html 是首页，构建绝不碰它）。
 echo ""
 echo "[构建] 加密数据（AES-256-GCM）..."
-if "$NODE" "$DEV_DIR/build_secure.mjs" "$REPO_DIR" 2>&1 | sed 's/^/    /'; then
+if "$NODE" "$DEV_DIR/build_secure.mjs" "$REPO_DIR/exam" 2>&1 | sed 's/^/    /'; then
   echo "    ✓ 密文构建完成"
 else
   echo ""
@@ -366,7 +395,9 @@ let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
     echo ""
     echo "========================================"
     echo "  ✓ 部署成功"
-    echo "  https://finealltheway.github.io/mba-exam-web/"
+    echo "  首页　　https://finealltheway.github.io/mba-exam-web/"
+    echo "  真题模拟 https://finealltheway.github.io/mba-exam-web/exam/"
+    echo "  作文背诵 https://finealltheway.github.io/mba-exam-web/essay.html"
     echo "========================================"
     exit 0
   fi
